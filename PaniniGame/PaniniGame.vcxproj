@@ -139,12 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Hand.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.hpp" />
+    <ClInclude Include="Card.hpp" />
     <ClInclude Include="Collider2D.hpp" />
+    <ClInclude Include="Deck.hpp" />
     <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="Hand.hpp" />
+    <ClInclude Include="PlayerBoard.hpp" />
     <ClInclude Include="Useful.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

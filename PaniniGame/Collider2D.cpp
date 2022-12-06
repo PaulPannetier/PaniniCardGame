@@ -24,7 +24,7 @@ bool Rectangle::Contain(const Vector2& point) const
 string Rectangle::ToString() const
 {
 	ostringstream os;
-	os << "{ center : " << this->center.ToString() << ", size : " << this->size.ToString() << " }" << std::endl;
+	os << "{ center : " << this->center.ToString() << ", size : " << this->size.ToString() << " }";
 	return os.str();
 }
 
@@ -45,6 +45,6 @@ bool Circle::Contain(const Vector2& point) const
 string Circle::ToString() const
 {
 	ostringstream os;
-	os << "{ center : " << this->center.ToString() << ", radius : " << this->radius << " }" << std::endl;
+	os << "{ center : " << this->center.ToString() << ", radius : " << this->radius << " }";
 	return os.str();
 }

@@ -71,6 +71,16 @@ public:
     {
         return Rand() * Useful::Abs(b - a) + a;
     }
+
+    static int RandExclude(int a, int b)
+    {
+        return Rand(a, b + 1);
+    }
+
+    static float RandExclude(float a, float b)
+    {
+        return (((float)(rand() - 1)) / RAND_MAX) * Useful::Abs(b - a) + a;
+    }
 };
 
 struct Object

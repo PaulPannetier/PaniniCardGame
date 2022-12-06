@@ -1,4 +1,10 @@
-﻿  Collider2D.cpp
+﻿  Card.cpp
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(57,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(67,44): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Collider2D.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(57,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Deck.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(57,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PlayerBoard.cpp
+  Generating Code...
   PaniniGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe
