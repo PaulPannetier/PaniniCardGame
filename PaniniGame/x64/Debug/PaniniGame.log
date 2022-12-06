@@ -1,2 +1,4 @@
-﻿  main.cpp
-  PaniniGame.vcxproj -> D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe
+﻿  Collider2D.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(57,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(67,44): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  PaniniGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe

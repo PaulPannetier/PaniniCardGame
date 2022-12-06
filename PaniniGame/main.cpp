@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "GameManager.hpp"
 
 using namespace std;
 using namespace sf;

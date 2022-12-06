@@ -71,13 +71,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Collider2D.hpp" />
+    <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="Useful.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
