@@ -71,13 +71,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\lib;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\lib;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\lib;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>D:\Users\Desktop\I%27m a folder\Study\Other repository\PaniniCardGame\PaniniGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -143,6 +143,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerBoard.cpp" />

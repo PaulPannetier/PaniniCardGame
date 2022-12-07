@@ -13,28 +13,34 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Sources">
+      <UniqueIdentifier>{4f01d8d8-c9fa-4a9d-912d-1c32804c543a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Collider2D.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Card.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerBoard.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Sources</Filter>
     </ClCompile>
     <ClCompile Include="Hand.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Fichiers sources\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Fichiers sources\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2D.cpp">
+      <Filter>Fichiers sources\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Fichiers sources\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Fichiers sources\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,21 +1,23 @@
 #include <SFML/Graphics.hpp>
+
 #include "Collider2D.hpp"
 
 using namespace std;
+using namespace sf;
 
 string Collider2D::ToString() const
 {
 	return "Collider2D";
 }
 
-void Rectangle::Draw(const Vector2& center, const Vector2& size, const sf::Color& color)
+void Rectangle::Draw(sf::RenderWindow& window, const Vector2f& center, const Vector2f& size, const sf::Color& color)
 {
 	sf::RectangleShape rec = sf::RectangleShape();
 	rec.setFillColor(color);
 	//acess to mainwindow
 }
 
-bool Rectangle::Contain(const Vector2& point) const
+bool Rectangle::Contain(const Vector2f& point) const
 {
 	return point.x >= center.x - size.x * 0.5 && point.x <= center.x + size.x * 0.5 &&
 		point.y >= center.y - size.x * 0.5 && point.y <= center.y + size.y * 0.5;
@@ -24,27 +26,28 @@ bool Rectangle::Contain(const Vector2& point) const
 string Rectangle::ToString() const
 {
 	ostringstream os;
-	os << "{ center : " << this->center.ToString() << ", size : " << this->size.ToString() << " }";
+	os << "{ center : (" << center.x << ", " << center.y  << "), size : (" << size.x << ", " << size.y << ") }";
 	return os.str();
 }
 
 
 
-void Circle::Draw(const Vector2& center, float radius, sf::Color color)
+void Circle::Draw(sf::RenderWindow& window, const Vector2f& center, float radius, sf::Color color)
 {
-	sf::CircleShape c = sf::CircleShape();
+	CircleShape c = CircleShape(radius, 60);
 	c.setFillColor(color);
-	//acess to mainwindow
+	c.setPosition(center - Vector2f(radius, radius));
+	window.draw(c);
 }
 
-bool Circle::Contain(const Vector2& point) const
+bool Circle::Contain(const Vector2f& point) const
 {
-	return center.SqrDistance(point) <= radius * radius;
+	return Useful::SqrDistance(center, point) <= radius * radius;
 }
 
 string Circle::ToString() const
 {
 	ostringstream os;
-	os << "{ center : " << this->center.ToString() << ", radius : " << this->radius << " }";
+	os << "{ center : (" << center.x << ", " << center.y << "), radius : " << radius << " }";
 	return os.str();
 }

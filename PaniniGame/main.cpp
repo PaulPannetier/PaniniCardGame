@@ -1,28 +1,20 @@
 #include <SFML/Graphics.hpp>
+
 #include "GameManager.hpp"
 
 using namespace std;
 using namespace sf;
 
+GameManager gameManager = GameManager();
+
 int main()
 {
-    RenderWindow window(VideoMode(200, 200), "SFML works!");
-    CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    RenderWindow window(VideoMode(1600, 900), "SFML!");
+    window.setVerticalSyncEnabled(true);
 
-    while (window.isOpen())
-    {
-        Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == Event::Closed)
-                window.close();
-        }
+    gameManager.Start();
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+    gameManager.GameLoop(window);
 
     return 0;
 }

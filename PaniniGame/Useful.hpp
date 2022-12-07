@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <sstream>
+#include <SFML/Graphics.hpp>
 
 class Useful
 {
@@ -46,6 +47,37 @@ public:
     static double Min(double a, double b)
     {
         return a <= b ? a : b;
+    }
+
+    static float SqrMagnitude(const sf::Vector2f v)
+    {
+        return v.x * v.x + v.y * v.y;
+    }
+
+    static float Magnitude(const sf::Vector2f v)
+    {
+        return sqrtf(v.x * v.x + v.y * v.y);
+    }
+
+    static sf::Vector2f Normalize(const sf::Vector2f v)
+    {
+        float mag = Magnitude(v);
+        return sf::Vector2f(v.x / mag, v.y / mag);
+    }
+
+    static float SqrDistance(const sf::Vector2f p1, const sf::Vector2f p2)
+    {
+        return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
+    }
+
+    static float Distance(const sf::Vector2f p1, const sf::Vector2f p2)
+    {
+        return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
+    }
+
+    static float Dot(const sf::Vector2f p1, const sf::Vector2f p2)
+    {
+        return p1.x * p2.x + p1.y * p2.y;
     }
 };
 
@@ -122,82 +154,6 @@ public:
     void Set(int i, int j, T value)
     {
         array[i * width + j] = value;
-    }
-};
-
-struct Vector2 : public Object
-{
-public:
-
-    float x, y;
-
-    Vector2()
-    {
-        this->x = 0.0f; this->y = 0.0f;
-    }
-
-    Vector2(float x)
-    {
-        this->x = x; this->y = 0.0f;
-    }
-
-    Vector2(float x, float y)
-    {
-        this->x = x; this->y = y;
-    }
-
-    float SqrMagnitude() const
-    {
-        return x * x + y * y;
-    }
-
-    float Magnitude() const
-    {
-        return sqrtf(x * x + y * y);
-    }
-
-    Vector2 Normalize() const
-    {
-        float mag = Magnitude();
-        return Vector2(this->x / mag, this->y / mag);
-    }
-
-    float SqrDistance(const Vector2& v) const
-    {
-        return (v.x - this->x) * (v.x - this->x) + (v.y - this->y) * (v.y - this->y);
-    }
-
-    float Distance(const Vector2& v) const
-    {
-        return sqrt((v.x - this->x) * (v.x - this->x) + (v.y - this->y) * (v.y - this->y));
-    }
-
-    std::string ToString() const override
-    {
-        std::ostringstream os;
-        os << "(" << x << ", " << y << ")" << std::endl;
-        return os.str();
-    }
-
-    Vector2 operator+(Vector2 v)
-    {
-        return Vector2(v.x + this->x, v.y + this->y);
-    }
-    Vector2 operator-(Vector2 v)
-    {
-        return Vector2(this->x - v.x, this->y - v.y);
-    }
-    Vector2 operator-()
-    {
-        return Vector2(-this->x, -this->y);
-    }
-    Vector2 operator*(float a)
-    {
-        return Vector2(a * this->x, a * this->y);
-    }
-    Vector2 operator/(float a)
-    {
-        return Vector2(this->x / a, this->y / a);
     }
 };
 

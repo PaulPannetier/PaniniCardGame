@@ -7,19 +7,19 @@
 class Collider2D : Object
 {
 public:
-	Vector2 center;
+	sf::Vector2f center;
 
-	virtual bool Contain(const Vector2& point) const;
+	virtual bool Contain(const sf::Vector2f& point) const = 0;
 	std::string ToString() const;
 };
 
 class Rectangle : public Collider2D
 {
 public:
-	Vector2 size;
+	sf::Vector2f size;
 
-	static void Draw(const Vector2 &center, const Vector2 &size, const sf::Color &color);
-	bool Contain(const Vector2& point) const override;
+	static void Draw(sf::RenderWindow& window, const sf::Vector2f &center, const sf::Vector2f &size, const sf::Color &color);
+	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
 };
 
@@ -28,8 +28,8 @@ class Circle : public Collider2D
 public:
 	float radius;
 
-	static void Draw(const Vector2& center, float radius, sf::Color color);
-	bool Contain(const Vector2& point) const override;
+	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, float radius, sf::Color color);
+	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
 };
 
