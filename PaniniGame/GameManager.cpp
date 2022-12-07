@@ -8,6 +8,7 @@ using namespace sf;
 
 void GameManager::Start() const
 {
+    //Board b = Board();
 
 }
 

@@ -2,9 +2,13 @@
 #define GAMEMANAGER_HPP
 
 #include <SFML/Graphics.hpp>
+#include "Board.hpp"
 
 class GameManager
 {
+private:
+	Board board;
+
 public:
 
 	GameManager() { }

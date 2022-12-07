@@ -16,6 +16,7 @@ private:
 
 public:
 	Card(std::string name, std::string description, int attack, int defence);
+	Card(const Card& card);
 
 	//Getter:
 	std::string name() { return _name; }

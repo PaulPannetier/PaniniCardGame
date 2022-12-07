@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardsManager.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="Board.hpp" />
     <ClInclude Include="Card.hpp" />
+    <ClInclude Include="CardsManager.hpp" />
     <ClInclude Include="Collider2D.hpp" />
     <ClInclude Include="Deck.hpp" />
     <ClInclude Include="GameManager.hpp" />

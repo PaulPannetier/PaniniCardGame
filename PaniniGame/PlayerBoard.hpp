@@ -15,9 +15,22 @@ private :
 	std::vector<Card> goalKeepers;
 	std::vector<Card> defencers;
 	std::vector<Card> strikers;
+	int _playerID;
 
 public:
+	//Getter
+	int playerID() { return _playerID; }
+
+	PlayerBoard();
+	PlayerBoard(int playerID);
+
 	void Draw();//dessine le board
+
+	PlayerBoard& operator =(PlayerBoard value)
+	{
+		this->_playerID = value._playerID;
+		return value;
+	}
 };
 
 #endif
