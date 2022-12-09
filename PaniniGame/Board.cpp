@@ -2,6 +2,7 @@
 #include "Board.hpp"
 
 using namespace std;
+using namespace sf;
 
 Board::Board()
 {
@@ -16,4 +17,10 @@ Board::Board()
 	cout << pb.playerID() << endl;
 	cout << pb2.playerID() << endl;
 	*/
+}
+
+//Affiche le plateau de jeu
+void Board::Draw(RenderWindow& window)
+{
+
 }

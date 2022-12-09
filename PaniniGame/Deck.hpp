@@ -11,7 +11,7 @@ private:
 
 	int count() const { return cards.size(); }
 	void Shuffle();
-	Card Draw();
+	bool Draw(Card card);
 	void AddCard(Card card);
 	bool isEmpty() { return count() <= 0; }
 	std::string ToString() const override;

@@ -18,6 +18,8 @@ class Rectangle : public Collider2D
 public:
 	sf::Vector2f size;
 
+	Rectangle(const Rectangle& rec);
+
 	static void Draw(sf::RenderWindow& window, const sf::Vector2f &center, const sf::Vector2f &size, const sf::Color &color);
 	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
@@ -27,6 +29,8 @@ class Circle : public Collider2D
 {
 public:
 	float radius;
+	
+	Circle(const Circle& circle);
 
 	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, float radius, sf::Color color);
 	bool Contain(const sf::Vector2f& point) const override;

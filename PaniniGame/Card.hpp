@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Useful.hpp"
+#include "PlayerBoard.hpp"
 
 typedef enum { goalkeeper, defender, striker, spell } CardType;
 
@@ -15,7 +16,8 @@ private:
 	CardType _cardType;
 
 public:
-	Card(std::string name, std::string description, int attack, int defence);
+	Card();
+	Card(std::string name, std::string description, int attack, int defence, CardType cardType);
 	Card(const Card& card);
 
 	//Getter:
@@ -30,6 +32,7 @@ public:
 	void attack(int value) { _attack = value; } void defence(int value) { _defence = value; }
 	void cardType(CardType value) { _cardType = value; }
 
+	bool CanPlaceInBoard(PlayerBoard playerBoard, int indexPlace);
 	std::string ToString() const override;
 };
 

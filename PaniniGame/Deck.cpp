@@ -15,11 +15,17 @@ void Deck::Shuffle()
     }
 }
 
-Card Deck::Draw()
+bool Deck::Draw(Card card)
 {
-    Card drawCard = cards[0];
+    if (this->isEmpty())
+    {
+        return false;
+    }
+
+    card = Card(cards[0]);
     cards.erase(cards.begin());
-    return drawCard;
+
+    return true;
 }
 
 void Deck::AddCard(Card card)

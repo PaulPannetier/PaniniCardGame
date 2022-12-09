@@ -12,6 +12,8 @@ public:
 
 	Board();
 
+	void Draw(sf::RenderWindow& windows);
+
 	Board& operator =(Board value)
 	{
 		return value;

@@ -1,14 +1,60 @@
 ﻿  Board.cpp
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Card.hpp(35,23): error C2061: syntax error: identifier 'PlayerBoard'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Card.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(10,14): error C2065: 'Card': undeclared identifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(10,7): error C2923: 'std::vector': 'Card' is not a valid template type argument for parameter '_Ty'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(10,14): message : see declaration of 'Card'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(10,7): error C2976: 'std::vector': too few template arguments
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(494,1): message : see declaration of 'std::vector'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(14,12): error C2061: syntax error: identifier 'Card'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(15,15): error C2061: syntax error: identifier 'Card'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,34): error C2662: 'allocator_traits<allocator_traits<_Alloc>::rebind_alloc<_Ty>>::size_type std::vector<_Ty,_Alloc>::size(void) noexcept const': cannot convert 'this' pointer from 'const std::vector' to 'const std::vector<_Ty,_Alloc> &'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,29): message : Reason: cannot convert from 'const std::vector' to 'const std::vector<_Ty,_Alloc>'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,29): message : Conversion requires a second user-defined-conversion operator or constructor
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1930,39): message : see declaration of 'std::vector<_Ty,_Alloc>::size'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,34): message : while trying to match the argument list '()'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(43,7): error C3646: 'goalKeepers': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(43,18): error C2143: syntax error: missing ',' before '['
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(43,38): error C2238: unexpected token(s) preceding ';'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(44,7): error C3646: 'defencers': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(44,16): error C2143: syntax error: missing ',' before '['
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(44,33): error C2238: unexpected token(s) preceding ';'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(45,7): error C3646: 'strikers': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(45,15): error C2143: syntax error: missing ',' before '['
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(45,31): error C2238: unexpected token(s) preceding ';'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(56,37): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(56,37): error C2143: syntax error: missing ',' before '&'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(57,24): error C2061: syntax error: identifier 'Card'
+  Deck.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(42,7): error C3646: 'deck': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(42,11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(43,7): error C3646: 'goalKeepers': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(43,18): error C2143: syntax error: missing ',' before '['
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(43,38): error C2238: unexpected token(s) preceding ';'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(44,7): error C3646: 'defencers': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(44,16): error C2143: syntax error: missing ',' before '['
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(44,33): error C2238: unexpected token(s) preceding ';'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(45,7): error C3646: 'strikers': unknown override specifier
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(45,15): error C2143: syntax error: missing ',' before '['
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(45,31): error C2238: unexpected token(s) preceding ';'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(56,37): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(56,37): error C2143: syntax error: missing ',' before '&'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\PlayerBoard.hpp(57,24): error C2061: syntax error: identifier 'Card'
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   GameManager.cpp
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  PlayerBoard.cpp
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Card.hpp(35,23): error C2061: syntax error: identifier 'PlayerBoard'
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   main.cpp
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Card.hpp(35,23): error C2061: syntax error: identifier 'PlayerBoard'
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PlayerBoard.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Card.hpp(35,23): error C2061: syntax error: identifier 'PlayerBoard'
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(12,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-  PaniniGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe

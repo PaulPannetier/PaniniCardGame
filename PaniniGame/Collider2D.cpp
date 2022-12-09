@@ -10,6 +10,12 @@ string Collider2D::ToString() const
 	return "Collider2D";
 }
 
+Rectangle::Rectangle(const Rectangle& rec)
+{
+	this->center = Vector2f(rec.center);
+	this->size = Vector2f(rec.size);
+}
+
 void Rectangle::Draw(sf::RenderWindow& window, const Vector2f& center, const Vector2f& size, const sf::Color& color)
 {
 	sf::RectangleShape rec = sf::RectangleShape();
@@ -30,7 +36,11 @@ string Rectangle::ToString() const
 	return os.str();
 }
 
-
+Circle::Circle(const Circle& circle)
+{
+	this->center = Vector2f(circle.center);
+	this->radius = circle.radius;
+}
 
 void Circle::Draw(sf::RenderWindow& window, const Vector2f& center, float radius, sf::Color color)
 {
