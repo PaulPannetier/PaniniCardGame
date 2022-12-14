@@ -6,12 +6,19 @@ using namespace sf;
 
 Board::Board()
 {
-	//playerBoard1 = PlayerBoard(0);
-	//playerBoard2 = PlayerBoard(1);
+
 }
 
 //Affiche le plateau de jeu
 void Board::Draw(RenderWindow& window)
 {
+	int i;
+	//Le joueur du haut
+	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		if (this->goalKeepersUp[i].isInitialised)
+		{
 
+		}
+	}
 }

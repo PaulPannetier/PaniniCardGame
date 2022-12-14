@@ -3,9 +3,13 @@
 
 using namespace std;
 
+Deck::Deck()
+{
+
+}
+
 void Deck::Shuffle()
 {
-    /*
     for (int i = 0; i < count(); i++)
     {
         int randIndex1 = Random::RandExclude(0, count());
@@ -14,10 +18,8 @@ void Deck::Shuffle()
         cards[randIndex1] = cards[randIndex2];
         cards[randIndex2] = tmp;
     }
-    */
 }
 
-/*
 bool Deck::Draw(Card card)
 {
     if (this->isEmpty())
@@ -30,14 +32,11 @@ bool Deck::Draw(Card card)
 
     return true;
 }
-*/
 
-/*
 void Deck::AddCard(Card card)
 {
     cards.push_back(card);
 }
-*/
 
 string Deck::ToString() const
 {

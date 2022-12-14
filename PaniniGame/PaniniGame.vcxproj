@@ -147,7 +147,6 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlayerBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.hpp" />
@@ -157,7 +156,6 @@
     <ClInclude Include="Deck.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="Hand.hpp" />
-    <ClInclude Include="PlayerBoard.hpp" />
     <ClInclude Include="Test.hpp" />
     <ClInclude Include="Useful.hpp" />
   </ItemGroup>

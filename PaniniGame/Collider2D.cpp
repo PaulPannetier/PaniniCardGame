@@ -38,7 +38,7 @@ void Rectangle::Draw(RenderWindow& window, const Rectangle& rec, const Color& co
 bool Rectangle::Contain(const Vector2f& point) const
 {
 	return point.x >= center.x - size.x * 0.5 && point.x <= center.x + size.x * 0.5 &&
-		point.y >= center.y - size.x * 0.5 && point.y <= center.y + size.y * 0.5;
+		point.y >= center.y - size.y * 0.5 && point.y <= center.y + size.y * 0.5;
 }
 
 string Rectangle::ToString() const

@@ -23,7 +23,7 @@ void GameManager::GameLoop(RenderWindow& window) const
 
 void GameManager::Start() const
 {
-    //Board b = Board();
+
 }
 
 void GameManager::Update(RenderWindow& window) const
@@ -37,6 +37,14 @@ void GameManager::Draw(RenderWindow& window) const
     {
         TestCollider2D(window);
     }
+
+    Rectangle rec = Rectangle(Vector2f(300, 100), Vector2f(250, 100));
+    Vector2i tmp = Mouse::getPosition(window);
+    Vector2f mousPos = Vector2f(tmp.x, tmp.y);
+
+    bool contain = rec.Contain(mousPos);
+    Color c = contain ? Color::Red : Color::Green;
+    Rectangle::Draw(window, rec, c);
 }
 
 void GameManager::HandleEvent(RenderWindow& window) const

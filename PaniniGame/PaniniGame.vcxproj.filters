@@ -21,9 +21,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBoard.cpp">
-      <Filter>Fichiers sources\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Hand.cpp">
       <Filter>Fichiers sources\Sources</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Board.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBoard.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Hand.hpp">
