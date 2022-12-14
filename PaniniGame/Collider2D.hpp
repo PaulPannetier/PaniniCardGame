@@ -16,11 +16,14 @@ public:
 class Rectangle : public Collider2D
 {
 public:
+	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, const sf::Vector2f& size, const sf::Color& color);
+	static void Draw(sf::RenderWindow& window, const Rectangle& rec, const sf::Color& color);
+
 	sf::Vector2f size;
 
+	Rectangle(const sf::Vector2f& center, const sf::Vector2f& size);
 	Rectangle(const Rectangle& rec);
 
-	static void Draw(sf::RenderWindow& window, const sf::Vector2f &center, const sf::Vector2f &size, const sf::Color &color);
 	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
 };
@@ -28,11 +31,14 @@ public:
 class Circle : public Collider2D
 {
 public:
+	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, float radius, const sf::Color& color);
+	static void Draw(sf::RenderWindow& window, const Circle& circle, const sf::Color& color);
+
 	float radius;
 	
+	Circle(const sf::Vector2f& center, float radius);
 	Circle(const Circle& circle);
 
-	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, float radius, sf::Color color);
 	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
 };

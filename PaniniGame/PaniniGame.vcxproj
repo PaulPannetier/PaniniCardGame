@@ -158,6 +158,7 @@
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="Hand.hpp" />
     <ClInclude Include="PlayerBoard.hpp" />
+    <ClInclude Include="Test.hpp" />
     <ClInclude Include="Useful.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

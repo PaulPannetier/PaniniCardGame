@@ -10,17 +10,29 @@ string Collider2D::ToString() const
 	return "Collider2D";
 }
 
+Rectangle::Rectangle(const Vector2f& center, const Vector2f& size)
+{
+	this->center = Vector2f(center);
+	this->size = Vector2f(size);
+}
+
 Rectangle::Rectangle(const Rectangle& rec)
 {
 	this->center = Vector2f(rec.center);
 	this->size = Vector2f(rec.size);
 }
 
-void Rectangle::Draw(sf::RenderWindow& window, const Vector2f& center, const Vector2f& size, const sf::Color& color)
+void Rectangle::Draw(RenderWindow& window, const Vector2f& center, const Vector2f& size, const Color& color)
 {
-	sf::RectangleShape rec = sf::RectangleShape();
+	sf::RectangleShape rec = sf::RectangleShape(size);
 	rec.setFillColor(color);
-	//acess to mainwindow
+	rec.setPosition(center - (size * 0.5f));
+	window.draw(rec);
+}
+
+void Rectangle::Draw(RenderWindow& window, const Rectangle& rec, const Color& color)
+{
+	Rectangle::Draw(window, rec.center, rec.size, color);
 }
 
 bool Rectangle::Contain(const Vector2f& point) const
@@ -42,12 +54,23 @@ Circle::Circle(const Circle& circle)
 	this->radius = circle.radius;
 }
 
-void Circle::Draw(sf::RenderWindow& window, const Vector2f& center, float radius, sf::Color color)
+Circle::Circle(const Vector2f& center, float radius)
+{
+	this->center = Vector2f(center);
+	this->radius = radius;
+}
+
+void Circle::Draw(RenderWindow& window, const Vector2f& center, float radius, const Color& color)
 {
 	CircleShape c = CircleShape(radius, 60);
 	c.setFillColor(color);
 	c.setPosition(center - Vector2f(radius, radius));
 	window.draw(c);
+}
+
+void Circle::Draw(RenderWindow& window, const Circle& circle, const Color& color)
+{
+	Circle::Draw(window, circle.center, circle.radius, color);
 }
 
 bool Circle::Contain(const Vector2f& point) const

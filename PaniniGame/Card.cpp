@@ -21,10 +21,12 @@ Card::Card(const Card& card)
 	this->cardType(card._cardType);
 }
 
-bool Card::CanPlaceInBoard(PlayerBoard playerBoard, int indexPlace)
+/*
+bool Card::CanPlaceInBoard(PlayerBoard playerBoard, int indexPlace) const
 {
 	return true;
 }
+*/
 
 string Card::ToString() const
 {

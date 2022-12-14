@@ -5,11 +5,11 @@
 using namespace std;
 using namespace sf;
 
-GameManager gameManager = GameManager();
-
 int main()
 {
+    GameManager gameManager = GameManager();
     RenderWindow window(VideoMode(1600, 900), "SFML!");
+
     window.setVerticalSyncEnabled(true);
 
     gameManager.Start();

@@ -16,6 +16,7 @@ private:
 	CardType _cardType;
 
 public:
+
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, CardType cardType);
 	Card(const Card& card);
@@ -32,7 +33,7 @@ public:
 	void attack(int value) { _attack = value; } void defence(int value) { _defence = value; }
 	void cardType(CardType value) { _cardType = value; }
 
-	bool CanPlaceInBoard(PlayerBoard playerBoard, int indexPlace);
+	//bool CanPlaceInBoard(PlayerBoard playerBoard, int indexPlace) const;
 	std::string ToString() const override;
 };
 

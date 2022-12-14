@@ -7,7 +7,7 @@
 class GameManager
 {
 private:
-	Board board;
+	//Board board;
 
 public:
 

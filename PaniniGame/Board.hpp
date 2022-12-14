@@ -8,7 +8,7 @@ class Board
 private:
 
 public:
-	PlayerBoard playerBoard1, playerBoard2;
+	//PlayerBoard playerBoard1, playerBoard2;
 
 	Board();
 

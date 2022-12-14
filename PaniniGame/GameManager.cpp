@@ -2,15 +2,12 @@
 
 #include "GameManager.hpp"
 #include "Collider2D.hpp"
+#include "Test.hpp"
 
 using namespace std;
 using namespace sf;
 
-void GameManager::Start() const
-{
-    //Board b = Board();
-
-}
+bool testCollider2D = false;
 
 void GameManager::GameLoop(RenderWindow& window) const
 {
@@ -24,6 +21,11 @@ void GameManager::GameLoop(RenderWindow& window) const
     }
 }
 
+void GameManager::Start() const
+{
+    //Board b = Board();
+}
+
 void GameManager::Update(RenderWindow& window) const
 {
     HandleEvent(window);
@@ -31,7 +33,10 @@ void GameManager::Update(RenderWindow& window) const
 
 void GameManager::Draw(RenderWindow& window) const
 {
-
+    if (testCollider2D)
+    {
+        TestCollider2D(window);
+    }
 }
 
 void GameManager::HandleEvent(RenderWindow& window) const

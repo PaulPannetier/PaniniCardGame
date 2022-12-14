@@ -12,7 +12,6 @@ class PlayerBoard
 {
 private :
 
-
 	const sf::Vector2f goalKeeperUpPos1 = sf::Vector2f(800, 100);
 
 	const sf::Vector2f defenderUpPos1= sf::Vector2f(400, 250);
@@ -39,10 +38,10 @@ private :
 	const sf::Vector2f strikerDownPos3 = sf::Vector2f(900, 500);
 	const sf::Vector2f strikerDownPos4 = sf::Vector2f(1100, 500);
 
-	Deck deck;
-	Card goalKeepers[NB_MAX_GOAL_KEEPER];
-	Card defencers[NB_MAX_DEFENDER];
-	Card strikers[NB_MAX_STRIKER];
+	//Deck deck;
+	//Card goalKeepers[NB_MAX_GOAL_KEEPER];
+	//Card defencers[NB_MAX_DEFENDER];
+	//Card strikers[NB_MAX_STRIKER];
 	int _playerID;
 
 public:
@@ -53,8 +52,8 @@ public:
 	PlayerBoard(int playerID);
 
 	void Draw();//dessine le board
-	bool CanPlaceCardInBoard(const Card& card, int placeIndex) const;
-	bool PlaceCardInBoard(Card card, int placeIndex);
+	//bool CanPlaceCardInBoard(const Card& card, int placeIndex) const;
+	//bool PlaceCardInBoard(Card card, int placeIndex);
 
 	PlayerBoard& operator =(PlayerBoard value)
 	{

@@ -13,17 +13,18 @@ PlayerBoard::PlayerBoard(int playerID)
 	this->_playerID = playerID;
 }
 
+/*
 bool PlayerBoard::CanPlaceCardInBoard(const Card& card, int placeIndex) const
 {
-
-
 	return true;
 }
-
+*/
+/*
 bool PlayerBoard::PlaceCardInBoard(Card card, int placeIndex)
 {
 	return true;
 }
+*/
 
 void PlayerBoard::Draw()
 {
