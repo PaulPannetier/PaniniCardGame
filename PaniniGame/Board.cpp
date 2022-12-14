@@ -18,7 +18,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->goalKeepersUp[i].isInitialised)
 		{
-
+			this->goalKeepersUp[i].Draw(window, this->goalKeeperUpPos[i], this->cardSize);
 		}
 	}
 }

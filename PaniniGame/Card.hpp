@@ -3,9 +3,6 @@
 
 #include <string>
 #include "Useful.hpp"
-//#include "PlayerBoard.hpp"
-
-class PlayerBoard;
 
 typedef enum { goalkeeper, defender, striker, spell } CardType;
 
