@@ -18,6 +18,8 @@ class Rectangle : public Collider2D
 public:
 	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, const sf::Vector2f& size, const sf::Color& color);
 	static void Draw(sf::RenderWindow& window, const Rectangle& rec, const sf::Color& color);
+	static void DrawWire(sf::RenderWindow& window, const Rectangle& rec, const sf::Color& color, float thinckness = 3.0f);
+	static void DrawWire(sf::RenderWindow& window, const sf::Vector2f& center, const sf::Vector2f& size, const sf::Color& color, float thinckness = 3.0f);
 
 	sf::Vector2f size;
 

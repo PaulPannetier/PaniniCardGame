@@ -58,9 +58,14 @@ private:
 	Card defencersDown[NB_MAX_DEFENDER];
 	Card strikersDown[NB_MAX_STRIKER];
 
+	sf::Sprite background;
+
 public:
 
 	Board();
+
+	bool CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
+	void PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 
 	void Draw(sf::RenderWindow& windows);
 };

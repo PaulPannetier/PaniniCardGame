@@ -9,7 +9,12 @@ using namespace sf;
 
 bool testCollider2D = false;
 
-void GameManager::GameLoop(RenderWindow& window) const
+GameManager::GameManager()
+{
+
+}
+
+void GameManager::GameLoop(RenderWindow& window)
 {
     while (window.isOpen())
     {
@@ -21,30 +26,25 @@ void GameManager::GameLoop(RenderWindow& window) const
     }
 }
 
-void GameManager::Start() const
+void GameManager::Start(RenderWindow& window) 
 {
-
+    AssetsManager::instance();
+    this->_windowSize = Vector2f(window.getSize().x, window.getSize().y);
 }
 
-void GameManager::Update(RenderWindow& window) const
+void GameManager::Update(RenderWindow& window)
 {
     HandleEvent(window);
 }
 
-void GameManager::Draw(RenderWindow& window) const
+void GameManager::Draw(RenderWindow& window)
 {
     if (testCollider2D)
     {
         TestCollider2D(window);
     }
 
-    Rectangle rec = Rectangle(Vector2f(300, 100), Vector2f(250, 100));
-    Vector2i tmp = Mouse::getPosition(window);
-    Vector2f mousPos = Vector2f(tmp.x, tmp.y);
-
-    bool contain = rec.Contain(mousPos);
-    Color c = contain ? Color::Red : Color::Green;
-    Rectangle::Draw(window, rec, c);
+    this->board.Draw(window);
 }
 
 void GameManager::HandleEvent(RenderWindow& window) const

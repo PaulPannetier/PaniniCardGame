@@ -24,7 +24,7 @@ Rectangle::Rectangle(const Rectangle& rec)
 
 void Rectangle::Draw(RenderWindow& window, const Vector2f& center, const Vector2f& size, const Color& color)
 {
-	sf::RectangleShape rec = sf::RectangleShape(size);
+	RectangleShape rec = RectangleShape(size);
 	rec.setFillColor(color);
 	rec.setPosition(center - (size * 0.5f));
 	window.draw(rec);
@@ -33,6 +33,19 @@ void Rectangle::Draw(RenderWindow& window, const Vector2f& center, const Vector2
 void Rectangle::Draw(RenderWindow& window, const Rectangle& rec, const Color& color)
 {
 	Rectangle::Draw(window, rec.center, rec.size, color);
+}
+
+void Rectangle::DrawWire(RenderWindow& window, const Vector2f& center, const Vector2f& size, const Color& color, float thinckness)
+{
+	Rectangle::Draw(window, Vector2f(center.x, center.y - size.y * 0.5f), Vector2f(size.x + thinckness, thinckness), color);
+	Rectangle::Draw(window, Vector2f(center.x, center.y + size.y * 0.5f), Vector2f(size.x + thinckness, thinckness), color);
+	Rectangle::Draw(window, Vector2f(center.x - size.x * 0.5f, center.y), Vector2f(thinckness, size.y + thinckness), color);
+	Rectangle::Draw(window, Vector2f(center.x + size.x * 0.5f, center.y), Vector2f(thinckness, size.y + thinckness), color);
+}
+
+void Rectangle::DrawWire(RenderWindow& window, const Rectangle& rec, const Color& color, float thinckness)
+{
+	Rectangle::DrawWire(window, rec.center, rec.size, color, thinckness);
 }
 
 bool Rectangle::Contain(const Vector2f& point) const

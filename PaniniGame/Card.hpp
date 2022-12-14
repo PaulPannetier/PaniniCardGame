@@ -13,13 +13,14 @@ private:
 	std::string _description;
 	int _attack, _defence;
 	CardType _cardType;
+	sf::Image* sticker;
 
 public:
 
 	bool isInitialised;
 
 	Card();
-	Card(std::string name, std::string description, int attack, int defence, CardType cardType);
+	Card(std::string name, std::string description, int attack, int defence, CardType cardType, sf::Image* image);
 	Card(const Card& card);
 
 	//Getter:
@@ -33,6 +34,9 @@ public:
 	void description(std::string value) { _description = value; }
 	void attack(int value) { _attack = value; } void defence(int value) { _defence = value; }
 	void cardType(CardType value) { _cardType = value; }
+
+	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
+	void OnPlay();
 
 	void Draw(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size) const;
 	std::string ToString() const override;

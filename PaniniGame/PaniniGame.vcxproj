@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetsManager.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardsManager.cpp" />
     <ClCompile Include="Collider2D.cpp" />
@@ -149,7 +151,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetsManager.hpp" />
     <ClInclude Include="Board.hpp" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="Card.hpp" />
     <ClInclude Include="CardsManager.hpp" />
     <ClInclude Include="Collider2D.hpp" />
