@@ -1,10 +1,7 @@
-﻿  Board.cpp
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(14,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  GameManager.cpp
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\Deck.hpp(14,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\GameManager.cpp(32,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+﻿  GameManager.cpp
+D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\Deck.hpp(14,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\GameManager.cpp(41,70): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -13,7 +10,7 @@ D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\G
           [
               T=float
           ]
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\GameManager.cpp(32,50): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\GameManager.cpp(41,50): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -22,5 +19,4 @@ D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\G
           [
               T=float
           ]
-  Generating Code...
-  PaniniGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe
+  PaniniGame.vcxproj -> D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe
