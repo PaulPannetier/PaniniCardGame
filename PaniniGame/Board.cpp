@@ -5,13 +5,16 @@
 using namespace std;
 using namespace sf;
 
+void OnClickEndTurnButton(Button& button);
+
 Board::Board()
 {
-	/*
-	background.setColor(Color::White);
-	background.setPosition(Vector2f(0, 0));
-	background.setScale(1, 1);
-	*/
+	endTurnButton = Button(Rectangle(Vector2f(1400, 450), Vector2f(50, 50)), OnClickEndTurnButton);
+}
+
+void OnClickEndTurnButton(Button& button)
+{
+	cout << "End turn" << endl;
 }
 
 bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace)
@@ -103,6 +106,11 @@ void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int 
 	}
 }
 
+void Board::Update(RenderWindow& window)
+{
+	endTurnButton.Update(window);
+}
+
 //Affiche le plateau de jeu
 void Board::Draw(RenderWindow& window)
 {
@@ -186,4 +194,7 @@ void Board::Draw(RenderWindow& window)
 			Rectangle::DrawWire(window, this->strikerDownPos[i], this->cardSize, Color::Green, 3.0f);
 		}
 	}
+
+	//Les boutons
+	this->endTurnButton.Draw(window);
 }

@@ -10,14 +10,6 @@ using namespace sf;
 
 bool testCollider2D = false;
 
-void OnClick(Button b)
-{
-    cout << b.ToString() << ": are pressed" << endl;
-}
-
-RectangleButton rb = RectangleButton(Rectangle(Vector2f(200, 200), Vector2f(300, 150)), OnClick);
-CircleButton cb = CircleButton(Circle(Vector2f(600, 300), 75), OnClick);
-
 GameManager::GameManager()
 {
 
@@ -44,8 +36,7 @@ void GameManager::Start(RenderWindow& window)
 void GameManager::Update(RenderWindow& window)
 {
     HandleEvent(window);
-    //rb.Update(window);
-    //cb.Update(window);
+    board.Update(window);
 }
 
 void GameManager::Draw(RenderWindow& window)
@@ -56,8 +47,6 @@ void GameManager::Draw(RenderWindow& window)
     }
 
     this->board.Draw(window);
-    rb.Draw(window);
-    cb.Draw(window);
 }
 
 void GameManager::HandleEvent(RenderWindow& window) const

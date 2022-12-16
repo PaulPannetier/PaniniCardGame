@@ -1,22 +1,4 @@
-﻿  GameManager.cpp
+﻿  Board.cpp
 D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
 D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\Deck.hpp(14,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
-D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\GameManager.cpp(41,70): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\GameManager.cpp(41,50): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
   PaniniGame.vcxproj -> D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe

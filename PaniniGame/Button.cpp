@@ -7,87 +7,37 @@ using namespace sf;
 Button::Button()
 {
 	this->OnClick = NULL;
-	isHover = false;
-	this->collider = NULL;
+	isHover = oldIsMousePressed = false;
 }
 
-Button::Button(void (*OnClick)(Button button), Collider2D* collider)
+Button::Button(const Rectangle& rectangle, void (*OnClick)(Button& button))
 {
 	this->OnClick = OnClick;
-	isHover = false;
-	this->collider = collider;
+	isHover = oldIsMousePressed = false;
+	this->rectangle = Rectangle(rectangle);
 }
 
 void Button::Update(RenderWindow& window)
 {
 	Vector2i tmp = Mouse::getPosition(window);
 	Vector2f mousePos = Vector2f(tmp.x, tmp.y);
-	this->isHover = collider->Contain(mousePos);
+	this->isHover = rectangle.Contain(mousePos);
+	bool isMousePressed = Mouse::isButtonPressed(Mouse::Button::Left);
+	if (isHover && !oldIsMousePressed && isMousePressed)
+	{
+		OnClick(*this);
+	}
+	oldIsMousePressed = isMousePressed;
 }
 
 void Button::Draw(RenderWindow& window)
 {
-
+	Color color = isHover ? Color::Red : Color::Green;
+	Rectangle::Draw(window, rectangle, color);
 }
 
 string Button::ToString() const
 {
 	return "Button";
 }
-
-RectangleButton::RectangleButton() : Button()
-{
-
-}
-
-RectangleButton::RectangleButton(Rectangle rec, void (*OnClick)(Button button)) : Button(OnClick, &rec)
-{
-
-}
-
-void RectangleButton::Update(RenderWindow& window)
-{
-	Button::Update(window);
-}
-
-void RectangleButton::Draw(RenderWindow& window)
-{
-	Rectangle* rec = (Rectangle*)(&collider);//marche pas
-	Color c = isHover ? Color::Red : Color::Green;
-	Rectangle::Draw(window, *rec, c);
-}
-
-string RectangleButton::ToString() const
-{
-	return "RectangleButton";
-}
-
-CircleButton::CircleButton() : Button()
-{
-
-}
-
-CircleButton::CircleButton(Circle circle, void (*OnClick)(Button button)) : Button(OnClick, &circle)
-{
-
-}
-
-void CircleButton::Update(RenderWindow& window)
-{
-	Button::Update(window);
-}
-
-void CircleButton::Draw(RenderWindow& window)
-{
-	Circle* circle = (Circle*)(&collider);
-	Color c = isHover ? Color::Red : Color::Green;
-	Circle::Draw(window, *circle, c);
-}
-
-string CircleButton::ToString() const
-{
-	return "CirceButton";
-}
-
-
 
