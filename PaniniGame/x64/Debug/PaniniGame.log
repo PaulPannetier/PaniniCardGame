@@ -1,4 +1,0 @@
-﻿  Board.cpp
-D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
-D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\Deck.hpp(14,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
-  PaniniGame.vcxproj -> D:\Users\Desktop\I'm a folder\Study\Other repository\PaniniCardGame\PaniniGame\x64\Debug\PaniniGame.exe
