@@ -1,0 +1,48 @@
+#ifndef COLLIDER2D_HPP
+#define COLLIDER2D_HPP
+
+#include <SFML/Graphics.hpp>
+#include "Useful.hpp"
+
+class Collider2D : Object
+{
+public:
+	sf::Vector2f center;
+
+	virtual bool Contain(const sf::Vector2f& point) const = 0;
+	std::string ToString() const;
+};
+
+class Rectangle : public Collider2D
+{
+public:
+	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, const sf::Vector2f& size, const sf::Color& color);
+	static void Draw(sf::RenderWindow& window, const Rectangle& rec, const sf::Color& color);
+	static void DrawWire(sf::RenderWindow& window, const Rectangle& rec, const sf::Color& color, float thinckness = 3.0f);
+	static void DrawWire(sf::RenderWindow& window, const sf::Vector2f& center, const sf::Vector2f& size, const sf::Color& color, float thinckness = 3.0f);
+
+	sf::Vector2f size;
+
+	Rectangle(const sf::Vector2f& center, const sf::Vector2f& size);
+	Rectangle(const Rectangle& rec);
+
+	bool Contain(const sf::Vector2f& point) const override;
+	std::string ToString() const override;
+};
+
+class Circle : public Collider2D
+{
+public:
+	static void Draw(sf::RenderWindow& window, const sf::Vector2f& center, float radius, const sf::Color& color);
+	static void Draw(sf::RenderWindow& window, const Circle& circle, const sf::Color& color);
+
+	float radius;
+
+	Circle(const sf::Vector2f& center, float radius);
+	Circle(const Circle& circle);
+
+	bool Contain(const sf::Vector2f& point) const override;
+	std::string ToString() const override;
+};
+
+#endif

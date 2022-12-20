@@ -61,8 +61,6 @@ public:
     ////////////////////////////////////////////////////////////
     Color(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha = 255);
 
-    Color Lerp(const Color& start, const Color& end, float t);
-
     ////////////////////////////////////////////////////////////
     /// \brief Construct the color from 32-bit unsigned integer
     ///
