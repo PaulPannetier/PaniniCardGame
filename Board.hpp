@@ -69,6 +69,7 @@ public:
 	bool CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	void PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 
+	void Start();
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);
 };

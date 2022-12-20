@@ -2,9 +2,10 @@
 #define ASSETS_MANAGER_HPP
 
 #include<map>
-#include<vector>
+#include<memory>
 #include<string>
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 class AssetsManager
 {
@@ -12,26 +13,21 @@ private:
 
 	const std::map<std::string, std::string> imagesPath =
 	{
-		{ "background", "a.jpg" },
+		{ "BoardBackground", "Assets/bg.png" },
 	};
 
-	AssetsManager();
+	std::map<std::string, std::shared_ptr<sf::Texture>> textures;
 
-	std::map<std::string, sf::Image> images;
+	AssetsManager();
 
 	void LoadAssets();
 
 public:
 
-	static AssetsManager instance()
-	{
-		static AssetsManager asset;
-		return asset;
-	}
+	static AssetsManager& Instance();
 
-	std::map<std::string, sf::Image> assets;
-
-	bool GetAsset(std::string assetName, sf::Image* res);
+	void Start();
+	sf::Texture &GetTexture(std::string name) const;
 };
 
 #endif

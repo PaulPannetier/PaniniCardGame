@@ -7,6 +7,17 @@ using namespace sf;
 
 AssetsManager::AssetsManager()
 {
+	
+}
+
+AssetsManager& AssetsManager::Instance()
+{
+	static AssetsManager instance;
+	return instance;
+}
+
+void AssetsManager::Start()
+{
 	LoadAssets();
 }
 
@@ -17,21 +28,20 @@ void AssetsManager::LoadAssets()
 	{
 		string name = iter->first;
 		string imgPath = iter->second;
-		Image image;
-		cout << imgPath << endl;
-		if (image.loadFromFile(imgPath))
+		shared_ptr<Texture> texture = make_shared<Texture>();
+		if (texture->loadFromFile(imgPath))
 		{
-			this->assets.insert({ name, image });
+			this->textures[name] = move(texture);
+			cout << "Image : " << name << " at : " << imgPath << " loaded!" << endl;
+		}
+		else
+		{
+			cout << "Can't load the image : " << name << " at : " << imgPath << endl;
 		}
 	}
 }
 
-bool AssetsManager::GetAsset(string assetName, Image* res)
+Texture& AssetsManager::GetTexture(string name) const
 {
-	if (this->assets.find(assetName) == this->assets.end())
-	{
-		return false;
-	}
-	res = &this->assets[assetName];
-	return true;
+	return *(textures.at(name).get());
 }

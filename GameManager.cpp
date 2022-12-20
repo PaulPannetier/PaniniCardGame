@@ -14,6 +14,12 @@ GameManager::GameManager()
 
 }
 
+GameManager& GameManager::Instance()
+{
+    static GameManager gameManager;
+    return gameManager;
+}
+
 void GameManager::GameLoop(RenderWindow& window)
 {
     while (window.isOpen())
@@ -28,8 +34,9 @@ void GameManager::GameLoop(RenderWindow& window)
 
 void GameManager::Start(RenderWindow& window)
 {
-    AssetsManager::instance();
     this->_windowSize = Vector2f(window.getSize().x, window.getSize().y);
+    AssetsManager::Instance().Start();//on charge les assets
+    board.Start();
 }
 
 void GameManager::Update(RenderWindow& window)

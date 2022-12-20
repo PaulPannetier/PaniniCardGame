@@ -7,8 +7,7 @@ using namespace sf;
 
 int main()
 {
-    GameManager gameManager = GameManager::instance();
-    Image image;
+    GameManager gameManager = GameManager::Instance();
 
     RenderWindow window(VideoMode(1600, 900), "SFML!");
 

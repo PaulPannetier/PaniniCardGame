@@ -8,17 +8,15 @@
 class GameManager
 {
 private:
+
 	GameManager();
 	Board board;
 	sf::Vector2f _windowSize;
 
 public:
 
-	static GameManager instance()
-	{
-		static GameManager gameManager;
-		return gameManager;
-	}
+	static GameManager& Instance();
+
 	sf::Vector2f GetWindowSize() {
 		return _windowSize;
 	}
