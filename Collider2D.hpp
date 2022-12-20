@@ -23,6 +23,7 @@ public:
 
 	sf::Vector2f size;
 
+	Rectangle();
 	Rectangle(const sf::Vector2f& center, const sf::Vector2f& size);
 	Rectangle(const Rectangle& rec);
 
@@ -38,6 +39,7 @@ public:
 
 	float radius;
 
+	Circle();
 	Circle(const sf::Vector2f& center, float radius);
 	Circle(const Circle& circle);
 

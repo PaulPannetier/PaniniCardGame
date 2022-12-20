@@ -10,6 +10,11 @@ string Collider2D::ToString() const
 	return "Collider2D";
 }
 
+Rectangle::Rectangle()
+{
+
+}
+
 Rectangle::Rectangle(const Vector2f& center, const Vector2f& size)
 {
 	this->center = Vector2f(center);
@@ -59,6 +64,11 @@ string Rectangle::ToString() const
 	ostringstream os;
 	os << "{ center : (" << center.x << ", " << center.y << "), size : (" << size.x << ", " << size.y << ") }";
 	return os.str();
+}
+
+Circle::Circle()
+{
+
 }
 
 Circle::Circle(const Circle& circle)

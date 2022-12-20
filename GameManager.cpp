@@ -35,6 +35,7 @@ void GameManager::Start(RenderWindow& window)
 void GameManager::Update(RenderWindow& window)
 {
     HandleEvent(window);
+    board.Update(window);
 }
 
 void GameManager::Draw(RenderWindow& window)

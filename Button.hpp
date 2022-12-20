@@ -2,25 +2,24 @@
 #define BUTTON_HPP
 
 #include "Useful.hpp"
+#include "Collider2D.hpp"
 
 class Button : Object
 {
 private:
-
+	bool isHover;
+	bool oldOnMouseClick;
 
 public:
 
-	void (*OnClick)(Button button);
-	std::string ToString() const override;
-};
+	Rectangle hitbox;
+	void (*OnClick)(const Button& button);
 
-class RectangleButton : Button
-{
-	std::string ToString() const override;
-};
+	Button();
+	Button(const Rectangle& hitbox, void (*OnClick)(const Button& button));
 
-class CircleButton : Button
-{
+	void Update(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window);
 
 	std::string ToString() const override;
 };
