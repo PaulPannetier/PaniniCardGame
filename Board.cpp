@@ -17,6 +17,12 @@ Board::Board()
 
 }
 
+Board& Board::Instance()
+{
+	static Board instance;
+	return instance;
+}
+
 void Board::Start()
 {
 	endTurnButton = Button(Rectangle(Vector2f(1300, 450), Vector2f(50, 50)), OnClickEndTurnButton);
@@ -25,7 +31,6 @@ void Board::Start()
 	Vector2f windowSize = GameManager::Instance().GetWindowSize();//marche pas
 	Vector2f textureSize = Vector2f(bgText.getSize());
 	Vector2f scale = Vector2f(1600 / textureSize.x, 900 / textureSize.y);
-	cout << scale.x << ", " << scale.y << endl;
 	background.setScale(scale);
 }
 

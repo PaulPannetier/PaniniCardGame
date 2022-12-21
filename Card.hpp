@@ -9,18 +9,19 @@ typedef enum { goalkeeper, defender, striker, spell } CardType;
 class Card : Object
 {
 private:
+	bool isOnBoard;
 	std::string _name;
 	std::string _description;
 	int _attack, _defence;
 	CardType _cardType;
-	sf::Image* sticker;
+	sf::Sprite sprite;
 
 public:
 
 	bool isInitialised;
 
 	Card();
-	Card(std::string name, std::string description, int attack, int defence, CardType cardType, sf::Image* image);
+	Card(std::string name, std::string description, int attack, int defence, CardType cardType, std::string textureName);
 	Card(const Card& card);
 
 	//Getter:
@@ -38,7 +39,7 @@ public:
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
 	void OnPlay();
 
-	void Draw(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size) const;
+	void Draw(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size);
 	std::string ToString() const override;
 };
 

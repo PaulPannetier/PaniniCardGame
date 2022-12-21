@@ -10,7 +10,6 @@ class GameManager
 private:
 
 	GameManager();
-	Board board;
 	sf::Vector2f _windowSize;
 
 public:

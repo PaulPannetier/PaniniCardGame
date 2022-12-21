@@ -36,13 +36,13 @@ void GameManager::Start(RenderWindow& window)
 {
     this->_windowSize = Vector2f(window.getSize().x, window.getSize().y);
     AssetsManager::Instance().Start();//on charge les assets
-    board.Start();
+    Board::Instance().Start();
 }
 
 void GameManager::Update(RenderWindow& window)
 {
     HandleEvent(window);
-    board.Update(window);
+    Board::Instance().Update(window);
 }
 
 void GameManager::Draw(RenderWindow& window)
@@ -52,7 +52,7 @@ void GameManager::Draw(RenderWindow& window)
         TestCollider2D(window);
     }
 
-    this->board.Draw(window);
+    Board::Instance().Draw(window);
 }
 
 void GameManager::HandleEvent(RenderWindow& window) const

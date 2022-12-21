@@ -14,6 +14,9 @@ private:
 	const std::map<std::string, std::string> imagesPath =
 	{
 		{ "BoardBackground", "Assets/bg.png" },
+		{ "Pavard", "Assets/Cards/Pavard.jpg" },
+		{ "Giroud", "Assets/Cards/Giroud.png" },
+		{ "Lioris", "Assets/Cards/Lioris.jpg" },
 	};
 
 	std::map<std::string, std::shared_ptr<sf::Texture>> textures;

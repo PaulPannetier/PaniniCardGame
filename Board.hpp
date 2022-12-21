@@ -12,6 +12,13 @@ class Board
 {
 private:
 
+	sf::Sprite background;
+	Button endTurnButton;
+
+	Board();
+
+public:
+
 	const sf::Vector2f cardSize = sf::Vector2f(50, 100);
 	const sf::Vector2f goalKeeperUpPos[1] = { sf::Vector2f(800, 100) };
 
@@ -59,17 +66,13 @@ private:
 	Card defencersDown[NB_MAX_DEFENDER];
 	Card strikersDown[NB_MAX_STRIKER];
 
-	sf::Sprite background;
-	Button endTurnButton;
+	static Board& Instance();
 
-public:
-
-	Board();
+	void Start();
 
 	bool CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	void PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 
-	void Start();
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);
 };
