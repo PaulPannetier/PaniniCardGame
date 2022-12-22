@@ -47,11 +47,11 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 			return false;
 		if (playerOneBoard)
 		{
-			if (goalKeepersUp[indexPlace].isInitialised)
+			if (goalKeepersUp[indexPlace].isOnBoard)
 				return false;
 			return true;
 		}
-		if (goalKeepersDown[indexPlace].isInitialised)
+		if (goalKeepersDown[indexPlace].isOnBoard)
 			return false;
 		return true;
 	case CardType::defender:
@@ -59,11 +59,11 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 			return false;
 		if (playerOneBoard)
 		{
-			if (defencersUp[indexPlace].isInitialised)
+			if (defencersUp[indexPlace].isOnBoard)
 				return false;
 			return true;
 		}
-		if (defencersDown[indexPlace].isInitialised)
+		if (defencersDown[indexPlace].isOnBoard)
 			return false;
 		return true;
 	case CardType::striker:
@@ -71,11 +71,11 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 			return false;
 		if (playerOneBoard)
 		{
-			if (strikersUp[indexPlace].isInitialised)
+			if (strikersUp[indexPlace].isOnBoard)
 				return false;
 			return true;
 		}
-		if (strikersDown[indexPlace].isInitialised)
+		if (strikersDown[indexPlace].isOnBoard)
 			return false;
 		return true;
 	case CardType::spell:
@@ -89,37 +89,47 @@ void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int 
 {
 	if (!CanPlaceCard(card, playerOneBoard, line, indexPlace))
 		return;
+	
 	switch (line)
 	{
 	case CardType::goalkeeper:
 		if (playerOneBoard)
 		{
 			goalKeepersUp[indexPlace] = Card(card);
+			goalKeepersUp[indexPlace].isOnBoard = true;
 		}
 		else
 		{
 			goalKeepersDown[indexPlace] = Card(card);
+			goalKeepersDown[indexPlace].isOnBoard = true;
 		}
+		break;
 	case CardType::defender:
 		if (playerOneBoard)
 		{
 			defencersUp[indexPlace] = Card(card);
+			defencersUp[indexPlace].isOnBoard = true;
 		}
 		else
 		{
 			defencersDown[indexPlace] = Card(card);
+			defencersDown[indexPlace].isOnBoard = true;
 		}
+		break;
 	case CardType::striker:
 		if (playerOneBoard)
 		{
 			strikersUp[indexPlace] = Card(card);
+			strikersUp[indexPlace].isOnBoard = true;
 		}
 		else
 		{
 			strikersDown[indexPlace] = Card(card);
+			strikersDown[indexPlace].isOnBoard = true;
 		}
+		break;
 	default:
-		return;
+		break;
 	}
 }
 
@@ -142,7 +152,7 @@ void Board::Draw(RenderWindow& window)
 	//le goal
 	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
 	{
-		if (this->goalKeepersUp[i].isInitialised)
+		if (this->goalKeepersUp[i].isOnBoard)
 		{
 			this->goalKeepersUp[i].Draw(window, this->goalKeeperUpPos[i], this->cardSize);
 		}
@@ -154,9 +164,9 @@ void Board::Draw(RenderWindow& window)
 	//defenseurs
 	for (i = 0; i < NB_MAX_DEFENDER; i++)
 	{
-		if (this->defencersUp[i].isInitialised)
+		if (this->defencersUp[i].isOnBoard)
 		{
-			this->goalKeepersUp[i].Draw(window, this->defenderUpPos[i], this->cardSize);
+			this->defencersUp[i].Draw(window, this->defenderUpPos[i], this->cardSize);
 		}
 		else
 		{
@@ -166,9 +176,9 @@ void Board::Draw(RenderWindow& window)
 	//attaquants
 	for (i = 0; i < NB_MAX_STRIKER; i++)
 	{
-		if (this->strikersUp[i].isInitialised)
+		if (this->strikersUp[i].isOnBoard)
 		{
-			this->goalKeepersUp[i].Draw(window, this->strikerUpPos[i], this->cardSize);
+			this->strikersUp[i].Draw(window, this->strikerUpPos[i], this->cardSize);
 		}
 		else
 		{
@@ -180,7 +190,7 @@ void Board::Draw(RenderWindow& window)
 	//le goal
 	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
 	{
-		if (this->goalKeepersDown[i].isInitialised)
+		if (this->goalKeepersDown[i].isOnBoard)
 		{
 			this->goalKeepersDown[i].Draw(window, this->goalKeeperDownPos[i], this->cardSize);
 		}
@@ -192,9 +202,9 @@ void Board::Draw(RenderWindow& window)
 	//defenseurs
 	for (i = 0; i < NB_MAX_DEFENDER; i++)
 	{
-		if (this->defencersDown[i].isInitialised)
+		if (this->defencersDown[i].isOnBoard)
 		{
-			this->goalKeepersDown[i].Draw(window, this->defenderDownPos[i], this->cardSize);
+			this->defencersDown[i].Draw(window, this->defenderDownPos[i], this->cardSize);
 		}
 		else
 		{
@@ -204,9 +214,9 @@ void Board::Draw(RenderWindow& window)
 	//attaquants
 	for (i = 0; i < NB_MAX_STRIKER; i++)
 	{
-		if (this->strikersUp[i].isInitialised)
+		if (this->strikersDown[i].isOnBoard)
 		{
-			this->goalKeepersDown[i].Draw(window, this->strikerDownPos[i], this->cardSize);
+			this->strikersDown[i].Draw(window, this->strikerDownPos[i], this->cardSize);
 		}
 		else
 		{

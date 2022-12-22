@@ -9,7 +9,6 @@ typedef enum { goalkeeper, defender, striker, spell } CardType;
 class Card : Object
 {
 private:
-	bool isOnBoard;
 	std::string _name;
 	std::string _description;
 	int _attack, _defence;
@@ -18,7 +17,7 @@ private:
 
 public:
 
-	bool isInitialised;
+	bool isOnBoard;
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, CardType cardType, std::string textureName);

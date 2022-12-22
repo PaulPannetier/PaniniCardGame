@@ -2,6 +2,7 @@
 
 #include "GameManager.hpp"
 #include "Collider2D.hpp"
+#include "CardManager.hpp"
 #include "Test.hpp"
 
 using namespace std;
@@ -36,7 +37,17 @@ void GameManager::Start(RenderWindow& window)
 {
     this->_windowSize = Vector2f(window.getSize().x, window.getSize().y);
     AssetsManager::Instance().Start();//on charge les assets
-    Board::Instance().Start();
+    CardsManager::Instance().Start();//Crétion de toutes les cartes du jeu
+    Board::Instance().Start();//Création du plateau dde jeu
+
+    //on place des cartes au pif mdr
+    Card card;
+    card = CardsManager::Instance().GetCard(CardsManager::CardNum::Lorris);
+    Board::Instance().PlaceCard(card, false, CardType::goalkeeper, 0);
+    card = CardsManager::Instance().GetCard(CardsManager::CardNum::Giroud);
+    Board::Instance().PlaceCard(card, false, CardType::defender, 3);
+    card = CardsManager::Instance().GetCard(CardsManager::CardNum::Pavard);
+    Board::Instance().PlaceCard(card, true, CardType::striker, 0);
 }
 
 void GameManager::Update(RenderWindow& window)

@@ -1,10 +1,21 @@
 #ifndef CARDS_MANAGER_HPP
 #define CARDS_MANAGER_HPP
 
+#include <vector>
 #include "Card.hpp"
 
 class CardsManager
 {
+private:
+
+	std::vector<Card> gameCards;
+
+	CardsManager();
+
+	void CreateCards();
+
+public:
+
 	typedef enum
 	{
 		Pavard,
@@ -12,12 +23,11 @@ class CardsManager
 		Lorris
 	}CardNum;
 
-	Card gameCards[3] =
-	{
-		Card("Pavard", "Second poteau Pavard!", 5, 3, CardType::striker, "Pavard"),
-		Card("Giroud", "ENcore raté", 3, 3, CardType::defender, "Giroud"),
-		Card("Lorris", "Ramener la coupe à la maison", 5, 3, CardType::goalkeeper, "Lioris")
-	};
+	static CardsManager& Instance();
+
+	void Start();
+
+	Card GetCard(const CardNum& cardNum);
 };
 
 #endif
