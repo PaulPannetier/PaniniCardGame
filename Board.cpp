@@ -25,7 +25,7 @@ Board& Board::Instance()
 
 void Board::Start()
 {
-	endTurnButton = Button(Rectangle(Vector2f(1300, 450), Vector2f(50, 50)), OnClickEndTurnButton);
+	endTurnButton = Button(Rectangle(Vector2f(800, 100), Vector2f(50, 50)), OnClickEndTurnButton);
 	Texture& bgText = AssetsManager::Instance().GetTexture("BoardBackground");
 	background.setTexture(bgText);
 	Vector2f windowSize = GameManager::Instance().GetWindowSize();//marche pas

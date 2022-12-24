@@ -7,8 +7,6 @@ using namespace sf;
 
 int main()
 {
-    Sprite sprite;
-
     GameManager gameManager = GameManager::Instance();
 
     RenderWindow window(VideoMode(1600, 900), "SFML!");

@@ -19,43 +19,43 @@ private:
 
 public:
 
-	const sf::Vector2f cardSize = sf::Vector2f(50, 100);
-	const sf::Vector2f goalKeeperUpPos[1] = { sf::Vector2f(800, 100) };
+	const sf::Vector2f cardSize = sf::Vector2f(75, 100);
+	const sf::Vector2f goalKeeperUpPos[1] = { sf::Vector2f(120, 450) };
 
 	const sf::Vector2f defenderUpPos[5] =
 	{
-		sf::Vector2f(400, 250),
-		sf::Vector2f(600, 250),
-		sf::Vector2f(800, 250),
-		sf::Vector2f(1000, 250),
-		sf::Vector2f(1200, 250)
+		sf::Vector2f(400, 150),
+		sf::Vector2f(400, 300),
+		sf::Vector2f(400, 450),
+		sf::Vector2f(400, 600),
+		sf::Vector2f(400, 750)
 	};
 
 	const sf::Vector2f strikerUpPos[4] =
 	{
-		sf::Vector2f(500, 400),
-		sf::Vector2f(700, 400),
-		sf::Vector2f(900, 400),
-		sf::Vector2f(1100, 400)
+		sf::Vector2f(650, 225),
+		sf::Vector2f(650, 375),
+		sf::Vector2f(650, 525),
+		sf::Vector2f(650, 675)
 	};
 
-	const sf::Vector2f goalKeeperDownPos[1] = { sf::Vector2f(800, 800) };
+	const sf::Vector2f goalKeeperDownPos[1] = { sf::Vector2f(1480, 450) };
 
 	const sf::Vector2f defenderDownPos[5] =
 	{
-		sf::Vector2f(400, 650),
-		sf::Vector2f(600, 650),
-		sf::Vector2f(800, 650),
-		sf::Vector2f(1000, 650),
-		sf::Vector2f(1200, 650)
+		sf::Vector2f(1200, 150),
+		sf::Vector2f(1200, 300),
+		sf::Vector2f(1200, 450),
+		sf::Vector2f(1200, 600),
+		sf::Vector2f(1200, 750)
 	};
 
 	const sf::Vector2f strikerDownPos[4] =
 	{
-		sf::Vector2f(500, 500),
-		sf::Vector2f(700, 500),
-		sf::Vector2f(900, 500),
-		sf::Vector2f(1100, 500)
+		sf::Vector2f(950, 225),
+		sf::Vector2f(950, 375),
+		sf::Vector2f(950, 525),
+		sf::Vector2f(950, 675)
 	};
 
 	Deck deckPlayer1, deckPlayer2;
