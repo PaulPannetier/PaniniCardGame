@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Deck::Deck()
+void Deck::Start()
 {
 
 }

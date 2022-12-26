@@ -28,6 +28,7 @@
     <ClInclude Include="Deck.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="Hand.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="Test.hpp" />
     <ClInclude Include="Useful.hpp" />
   </ItemGroup>
@@ -42,6 +43,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

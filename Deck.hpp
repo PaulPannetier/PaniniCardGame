@@ -10,7 +10,9 @@ private:
 	std::vector<Card> cards;//0=> bas du deck, count() => haut du deck
 
 public:
-	Deck();
+	Deck() = default;
+
+	void Start();
 	int count() const { return cards.size(); }
 	void Shuffle();
 	bool Draw(Card card);

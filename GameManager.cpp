@@ -3,6 +3,7 @@
 #include "GameManager.hpp"
 #include "Collider2D.hpp"
 #include "CardManager.hpp"
+#include "Board.hpp"
 #include "Test.hpp"
 
 using namespace std;
@@ -39,6 +40,8 @@ void GameManager::Start(RenderWindow& window)
     AssetsManager::Instance().Start();//on charge les assets
     CardsManager::Instance().Start();//Crétion de toutes les cartes du jeu
     Board::Instance().Start();//Création du plateau dde jeu
+    player1.Start();
+    player2.Start();
 
     //on place des cartes au pif mdr
     Card card;
@@ -53,6 +56,8 @@ void GameManager::Start(RenderWindow& window)
 void GameManager::Update(RenderWindow& window)
 {
     HandleEvent(window);
+    player1.Update(window);
+    player2.Update(window);
     Board::Instance().Update(window);
 }
 

@@ -1,7 +1,7 @@
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
-#include "Deck.hpp"
+#include "Card.hpp"
 #include "Button.hpp"
 
 #define NB_MAX_GOAL_KEEPER 1
@@ -58,7 +58,6 @@ public:
 		sf::Vector2f(950, 675)
 	};
 
-	Deck deckPlayer1, deckPlayer2;
 	Card goalKeepersUp[NB_MAX_GOAL_KEEPER];
 	Card defencersUp[NB_MAX_DEFENDER];
 	Card strikersUp[NB_MAX_STRIKER];

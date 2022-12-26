@@ -1,5 +1,6 @@
 
 #include "Card.hpp"
+#include "Board.hpp"
 #include "Collider2D.hpp"
 #include "AssetsManager.hpp"
 #include "GameManager.hpp"
