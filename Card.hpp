@@ -37,11 +37,14 @@ public:
 	void description(std::string value) { _description = value; }
 	void attack(int value) { _attack = value; } void defence(int value) { _defence = value; }
 	void cardType(CardType value) { _cardType = value; }
+	void SetPosition(const sf::Vector2f& position);
+	void SetRotation(float angle);
+	void SetSize(const sf::Vector2f& size);
 
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
 	void OnPlay();
 
-	void Draw(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size);
+	void Draw(sf::RenderWindow& window);
 	std::string ToString() const override;
 };
 

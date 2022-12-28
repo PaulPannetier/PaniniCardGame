@@ -47,6 +47,23 @@ int Card::GetUniqueId()
 	return id;
 }
 
+void Card::SetPosition(const Vector2f& position)
+{
+	this->sprite.setPosition(position);
+}
+
+void Card::SetRotation(float angle)
+{
+	this->sprite.setRotation(angle);
+}
+
+void Card::SetSize(const Vector2f& size)
+{
+	Vector2f textureSize = Vector2f(this->sprite.getTexture()->getSize().x, this->sprite.getTexture()->getSize().y);
+	Vector2f scale = Vector2f(size.x / textureSize.x, size.y / textureSize.y);
+	this->sprite.setScale(scale);
+}
+
 bool Card::CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const
 {
 	if (this->_cardType != line)
@@ -61,9 +78,8 @@ void Card::OnPlay()
 
 }
 
-void Card::Draw(RenderWindow& window, const Vector2f& position, const Vector2f& size)
+void Card::Draw(RenderWindow& window)
 {
-	sprite.setPosition(position);
 	window.draw(sprite);
 }
 

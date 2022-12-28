@@ -25,7 +25,7 @@ Board& Board::Instance()
 
 void Board::Start()
 {
-	endTurnButton = Button(Rectangle(Vector2f(800, 100), Vector2f(50, 50)), OnClickEndTurnButton);
+	endTurnButton = Button(Rectangle(Vector2f(1400, 700), Vector2f(50, 50)), OnClickEndTurnButton);
 	Texture& bgText = AssetsManager::Instance().GetTexture("BoardBackground");
 	background.setTexture(bgText);
 	Vector2f windowSize = GameManager::Instance().GetWindowSize();//marche pas
@@ -154,7 +154,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->goalKeepersUp[i].isOnBoard)
 		{
-			this->goalKeepersUp[i].Draw(window, this->goalKeeperUpPos[i], this->cardSize);
+			this->goalKeepersUp[i].Draw(window);
 		}
 		else
 		{
@@ -166,7 +166,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->defencersUp[i].isOnBoard)
 		{
-			this->defencersUp[i].Draw(window, this->defenderUpPos[i], this->cardSize);
+			this->defencersUp[i].Draw(window);
 		}
 		else
 		{
@@ -178,7 +178,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->strikersUp[i].isOnBoard)
 		{
-			this->strikersUp[i].Draw(window, this->strikerUpPos[i], this->cardSize);
+			this->strikersUp[i].Draw(window);
 		}
 		else
 		{
@@ -192,7 +192,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->goalKeepersDown[i].isOnBoard)
 		{
-			this->goalKeepersDown[i].Draw(window, this->goalKeeperDownPos[i], this->cardSize);
+			this->goalKeepersDown[i].Draw(window);
 		}
 		else
 		{
@@ -204,7 +204,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->defencersDown[i].isOnBoard)
 		{
-			this->defencersDown[i].Draw(window, this->defenderDownPos[i], this->cardSize);
+			this->defencersDown[i].Draw(window);
 		}
 		else
 		{
@@ -216,7 +216,7 @@ void Board::Draw(RenderWindow& window)
 	{
 		if (this->strikersDown[i].isOnBoard)
 		{
-			this->strikersDown[i].Draw(window, this->strikerDownPos[i], this->cardSize);
+			this->strikersDown[i].Draw(window);
 		}
 		else
 		{

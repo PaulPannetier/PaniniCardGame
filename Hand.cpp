@@ -18,18 +18,32 @@ void Hand::Start()
 	player = nullptr;
 }
 
-void Hand::Update(sf::RenderWindow& window)
+void Hand::Update(RenderWindow& window)
 {
 
 }
 
-void Hand::Draw(sf::RenderWindow& window)
+void Hand::Draw(RenderWindow& window)
 {
 	if (player->isMyTurn)
 	{
 		if (isSelected)
 		{
 			Rectangle::DrawWire(window, recSelected, Color::Blue);
+
+			int nbCards = GetNbCards();
+			Vector2f space = Vector2f(recSelected.size.x - ((float)nbCards * cardSizeWhenSelected.x), recSelected.size.y - cardSizeWhenSelected.y);
+			int nbGapX = nbCards + 1;
+			Vector2f gap = Vector2f(space.x / nbGapX, space.y * 0.5f);
+			float y = recSelected.center.y;
+			float x;
+			for (int i = 0; i < nbCards; i++)
+			{
+				x = gap.x * (i + 1);
+				cards[i].SetPosition(Vector2f(x, y));
+				cards[i].SetSize(cardSizeWhenSelected);
+				cards[i].Draw(window);
+			}
 		}
 		else
 		{
@@ -40,6 +54,11 @@ void Hand::Draw(sf::RenderWindow& window)
 	{
 		Rectangle::DrawWire(window, recNotHerTurn, Color::Blue);
 	}
+}
+
+int Hand::GetNbCards() const
+{
+	return indexLastCard + 1;
 }
 
 bool Hand::IsFull() const
@@ -56,6 +75,7 @@ bool Hand::AddCard(const Card& card)
 	this->cards[indexLastCard] = Card(card);
 	return true;
 }
+
 bool Hand::RemoveCard(const Card& card)
 {
 	if (indexLastCard < 0)
@@ -71,6 +91,7 @@ bool Hand::RemoveCard(const Card& card)
 					cards[j] = Card(cards[j + 1]);
 				}
 				cards[MAX_HAND_SIZE - 1].isInitialized = false;
+				indexLastCard--;
 				return true;
 			}
 		}
