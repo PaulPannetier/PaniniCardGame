@@ -11,6 +11,7 @@ using namespace sf;
 Card::Card()
 {
 	isOnBoard = false;
+	isInitialized = false;
 }
 
 Card::Card(string name, string description, int attack, int defence, CardType cardType, string textureName)
@@ -25,6 +26,8 @@ Card::Card(string name, string description, int attack, int defence, CardType ca
 	Vector2f cardSize = Board::Instance().cardSize;
 	Vector2f scale = Vector2f(cardSize.x / texture.getSize().x, cardSize.y / texture.getSize().y);
 	this->sprite.setScale(scale);
+	this->id = GetUniqueId();
+	this->isInitialized = true;
 }
 
 Card::Card(const Card& card)
@@ -33,6 +36,15 @@ Card::Card(const Card& card)
 	this->cardType(card._cardType);
 	isOnBoard = card.isOnBoard;
 	this->sprite = Sprite(card.sprite);
+	this->id = card.id;
+	this->isInitialized = card.isInitialized;
+}
+
+int Card::GetUniqueId()
+{
+	static int id = -1;
+	id++;
+	return id;
 }
 
 bool Card::CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const

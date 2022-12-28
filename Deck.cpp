@@ -20,16 +20,15 @@ void Deck::Shuffle()
     }
 }
 
-bool Deck::Draw(Card card)
+bool Deck::Draw(Card& drawCard)
 {
     if (this->isEmpty())
     {
         return false;
     }
 
-    card = Card(cards[0]);
+    drawCard = Card(cards[0]);
     cards.erase(cards.begin());
-
     return true;
 }
 
@@ -41,6 +40,5 @@ void Deck::AddCard(Card card)
 string Deck::ToString() const
 {
     ostringstream os;
-    //os << "[Deck], count : " << count();
     return os.str();
 }

@@ -94,9 +94,14 @@ public:
         return ((float)rand()) / RAND_MAX;
     }
 
+    static float RandExclude()
+    {
+        return ((float)rand()) / (RAND_MAX + 1);
+    }
+
     static int Rand(int a, int b)
     {
-        return (int)(Rand() * Useful::Abs(b - a)) + a;
+        return (int)(RandExclude() * (Useful::Abs(b - a) + 1)) + a;
     }
 
     static float Rand(float a, float b)
@@ -106,12 +111,12 @@ public:
 
     static int RandExclude(int a, int b)
     {
-        return Rand(a, b + 1);
+        return Rand(a, b - 1);
     }
 
     static float RandExclude(float a, float b)
     {
-        return (((float)(rand() - 1)) / RAND_MAX) * Useful::Abs(b - a) + a;
+        return RandExclude() * Useful::Abs(b - a) + a;
     }
 };
 

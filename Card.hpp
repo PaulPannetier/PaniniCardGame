@@ -15,9 +15,12 @@ private:
 	CardType _cardType;
 	sf::Sprite sprite;
 
-public:
+	int GetUniqueId();
 
+public:
+	int id;
 	bool isOnBoard;
+	bool isInitialized;
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, CardType cardType, std::string textureName);

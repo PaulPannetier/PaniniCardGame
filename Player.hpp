@@ -3,6 +3,8 @@
 
 #include "Deck.hpp"
 #include "Hand.hpp"
+#include <vector>
+#include "CardManager.hpp"
 
 class Player
 {
@@ -19,6 +21,9 @@ public :
 	void Start();
 	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
+
+	void FillDeck(std::vector<CardsManager::CardNum>& cards);
+	void FirstDraw(int nbCards);
 };
 
 #endif
