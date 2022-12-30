@@ -1,32 +1,29 @@
 
 #include "Button.hpp"
+#include "InputManager.hpp"
 
 using namespace std;
 using namespace sf;
 
 Button::Button()
 {
-	this->isHover = oldOnMouseClick = false;
+	this->isHover = false;
 }
 
 Button::Button(const Rectangle& hitbox, void (*OnClick)(const Button& button))
 {
-	this->isHover = oldOnMouseClick = false;
+	this->isHover = false;
 	this->hitbox = Rectangle(hitbox);
 	this->OnClick = OnClick;
 }
 
 void Button::Update(RenderWindow& window)
 {
-	Vector2i tmp = Mouse::getPosition(window);
-	Vector2f mousePosition = Vector2f(tmp.x, tmp.y);
-	isHover = this->hitbox.Contain(mousePosition);
-	bool onMouseClick = Mouse::isButtonPressed(Mouse::Button::Left);
-	if (isHover && !oldOnMouseClick && onMouseClick)
+	isHover = this->hitbox.Contain(InputManager::Instance().MousePosition());
+	if (isHover && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 	{
 		OnClick(*this);
 	}
-	oldOnMouseClick = onMouseClick;
 }
 
 void Button::Draw(RenderWindow& window)

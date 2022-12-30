@@ -20,7 +20,7 @@ void Deck::Shuffle()
     }
 }
 
-bool Deck::Draw(Card& drawCard)
+bool Deck::DrawCard(Card& drawCard)
 {
     if (this->isEmpty())
     {

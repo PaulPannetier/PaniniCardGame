@@ -5,13 +5,14 @@
 #include "CardManager.hpp"
 #include "Board.hpp"
 #include "Test.hpp"
+#include "InputManager.hpp"
+#include "Time.hpp"
 
 using namespace std;
 using namespace sf;
 
 bool testCollider2D = false;
 void FillDeck(Player& player1, Player& player2);
-
 
 GameManager::GameManager()
 {
@@ -40,8 +41,9 @@ void GameManager::Start(RenderWindow& window)
 {
     Random::SetRandomSeed();
     this->_windowSize = Vector2f(window.getSize().x, window.getSize().y);
+    InputManager::Instance().Start(window);
     AssetsManager::Instance().Start();//on charge les assets
-    CardsManager::Instance().Start();//Crétion de toutes les cartes du jeu
+    CardsManager::Instance().Start();//Création de toutes les cartes du jeu
     Board::Instance().Start();//Création du plateau dde jeu
     player1.Start();
     player2.Start();
@@ -49,6 +51,7 @@ void GameManager::Start(RenderWindow& window)
     player1.FirstDraw(NB_BEGIN_CARDS);
     player2.FirstDraw(NB_BEGIN_CARDS);
     player1.isMyTurn = true;
+
 
     //on place des cartes au pif mdr
     /*
@@ -96,6 +99,8 @@ void FillDeck(Player& player1, Player& player2)
 void GameManager::Update(RenderWindow& window)
 {
     HandleEvent(window);
+    TimeManager::Update(window);
+    InputManager::Instance().Update(window);
     player1.Update(window);
     player2.Update(window);
     Board::Instance().Update(window);

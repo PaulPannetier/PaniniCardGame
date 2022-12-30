@@ -1,4 +1,76 @@
 ﻿  Board.cpp
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Card.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(25,72): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(25,45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(62,110): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(62,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(93,110): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(93,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  GameManager.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\GameManager.cpp(43,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\GameManager.cpp(43,50): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Hand.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Player.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   PaniniCardGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\x64\Debug\PaniniCardGame.exe

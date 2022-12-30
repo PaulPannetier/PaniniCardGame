@@ -64,6 +64,37 @@ void Card::SetSize(const Vector2f& size)
 	this->sprite.setScale(scale);
 }
 
+void Card::InverseScale(bool x, bool y)
+{
+	if (sprite.getScale().x >= 0.0f)
+	{
+		if (x)
+			sprite.setScale(Vector2f(-sprite.getScale().x, sprite.getScale().y));
+	}
+	else
+	{
+		if (!x)
+			sprite.setScale(Vector2f(-sprite.getScale().x, sprite.getScale().y));
+	}
+	if (sprite.getScale().y >= 0.0f)
+	{
+		if (y)
+			sprite.setScale(Vector2f(sprite.getScale().x, -sprite.getScale().y));
+	}
+	else
+	{
+		if (!y)
+			sprite.setScale(Vector2f(sprite.getScale().x, -sprite.getScale().y));
+	}
+}
+
+Vector2f Card::GetSize()
+{
+	Vector2f textureSize = Vector2f(this->sprite.getTexture()->getSize().x, this->sprite.getTexture()->getSize().y);
+	Vector2f scale = sprite.getScale();
+	return Vector2f(scale.x * textureSize.x, scale.y * textureSize.y);
+}
+
 bool Card::CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const
 {
 	if (this->_cardType != line)
@@ -80,7 +111,10 @@ void Card::OnPlay()
 
 void Card::Draw(RenderWindow& window)
 {
+	if (!isInitialized)
+		return;
 	window.draw(sprite);
+	Rectangle::DrawWire(window, Rectangle(sprite.getPosition(), GetSize()), Color::Blue);
 }
 
 string Card::ToString() const

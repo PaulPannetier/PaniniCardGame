@@ -8,7 +8,6 @@ class Button : Object
 {
 private:
 	bool isHover;
-	bool oldOnMouseClick;
 
 public:
 

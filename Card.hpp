@@ -40,6 +40,8 @@ public:
 	void SetPosition(const sf::Vector2f& position);
 	void SetRotation(float angle);
 	void SetSize(const sf::Vector2f& size);
+	void InverseScale(bool x, bool y);
+	sf::Vector2f GetSize();
 
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
 	void OnPlay();

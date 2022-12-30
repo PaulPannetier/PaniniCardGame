@@ -13,17 +13,20 @@ class Player;
 class Hand
 {
 private:
-	const Rectangle recNotSelected = Rectangle(sf::Vector2f(800, 900), sf::Vector2f(700, 600));
-	const Rectangle recNotHerTurn = Rectangle(sf::Vector2f(800, 0), sf::Vector2f(700, 600));
+	const Rectangle recNotSelected = Rectangle(sf::Vector2f(800, 925), sf::Vector2f(700, 350));
+	const Rectangle recNotHerTurn = Rectangle(sf::Vector2f(800, -50), sf::Vector2f(700, 350));
 	const Rectangle recSelected = Rectangle(sf::Vector2f(800, 450), sf::Vector2f(900, 600));
 
-	const sf::Vector2f cardSizeWhenSelected = sf::Vector2f(120, 450);
-	const sf::Vector2f cardSizeWhenNotSelected = sf::Vector2f(80, 450);
-	const sf::Vector2f cardSizeWhenNotHerTurn = sf::Vector2f(80, 450);
+	const sf::Vector2f cardSizeWhenSelected = sf::Vector2f(150, 400);
+	const sf::Vector2f cardSizeWhenNotSelected = sf::Vector2f(80, 300);
+	const sf::Vector2f cardSizeWhenNotHerTurn = sf::Vector2f(80, 300);
 
 	Card cards[MAX_HAND_SIZE];
 	bool isACardSelected, isSelected;
 	int indexCardSelected, indexLastCard;
+
+	void CalculateCardsTransform(int nbCards, const Rectangle& rec, const sf::Vector2f& cardSize);
+
 
 public :
 

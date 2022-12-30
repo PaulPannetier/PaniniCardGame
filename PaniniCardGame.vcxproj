@@ -28,8 +28,10 @@
     <ClInclude Include="Deck.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="Hand.hpp" />
+    <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Test.hpp" />
+    <ClInclude Include="Time.hpp" />
     <ClInclude Include="Useful.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -42,8 +44,10 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

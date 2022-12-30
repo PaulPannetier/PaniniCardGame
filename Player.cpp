@@ -15,10 +15,7 @@ void Player::Start()
 
 void Player::Update(RenderWindow& window)
 {
-	if (isMyTurn)
-	{
-		hand.Update(window);
-	}
+	hand.Update(window);
 }
 
 void Player::Draw(RenderWindow& window)
@@ -40,7 +37,7 @@ void Player::FirstDraw(int nbCards)
 	Card drawCard;
 	for (int i = 0; i < nbCards; i++)
 	{
-		if (this->deck.Draw(drawCard))
+		if (this->deck.DrawCard(drawCard))
 		{
 			this->hand.AddCard(drawCard);
 		}
