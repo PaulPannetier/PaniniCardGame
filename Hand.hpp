@@ -22,17 +22,23 @@ private:
 	const sf::Vector2f cardSizeWhenNotHerTurn = sf::Vector2f(80, 300);
 
 	Card cards[MAX_HAND_SIZE];
-	bool isACardSelected, isSelected;
-	int indexCardSelected, indexLastCard;
+	bool isSelected;// si la main est sélectionner
+	int indexLastCard;// index de la dernière carte
 
 	void CalculateCardsTransform(int nbCards, const Rectangle& rec, const sf::Vector2f& cardSize);
-
+	void DeselectSelectedCard();
 
 public :
+	bool isACardSelected;//si une carte est selectionner 
+	int indexCardSelected;//l'index de la carte sélectionner 
 
 	Player* player;
 
 	Hand();
+
+	//Getter
+	bool IsSelected();
+	bool GetSelectedCard(Card& card);
 
 	void Start();
 	void Update(sf::RenderWindow& window);
@@ -40,6 +46,7 @@ public :
 	bool IsFull() const;
 	bool AddCard(const Card& card);
 	bool RemoveCard(const Card& card);
+	bool RemoveCard(int cardId);
 	int GetNbCards() const;
 };
 

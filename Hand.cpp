@@ -11,6 +11,21 @@ Hand::Hand()
 
 }
 
+bool Hand::IsSelected()
+{
+	return isSelected;
+}
+
+bool Hand::GetSelectedCard(Card& card)
+{
+	if (isACardSelected)
+	{
+		card = Card(cards[indexCardSelected]);
+		return true;
+	}
+	return false;
+}
+
 void Hand::Start()
 {
 	isACardSelected = isSelected = false;
@@ -21,7 +36,7 @@ void Hand::Start()
 
 void Hand::Update(RenderWindow& window)
 {
-	//calculate cards trabsform
+	//calculate cards transform
 	if (player->isMyTurn)
 	{
 		if (isSelected)
@@ -46,6 +61,8 @@ void Hand::Update(RenderWindow& window)
 			if (!recSelected.Contain(InputManager::Instance().MousePosition()) && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 			{
 				isSelected = false;
+				//on déselectionne la carte sélectionner
+				DeselectSelectedCard();
 			}
 		}
 		else
@@ -56,9 +73,42 @@ void Hand::Update(RenderWindow& window)
 ;			}
 		}
 	}
-	else
-	{
 
+	//select the card
+	if (player->isMyTurn)
+	{
+		if (isSelected)
+		{
+			if (InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+			{
+				int nbCard = GetNbCards();
+				for (int i = 0; i < nbCard; i++)
+				{
+					Rectangle hitbox = cards[i].GetHitbox();
+					if (hitbox.Contain(InputManager::Instance().MousePosition()))
+					{
+						//on déseclectionne la carte précédemment sélectionner
+						DeselectSelectedCard();
+						
+						//on sélectionne la nouvelle
+						cards[i].isSelected = true;
+						isSelected = false;
+						isACardSelected = true;
+						indexCardSelected = i;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void Hand::DeselectSelectedCard()
+{
+	if (isACardSelected)
+	{
+		cards[indexCardSelected].isSelected = false;
+		isACardSelected = false;
 	}
 }
 
@@ -124,7 +174,7 @@ bool Hand::AddCard(const Card& card)
 	return true;
 }
 
-bool Hand::RemoveCard(const Card& card)
+bool Hand::RemoveCard(int cardId)
 {
 	if (indexLastCard < 0)
 		return false;
@@ -132,7 +182,7 @@ bool Hand::RemoveCard(const Card& card)
 	{
 		if (cards[i].isInitialized && !cards[i].isOnBoard)
 		{
-			if (cards[i].id == card.id)
+			if (cards[i].id == cardId)
 			{
 				for (int j = i; j < MAX_HAND_SIZE - 1; j++)
 				{
@@ -145,4 +195,9 @@ bool Hand::RemoveCard(const Card& card)
 		}
 	}
 	return false;
+}
+
+bool Hand::RemoveCard(const Card& card)
+{
+	return RemoveCard(card.id);
 }

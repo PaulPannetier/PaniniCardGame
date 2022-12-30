@@ -1,7 +1,6 @@
 
 #include "Card.hpp"
 #include "Board.hpp"
-#include "Collider2D.hpp"
 #include "AssetsManager.hpp"
 #include "GameManager.hpp"
 
@@ -10,7 +9,6 @@ using namespace sf;
 
 Card::Card()
 {
-	isOnBoard = false;
 	isInitialized = false;
 }
 
@@ -28,6 +26,7 @@ Card::Card(string name, string description, int attack, int defence, CardType ca
 	this->sprite.setScale(scale);
 	this->id = GetUniqueId();
 	this->isInitialized = true;
+	this->isSelected = false;
 }
 
 Card::Card(const Card& card)
@@ -38,6 +37,7 @@ Card::Card(const Card& card)
 	this->sprite = Sprite(card.sprite);
 	this->id = card.id;
 	this->isInitialized = card.isInitialized;
+	this->isSelected = card.isSelected;
 }
 
 int Card::GetUniqueId()
@@ -47,9 +47,19 @@ int Card::GetUniqueId()
 	return id;
 }
 
+Vector2f Card::GetPosition()
+{
+	return sprite.getPosition();
+}
+
 void Card::SetPosition(const Vector2f& position)
 {
 	this->sprite.setPosition(position);
+}
+
+float Card::GetRotation()
+{
+	return sprite.getRotation();
 }
 
 void Card::SetRotation(float angle)
@@ -57,11 +67,27 @@ void Card::SetRotation(float angle)
 	this->sprite.setRotation(angle);
 }
 
+Vector2f Card::GetSize()
+{
+	if (!isInitialized)
+		return Vector2f(0, 0);
+	Vector2f scale = sprite.getScale();
+	Vector2f fullSize = Vector2f(sprite.getTextureRect().width, sprite.getTextureRect().height);
+	return Vector2f(scale.x * fullSize.x, scale.y * fullSize.y);
+}
+
 void Card::SetSize(const Vector2f& size)
 {
+	if (!isInitialized)
+		return;
 	Vector2f textureSize = Vector2f(this->sprite.getTexture()->getSize().x, this->sprite.getTexture()->getSize().y);
 	Vector2f scale = Vector2f(size.x / textureSize.x, size.y / textureSize.y);
 	this->sprite.setScale(scale);
+}
+
+Rectangle Card::GetHitbox()
+{
+	return Rectangle(GetPosition(), GetSize());
 }
 
 void Card::InverseScale(bool x, bool y)
@@ -88,13 +114,6 @@ void Card::InverseScale(bool x, bool y)
 	}
 }
 
-Vector2f Card::GetSize()
-{
-	Vector2f textureSize = Vector2f(this->sprite.getTexture()->getSize().x, this->sprite.getTexture()->getSize().y);
-	Vector2f scale = sprite.getScale();
-	return Vector2f(scale.x * textureSize.x, scale.y * textureSize.y);
-}
-
 bool Card::CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const
 {
 	if (this->_cardType != line)
@@ -114,7 +133,8 @@ void Card::Draw(RenderWindow& window)
 	if (!isInitialized)
 		return;
 	window.draw(sprite);
-	Rectangle::DrawWire(window, Rectangle(sprite.getPosition(), GetSize()), Color::Blue);
+	Color color = isSelected ? Color::Yellow : Color::Blue;
+	Rectangle::DrawWire(window, GetHitbox(), color);
 }
 
 string Card::ToString() const

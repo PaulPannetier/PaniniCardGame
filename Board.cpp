@@ -40,6 +40,7 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 	{
 		return false;
 	}
+
 	switch (line)
 	{
 	case CardType::goalkeeper:
@@ -47,11 +48,11 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 			return false;
 		if (playerOneBoard)
 		{
-			if (goalKeepersUp[indexPlace].isOnBoard)
+			if (goalKeepersOne[indexPlace].isOnBoard)
 				return false;
 			return true;
 		}
-		if (goalKeepersDown[indexPlace].isOnBoard)
+		if (goalKeepersTwo[indexPlace].isOnBoard)
 			return false;
 		return true;
 	case CardType::defender:
@@ -59,11 +60,11 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 			return false;
 		if (playerOneBoard)
 		{
-			if (defencersUp[indexPlace].isOnBoard)
+			if (defencersOne[indexPlace].isOnBoard)
 				return false;
 			return true;
 		}
-		if (defencersDown[indexPlace].isOnBoard)
+		if (defencersTwo[indexPlace].isOnBoard)
 			return false;
 		return true;
 	case CardType::striker:
@@ -71,11 +72,11 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 			return false;
 		if (playerOneBoard)
 		{
-			if (strikersUp[indexPlace].isOnBoard)
+			if (strikersOne[indexPlace].isOnBoard)
 				return false;
 			return true;
 		}
-		if (strikersDown[indexPlace].isOnBoard)
+		if (strikersTwo[indexPlace].isOnBoard)
 			return false;
 		return true;
 	case CardType::spell:
@@ -83,6 +84,96 @@ bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, i
 	default:
 		return false;
 	}
+}
+
+bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
+{
+	Rectangle hitbox;
+	//gardien joueur 1
+	for (int i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		hitbox = Rectangle(goalKeeperOnePos[i], cardSize);
+		if (hitbox.Contain(position))
+		{
+			info.indexPlace = i;
+			info.card = Card(this->goalKeepersOne[i]);
+			info.line = CardType::goalkeeper;
+			info.playerOnePlace = true;
+			return true;
+		}
+	}
+
+	//defenceurs joueur 1
+	for (int i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		hitbox = Rectangle(defenderOnePos[i], cardSize);
+		if (hitbox.Contain(position))
+		{
+			info.indexPlace = i;
+			info.card = Card(this->defencersOne[i]);
+			info.line = CardType::defender;
+			info.playerOnePlace = true;
+			return true;
+		}
+	}
+
+	//attaquant joueur 1
+	for (int i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		hitbox = Rectangle(strikerOnePos[i], cardSize);
+		if (hitbox.Contain(position))
+		{
+			info.indexPlace = i;
+			info.card = Card(this->strikersOne[i]);
+			info.line = CardType::striker;
+			info.playerOnePlace = true;
+			return true;
+		}
+	}
+
+	//gardien joueur 2
+	for (int i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		hitbox = Rectangle(goalKeeperTwoPos[i], cardSize);
+		if (hitbox.Contain(position))
+		{
+			info.indexPlace = i;
+			info.card = Card(this->goalKeepersTwo[i]);
+			info.line = CardType::goalkeeper;
+			info.playerOnePlace = false;
+			return true;
+		}
+	}
+
+	//defenceurs joueur 2
+	for (int i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		hitbox = Rectangle(defenderTwoPos[i], cardSize);
+		if (hitbox.Contain(position))
+		{
+			info.indexPlace = i;
+			info.card = Card(this->defencersTwo[i]);
+			info.line = CardType::defender;
+			info.playerOnePlace = false;
+			return true;
+		}
+	}
+
+	//attaquant joueur 2
+	for (int i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		hitbox = Rectangle(strikerTwoPos[i], cardSize);
+		if (hitbox.Contain(position))
+		{
+			info.indexPlace = i;
+			info.card = Card(this->strikersTwo[i]);
+			info.line = CardType::striker;
+			info.playerOnePlace = false;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace)
@@ -95,37 +186,44 @@ void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int 
 	case CardType::goalkeeper:
 		if (playerOneBoard)
 		{
-			goalKeepersUp[indexPlace] = Card(card);
-			goalKeepersUp[indexPlace].isOnBoard = true;
+			goalKeepersOne[indexPlace] = Card(card);
+			goalKeepersOne[indexPlace].isOnBoard = true;
+			goalKeepersOne[indexPlace].isSelected = false;
+
 		}
 		else
 		{
-			goalKeepersDown[indexPlace] = Card(card);
-			goalKeepersDown[indexPlace].isOnBoard = true;
+			goalKeepersTwo[indexPlace] = Card(card);
+			goalKeepersTwo[indexPlace].isOnBoard = true;
+			goalKeepersTwo[indexPlace].isSelected = false;
 		}
 		break;
 	case CardType::defender:
 		if (playerOneBoard)
 		{
-			defencersUp[indexPlace] = Card(card);
-			defencersUp[indexPlace].isOnBoard = true;
+			defencersOne[indexPlace] = Card(card);
+			defencersOne[indexPlace].isOnBoard = true;
+			defencersOne[indexPlace].isSelected = false;
 		}
 		else
 		{
-			defencersDown[indexPlace] = Card(card);
-			defencersDown[indexPlace].isOnBoard = true;
+			defencersTwo[indexPlace] = Card(card);
+			defencersTwo[indexPlace].isOnBoard = true;
+			defencersTwo[indexPlace].isSelected = false;
 		}
 		break;
 	case CardType::striker:
 		if (playerOneBoard)
 		{
-			strikersUp[indexPlace] = Card(card);
-			strikersUp[indexPlace].isOnBoard = true;
+			strikersOne[indexPlace] = Card(card);
+			strikersOne[indexPlace].isOnBoard = true;
+			strikersOne[indexPlace].isSelected = false;
 		}
 		else
 		{
-			strikersDown[indexPlace] = Card(card);
-			strikersDown[indexPlace].isOnBoard = true;
+			strikersTwo[indexPlace] = Card(card);
+			strikersTwo[indexPlace].isOnBoard = true;
+			strikersTwo[indexPlace].isSelected = false;
 		}
 		break;
 	default:
@@ -133,9 +231,55 @@ void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int 
 	}
 }
 
+void Board::CalculateCardsTransform()
+{
+	//goals joueur 1
+	for (int i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		goalKeepersOne[i].SetPosition(goalKeeperOnePos[i]);
+		goalKeepersOne[i].SetSize(cardSize);
+	}
+
+	//defenceurs joueur 1
+	for (int i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		defencersOne[i].SetPosition(defenderOnePos[i]);
+		defencersOne[i].SetSize(cardSize);
+	}
+
+	//attaquant joueur 1
+	for (int i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		strikersOne[i].SetPosition(strikerOnePos[i]);
+		strikersOne[i].SetSize(cardSize);
+	}
+
+	//gardien joueur 2
+	for (int i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		goalKeepersTwo[i].SetPosition(goalKeeperTwoPos[i]);
+		goalKeepersTwo[i].SetSize(cardSize);
+	}
+
+	//defenceurs joueur 2
+	for (int i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		defencersTwo[i].SetPosition(defenderTwoPos[i]);
+		defencersTwo[i].SetSize(cardSize);
+	}
+
+	//attaquant joueur 2
+	for (int i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		strikersTwo[i].SetPosition(strikerTwoPos[i]);
+		strikersTwo[i].SetSize(cardSize);
+	}
+}
+
 void Board::Update(RenderWindow& window)
 {
 	endTurnButton.Update(window);
+	CalculateCardsTransform();
 }
 
 //Affiche le plateau de jeu
@@ -152,37 +296,37 @@ void Board::Draw(RenderWindow& window)
 	//le goal
 	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
 	{
-		if (this->goalKeepersUp[i].isOnBoard)
+		if (this->goalKeepersOne[i].isOnBoard)
 		{
-			this->goalKeepersUp[i].Draw(window);
+			this->goalKeepersOne[i].Draw(window);
 		}
 		else
 		{
-			Rectangle::DrawWire(window, this->goalKeeperUpPos[i], this->cardSize, Color::Red, 3.0f);
+			Rectangle::DrawWire(window, this->goalKeeperOnePos[i], this->cardSize, Color::Red, 3.0f);
 		}
 	}
 	//defenseurs
 	for (i = 0; i < NB_MAX_DEFENDER; i++)
 	{
-		if (this->defencersUp[i].isOnBoard)
+		if (this->defencersOne[i].isOnBoard)
 		{
-			this->defencersUp[i].Draw(window);
+			this->defencersOne[i].Draw(window);
 		}
 		else
 		{
-			Rectangle::DrawWire(window, this->defenderUpPos[i], this->cardSize, Color::Blue, 3.0f);
+			Rectangle::DrawWire(window, this->defenderOnePos[i], this->cardSize, Color::Blue, 3.0f);
 		}
 	}
 	//attaquants
 	for (i = 0; i < NB_MAX_STRIKER; i++)
 	{
-		if (this->strikersUp[i].isOnBoard)
+		if (this->strikersOne[i].isOnBoard)
 		{
-			this->strikersUp[i].Draw(window);
+			this->strikersOne[i].Draw(window);
 		}
 		else
 		{
-			Rectangle::DrawWire(window, this->strikerUpPos[i], this->cardSize, Color::Green, 3.0f);
+			Rectangle::DrawWire(window, this->strikerOnePos[i], this->cardSize, Color::Green, 3.0f);
 		}
 	}
 
@@ -190,37 +334,37 @@ void Board::Draw(RenderWindow& window)
 	//le goal
 	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
 	{
-		if (this->goalKeepersDown[i].isOnBoard)
+		if (this->goalKeepersTwo[i].isOnBoard)
 		{
-			this->goalKeepersDown[i].Draw(window);
+			this->goalKeepersTwo[i].Draw(window);
 		}
 		else
 		{
-			Rectangle::DrawWire(window, this->goalKeeperDownPos[i], this->cardSize, Color::Red, 3.0f);
+			Rectangle::DrawWire(window, this->goalKeeperTwoPos[i], this->cardSize, Color::Red, 3.0f);
 		}
 	}
 	//defenseurs
 	for (i = 0; i < NB_MAX_DEFENDER; i++)
 	{
-		if (this->defencersDown[i].isOnBoard)
+		if (this->defencersTwo[i].isOnBoard)
 		{
-			this->defencersDown[i].Draw(window);
+			this->defencersTwo[i].Draw(window);
 		}
 		else
 		{
-			Rectangle::DrawWire(window, this->defenderDownPos[i], this->cardSize, Color::Blue, 3.0f);
+			Rectangle::DrawWire(window, this->defenderTwoPos[i], this->cardSize, Color::Blue, 3.0f);
 		}
 	}
 	//attaquants
 	for (i = 0; i < NB_MAX_STRIKER; i++)
 	{
-		if (this->strikersDown[i].isOnBoard)
+		if (this->strikersTwo[i].isOnBoard)
 		{
-			this->strikersDown[i].Draw(window);
+			this->strikersTwo[i].Draw(window);
 		}
 		else
 		{
-			Rectangle::DrawWire(window, this->strikerDownPos[i], this->cardSize, Color::Green, 3.0f);
+			Rectangle::DrawWire(window, this->strikerTwoPos[i], this->cardSize, Color::Green, 3.0f);
 		}
 	}
 }

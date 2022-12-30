@@ -46,12 +46,13 @@ void GameManager::Start(RenderWindow& window)
     CardsManager::Instance().Start();//Création de toutes les cartes du jeu
     Board::Instance().Start();//Création du plateau dde jeu
     player1.Start();
+    player1.isPlayerOne = true;
     player2.Start();
+    player2.isPlayerOne = false;
     FillDeck(player1, player2);
     player1.FirstDraw(NB_BEGIN_CARDS);
     player2.FirstDraw(NB_BEGIN_CARDS);
     player1.isMyTurn = true;
-
 
     //on place des cartes au pif mdr
     /*

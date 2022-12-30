@@ -3,24 +3,26 @@
 
 #include <string>
 #include "Useful.hpp"
+#include "Collider2D.hpp"
 
 typedef enum { goalkeeper, defender, striker, spell } CardType;
 
 class Card : Object
 {
 private:
-	std::string _name;
-	std::string _description;
-	int _attack, _defence;
-	CardType _cardType;
-	sf::Sprite sprite;
+	std::string _name;//le nom du joueur
+	std::string _description;//description des effets
+	int _attack, _defence;//stats d'attaque et de defence
+	CardType _cardType;//le type de carte (goal, attaquant, defenceur ou sort)
+	sf::Sprite sprite;//le sprite (servant a laffichage de l'image)
 
 	int GetUniqueId();
 
 public:
-	int id;
-	bool isOnBoard;
-	bool isInitialized;
+	int id;//l'identifiant unique de la carte
+	bool isOnBoard;//true si elle est posé sur le plateau, false si elle est dans la main ou le deck
+	bool isInitialized;//true si tout les attribut ont été affecté, false sinon
+	bool isSelected;
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, CardType cardType, std::string textureName);
@@ -31,6 +33,10 @@ public:
 	std::string description() { return _description; }
 	int attack() { return _attack; } int defence() { return _defence; }
 	CardType cardType() { return _cardType; }
+	sf::Vector2f GetPosition();
+	float GetRotation();
+	sf::Vector2f GetSize();
+	Rectangle GetHitbox();
 
 	//Setter
 	void name(std::string value) { _name = value; }
@@ -41,7 +47,6 @@ public:
 	void SetRotation(float angle);
 	void SetSize(const sf::Vector2f& size);
 	void InverseScale(bool x, bool y);
-	sf::Vector2f GetSize();
 
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
 	void OnPlay();

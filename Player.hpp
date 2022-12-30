@@ -9,12 +9,13 @@
 class Player
 {
 private :
-	Deck deck;
-	Hand hand;
+	Deck deck;//le deck du joueur
+	Hand hand;//la main du joueur
 
 public :
 
-	bool isMyTurn;
+	bool isPlayerOne;
+	bool isMyTurn;//true si c'est le tour de ce joueur, false sinon
 
 	Player() = default;
 

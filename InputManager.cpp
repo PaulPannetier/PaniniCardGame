@@ -82,6 +82,7 @@ void InputManager::Update(RenderWindow& window)
 	{
 		newIsPressesMouse[i] = Mouse::isButtonPressed((Mouse::Button)i);
 	}
+
 	for (int i = 0; i < (int)Mouse::Button::ButtonCount; i++)
 	{
 		newIsPressesKeyboard[i] = Keyboard::isKeyPressed((Keyboard::Key)i);

@@ -1,5 +1,7 @@
 
 #include "Player.hpp"
+#include "Board.hpp"
+#include "InputManager.hpp"
 #include <vector>
 
 using namespace std; 
@@ -16,6 +18,32 @@ void Player::Start()
 void Player::Update(RenderWindow& window)
 {
 	hand.Update(window);
+	if (!hand.IsSelected() && hand.isACardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+	{
+		CardPlaceInfo info;
+		if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
+		{
+			if (false)
+			{
+				cout << info.card.ToString() << endl;
+				cout << info.indexPlace << endl;
+				cout << info.line << endl;
+				cout << to_string(info.playerOnePlace) << endl << endl;
+			}
+
+			if (info.playerOnePlace == isPlayerOne)
+			{
+				//on place la carte sur le plateau
+				Card card;
+				hand.GetSelectedCard(card);
+				if (Board::Instance().CanPlaceCard(card, isPlayerOne, info.line, info.indexPlace))
+				{
+					Board::Instance().PlaceCard(card, isPlayerOne, info.line, info.indexPlace);
+					hand.RemoveCard(card);
+				}
+			}
+		}
+	}
 }
 
 void Player::Draw(RenderWindow& window)
