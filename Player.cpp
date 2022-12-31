@@ -71,3 +71,13 @@ void Player::FirstDraw(int nbCards)
 		}
 	}
 }
+
+void Player::BeginTurn()
+{
+
+}
+
+void Player::EndTurn()
+{
+
+}

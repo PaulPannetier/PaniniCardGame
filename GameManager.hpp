@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "AssetsManager.hpp"
-#include "Player.hpp"
 
 class GameManager
 {
@@ -11,7 +10,6 @@ private:
 
 	GameManager();
 	sf::Vector2f _windowSize;
-	Player player1, player2;
 
 public:
 

@@ -25,6 +25,8 @@ public :
 
 	void FillDeck(std::vector<CardsManager::CardNum>& cards);
 	void FirstDraw(int nbCards);
+	void BeginTurn();
+	void EndTurn();
 };
 
 #endif

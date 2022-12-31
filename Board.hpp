@@ -3,6 +3,7 @@
 
 #include "Card.hpp"
 #include "Button.hpp"
+#include "Player.hpp"
 
 #define NB_MAX_GOAL_KEEPER 1
 #define NB_MAX_DEFENDER 5
@@ -35,10 +36,12 @@ private:
 
 	sf::Sprite background;
 	Button endTurnButton;
+	Player player1, player2;
 
 	Board();
 
 	void CalculateCardsTransform();
+	void FillDeck();
 
 public:
 
@@ -95,6 +98,7 @@ public:
 	bool CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	void PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	bool GetCardPlaceInfo(sf::Vector2f position, CardPlaceInfo& info);
+	void OnClickEndTurnButtonAction(const Button& button);
 
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);

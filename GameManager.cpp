@@ -45,56 +45,6 @@ void GameManager::Start(RenderWindow& window)
     AssetsManager::Instance().Start();//on charge les assets
     CardsManager::Instance().Start();//Création de toutes les cartes du jeu
     Board::Instance().Start();//Création du plateau dde jeu
-    player1.Start();
-    player1.isPlayerOne = true;
-    player2.Start();
-    player2.isPlayerOne = false;
-    FillDeck(player1, player2);
-    player1.FirstDraw(NB_BEGIN_CARDS);
-    player2.FirstDraw(NB_BEGIN_CARDS);
-    player1.isMyTurn = true;
-
-    //on place des cartes au pif mdr
-    /*
-    Card card;
-    card = CardsManager::Instance().GetCard(CardsManager::CardNum::Lorris);
-    Board::Instance().PlaceCard(card, false, CardType::goalkeeper, 0);
-    card = CardsManager::Instance().GetCard(CardsManager::CardNum::Giroud);
-    Board::Instance().PlaceCard(card, false, CardType::defender, 3);
-    card = CardsManager::Instance().GetCard(CardsManager::CardNum::Pavard);
-    Board::Instance().PlaceCard(card, true, CardType::striker, 0);
-    */
-}
-
-void FillDeck(Player& player1, Player& player2)
-{
-    vector<CardsManager::CardNum> deckPlayer1 =
-    {
-        CardsManager::CardNum::Lorris,
-        CardsManager::CardNum::Lorris,
-        CardsManager::CardNum::Lorris,
-        CardsManager::CardNum::Giroud,
-        CardsManager::CardNum::Giroud,
-        CardsManager::CardNum::Giroud,
-        CardsManager::CardNum::Pavard,
-        CardsManager::CardNum::Pavard,
-        CardsManager::CardNum::Pavard
-    };
-    player1.FillDeck(deckPlayer1);
-
-    vector<CardsManager::CardNum> deckPlayer2 =
-    {
-        CardsManager::CardNum::Lorris,
-        CardsManager::CardNum::Lorris,
-        CardsManager::CardNum::Lorris,
-        CardsManager::CardNum::Giroud,
-        CardsManager::CardNum::Giroud,
-        CardsManager::CardNum::Giroud,
-        CardsManager::CardNum::Pavard,
-        CardsManager::CardNum::Pavard,
-        CardsManager::CardNum::Pavard
-    };
-    player2.FillDeck(deckPlayer2);
 }
 
 void GameManager::Update(RenderWindow& window)
@@ -102,8 +52,6 @@ void GameManager::Update(RenderWindow& window)
     HandleEvent(window);
     TimeManager::Update(window);
     InputManager::Instance().Update(window);
-    player1.Update(window);
-    player2.Update(window);
     Board::Instance().Update(window);
 }
 
@@ -115,8 +63,6 @@ void GameManager::Draw(RenderWindow& window)
     }
 
     Board::Instance().Draw(window);
-    player1.Draw(window);
-    player2.Draw(window);
 }
 
 void GameManager::HandleEvent(RenderWindow& window) const

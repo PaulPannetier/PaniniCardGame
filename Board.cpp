@@ -7,9 +7,19 @@
 using namespace std;
 using namespace sf;
 
+void Board::OnClickEndTurnButtonAction(const Button& button)
+{
+	Player& player = player1.isMyTurn ? player1 : player2;
+	Player& otherPlayer = player1.isMyTurn ? player2 : player1;
+	player.isMyTurn = false;
+	player.EndTurn();
+	otherPlayer.isMyTurn = true;
+	otherPlayer.BeginTurn();
+}
+
 void OnClickEndTurnButton(const Button& button)
 {
-	cout << "End Turn" << endl;
+	Board::Instance().OnClickEndTurnButtonAction(button);
 }
 
 Board::Board()
@@ -31,7 +41,50 @@ void Board::Start()
 	Vector2f windowSize = GameManager::Instance().GetWindowSize();//marche pas
 	Vector2f textureSize = Vector2f(bgText.getSize());
 	Vector2f scale = Vector2f(1600 / textureSize.x, 900 / textureSize.y);
+
+	//start the players
 	background.setScale(scale);
+	player1.Start();
+	player1.isPlayerOne = true;
+	player2.Start();
+	player2.isPlayerOne = false;
+	FillDeck();
+	player1.FirstDraw(NB_BEGIN_CARDS);
+	player2.FirstDraw(NB_BEGIN_CARDS);
+	player1.isMyTurn = true;
+	player1.BeginTurn();
+}
+
+
+void Board::FillDeck()
+{
+	vector<CardsManager::CardNum> deckPlayer1 =
+	{
+		CardsManager::CardNum::Lorris,
+		CardsManager::CardNum::Lorris,
+		CardsManager::CardNum::Lorris,
+		CardsManager::CardNum::Giroud,
+		CardsManager::CardNum::Giroud,
+		CardsManager::CardNum::Giroud,
+		CardsManager::CardNum::Pavard,
+		CardsManager::CardNum::Pavard,
+		CardsManager::CardNum::Pavard
+	};
+	player1.FillDeck(deckPlayer1);
+
+	vector<CardsManager::CardNum> deckPlayer2 =
+	{
+		CardsManager::CardNum::Lorris,
+		CardsManager::CardNum::Lorris,
+		CardsManager::CardNum::Lorris,
+		CardsManager::CardNum::Giroud,
+		CardsManager::CardNum::Giroud,
+		CardsManager::CardNum::Giroud,
+		CardsManager::CardNum::Pavard,
+		CardsManager::CardNum::Pavard,
+		CardsManager::CardNum::Pavard
+	};
+	player2.FillDeck(deckPlayer2);
 }
 
 bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace)
@@ -278,8 +331,10 @@ void Board::CalculateCardsTransform()
 
 void Board::Update(RenderWindow& window)
 {
-	endTurnButton.Update(window);
+	player1.Update(window);
+	player2.Update(window);
 	CalculateCardsTransform();
+	endTurnButton.Update(window);
 }
 
 //Affiche le plateau de jeu
@@ -288,8 +343,8 @@ void Board::Draw(RenderWindow& window)
 	//afficher le background
 	window.draw(background);
 
-	//les boutons
-	endTurnButton.Draw(window);
+	player1.Draw(window);
+	player2.Draw(window);
 
 	int i;
 	//Le joueur du haut
@@ -367,4 +422,7 @@ void Board::Draw(RenderWindow& window)
 			Rectangle::DrawWire(window, this->strikerTwoPos[i], this->cardSize, Color::Green, 3.0f);
 		}
 	}
+
+	//les boutons
+	endTurnButton.Draw(window);
 }

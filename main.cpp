@@ -12,6 +12,7 @@ int main()
     RenderWindow window(VideoMode(1600, 900), "SFML!");
 
     window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
 
     gameManager.Start(window);
 

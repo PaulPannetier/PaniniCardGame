@@ -1,42 +1,4 @@
-﻿  Card.cpp
+﻿  Board.cpp
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(23,72): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(23,45): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(75,85): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(75,54): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(83,110): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\Card.cpp(83,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
   PaniniCardGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\x64\Debug\PaniniCardGame.exe
