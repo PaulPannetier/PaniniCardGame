@@ -12,10 +12,10 @@ Card::Card()
 	isInitialized = false;
 }
 
-Card::Card(string name, string description, int attack, int defence, CardType cardType, string textureName)
+Card::Card(string name, string description, int attack, int defence, int cost, CardType cardType, string textureName)
 {
 	this->name(name); this->description(description); this->attack(attack); this->defence(defence);
-	this->cardType(cardType);
+	this->cardType(cardType); this->cost(cost);
 	isOnBoard = false;
 
 	Texture& texture = AssetsManager::Instance().GetTexture(textureName);
@@ -32,7 +32,7 @@ Card::Card(string name, string description, int attack, int defence, CardType ca
 Card::Card(const Card& card)
 {
 	this->name(card._name); this->description(card._description); this->attack(card._attack); this->defence(card._defence);
-	this->cardType(card._cardType);
+	this->cardType(card._cardType); this->cost(card._cost);
 	isOnBoard = card.isOnBoard;
 	this->sprite = Sprite(card.sprite);
 	this->id = card.id;

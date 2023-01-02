@@ -13,11 +13,13 @@ void Player::Start()
 	deck.Start();
 	hand.Start();
 	hand.player = this;
+	mana = 1;
 }
 
 void Player::Update(RenderWindow& window)
 {
-	hand.Update(window);
+	hand.Update(window);//on actualise la main
+	//on place la carte selectionner sur le plateau
 	if (!hand.IsSelected() && hand.isACardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 	{
 		CardPlaceInfo info;

@@ -13,6 +13,7 @@ private:
 	std::string _name;//le nom du joueur
 	std::string _description;//description des effets
 	int _attack, _defence;//stats d'attaque et de defence
+	int _cost;//le cout en point de la carte
 	CardType _cardType;//le type de carte (goal, attaquant, defenceur ou sort)
 	sf::Sprite sprite;//le sprite (servant a laffichage de l'image)
 
@@ -25,13 +26,13 @@ public:
 	bool isSelected;
 
 	Card();
-	Card(std::string name, std::string description, int attack, int defence, CardType cardType, std::string textureName);
+	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName);
 	Card(const Card& card);
 
 	//Getter:
 	std::string name() { return _name; }
 	std::string description() { return _description; }
-	int attack() { return _attack; } int defence() { return _defence; }
+	int attack() { return _attack; } int defence() { return _defence; } int cost() { return _cost; }
 	CardType cardType() { return _cardType; }
 	sf::Vector2f GetPosition();
 	float GetRotation();
@@ -42,6 +43,7 @@ public:
 	void name(std::string value) { _name = value; }
 	void description(std::string value) { _description = value; }
 	void attack(int value) { _attack = value; } void defence(int value) { _defence = value; }
+	void cost(int value) { _cost = value; }
 	void cardType(CardType value) { _cardType = value; }
 	void SetPosition(const sf::Vector2f& position);
 	void SetRotation(float angle);

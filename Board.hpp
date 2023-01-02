@@ -42,6 +42,7 @@ private:
 
 	void CalculateCardsTransform();
 	void FillDeck();
+	void PlaceCard(Card& boardCard, const Card& card, int index, int globalIndex);
 
 public:
 
@@ -90,6 +91,7 @@ public:
 	Card goalKeepersTwo[NB_MAX_GOAL_KEEPER];
 	Card defencersTwo[NB_MAX_DEFENDER];
 	Card strikersTwo[NB_MAX_STRIKER];
+	Card* boardCards[(NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + NB_MAX_STRIKER) * 2];
 
 	static Board& Instance();
 

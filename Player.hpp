@@ -11,6 +11,7 @@ class Player
 private :
 	Deck deck;//le deck du joueur
 	Hand hand;//la main du joueur
+	int mana;//les point permettant de jouer des carte
 
 public :
 

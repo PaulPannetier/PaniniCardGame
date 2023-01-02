@@ -21,9 +21,9 @@ void CardsManager::CreateCards()
 {
 	this->gameCards = 
 	{
-		Card("Pavard", "Second poteau Pavard!", 5, 3, CardType::striker, "Pavard"),
-		Card("Giroud", "Encore raté", 3, 3, CardType::defender, "Giroud"),
-		Card("Lorris", "Ramener la coupe à la maison", 5, 3, CardType::goalkeeper, "Lioris")
+		Card("Pavard", "Second poteau Pavard!", 5, 3, 3, CardType::striker, "Pavard"),
+		Card("Giroud", "Encore raté", 3, 3, 2, CardType::defender, "Giroud"),
+		Card("Lorris", "Ramener la coupe à la maison", 5, 3, 2, CardType::goalkeeper, "Lioris")
 	};
 }
 

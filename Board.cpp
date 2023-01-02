@@ -229,6 +229,14 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 	return false;
 }
 
+void Board::PlaceCard(Card& boardCard, const Card& newCard, int index, int globalIndex = 0)
+{
+	boardCard = Card(newCard);
+	boardCard.isOnBoard = true;
+	boardCard.isSelected = false;
+	boardCards[globalIndex] = &boardCard;
+}
+
 void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace)
 {
 	if (!CanPlaceCard(card, playerOneBoard, line, indexPlace))
@@ -239,44 +247,31 @@ void Board::PlaceCard(const Card& card, bool playerOneBoard, CardType line, int 
 	case CardType::goalkeeper:
 		if (playerOneBoard)
 		{
-			goalKeepersOne[indexPlace] = Card(card);
-			goalKeepersOne[indexPlace].isOnBoard = true;
-			goalKeepersOne[indexPlace].isSelected = false;
-
+			PlaceCard(goalKeepersOne[indexPlace], card, indexPlace, indexPlace);
 		}
 		else
 		{
-			goalKeepersTwo[indexPlace] = Card(card);
-			goalKeepersTwo[indexPlace].isOnBoard = true;
-			goalKeepersTwo[indexPlace].isSelected = false;
+			PlaceCard(goalKeepersTwo[indexPlace], card, indexPlace, ((NB_MAX_DEFENDER + NB_MAX_STRIKER) * 2) + NB_MAX_GOAL_KEEPER - 1 + indexPlace);
 		}
 		break;
 	case CardType::defender:
 		if (playerOneBoard)
 		{
-			defencersOne[indexPlace] = Card(card);
-			defencersOne[indexPlace].isOnBoard = true;
-			defencersOne[indexPlace].isSelected = false;
+			PlaceCard(defencersOne[indexPlace], card, indexPlace, NB_MAX_GOAL_KEEPER + indexPlace);
 		}
 		else
 		{
-			defencersTwo[indexPlace] = Card(card);
-			defencersTwo[indexPlace].isOnBoard = true;
-			defencersTwo[indexPlace].isSelected = false;
+			PlaceCard(defencersTwo[indexPlace], card, indexPlace, NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + 2 * NB_MAX_STRIKER + indexPlace);
 		}
 		break;
 	case CardType::striker:
 		if (playerOneBoard)
 		{
-			strikersOne[indexPlace] = Card(card);
-			strikersOne[indexPlace].isOnBoard = true;
-			strikersOne[indexPlace].isSelected = false;
+			PlaceCard(strikersOne[indexPlace], card, indexPlace, NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + indexPlace);
 		}
 		else
 		{
-			strikersTwo[indexPlace] = Card(card);
-			strikersTwo[indexPlace].isOnBoard = true;
-			strikersTwo[indexPlace].isSelected = false;
+			PlaceCard(strikersTwo[indexPlace], card, indexPlace, NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + NB_MAX_STRIKER + indexPlace);
 		}
 		break;
 	default:
