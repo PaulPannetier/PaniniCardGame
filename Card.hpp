@@ -5,6 +5,8 @@
 #include "Useful.hpp"
 #include "Collider2D.hpp"
 
+struct CardPlaceInfo;
+
 typedef enum { goalkeeper, defender, striker, spell } CardType;
 
 class Card : Object
@@ -23,10 +25,11 @@ public:
 	int id;//l'identifiant unique de la carte
 	bool isOnBoard;//true si elle est posé sur le plateau, false si elle est dans la main ou le deck
 	bool isInitialized;//true si tout les attribut ont été affecté, false sinon
-	bool isSelected;
+	bool isSelected;//est selectionner sur le plateau de jeu ou dans la main
+	bool isPlayerOneCard;//si cette carte appartient au joueur 1
 
 	Card();
-	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName);
+	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName, bool isPlayerOneCard = false);
 	Card(const Card& card);
 
 	//Getter:
@@ -51,7 +54,8 @@ public:
 	void InverseScale(bool x, bool y);
 
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
-	void OnPlay();
+	bool CanAttack(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& defencerInfo);
+	bool CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& strikerInfo);
 
 	void Draw(sf::RenderWindow& window);
 	std::string ToString() const override;

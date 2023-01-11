@@ -29,6 +29,16 @@ public:
 
 	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
+
+	friend Rectangle operator*(Rectangle rec, float f)
+	{
+		return Rectangle(rec.center, rec.size * f);
+	}
+
+	friend Rectangle operator*(float f, Rectangle rec)
+	{
+		return rec * f;
+	}
 };
 
 class Circle : public Collider2D
@@ -45,6 +55,16 @@ public:
 
 	bool Contain(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
+
+	friend Circle operator*(Circle c, float f)
+	{
+		return Circle(c.center, c.radius * f);
+	}
+
+	friend Circle operator*(float f, Circle c)
+	{
+		return c * f;
+	}
 };
 
 #endif

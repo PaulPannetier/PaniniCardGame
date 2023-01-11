@@ -1,10 +1,11 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include <vector>
 #include "Deck.hpp"
 #include "Hand.hpp"
-#include <vector>
 #include "CardManager.hpp"
+#include "CardPlaceInfo.hpp"
 
 class Player
 {
@@ -12,6 +13,10 @@ private :
 	Deck deck;//le deck du joueur
 	Hand hand;//la main du joueur
 	int mana;//les point permettant de jouer des carte
+
+	//pour update
+	bool isABoardCardSelected;
+	CardPlaceInfo cardBoardSelected;
 
 public :
 

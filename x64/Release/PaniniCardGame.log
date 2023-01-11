@@ -1,1 +1,117 @@
-﻿  PaniniCardGame.vcxproj -> D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\x64\Release\PaniniCardGame.exe
+﻿  AssetsManager.cpp
+  Board.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+  Button.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  Card.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Card.cpp(23,72): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Card.cpp(23,45): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Card.cpp(77,85): warning C4244: 'argument' : conversion de 'const T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Card.cpp(77,54): warning C4244: 'argument' : conversion de 'const T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Card.cpp(85,110): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Card.cpp(85,70): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  CardManager.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  Collider2D.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  Deck.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+  GameManager.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\GameManager.cpp(43,70): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\GameManager.cpp(43,50): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Hand.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+  InputManager.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\InputManager.cpp(63,49): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\InputManager.cpp(63,36): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\InputManager.cpp(93,40): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\InputManager.cpp(93,33): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  main.cpp
+  Player.cpp
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+  Time.cpp
+  Génération de code en cours
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 629 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Fin de la génération du code
+  PaniniCardGame.vcxproj -> D:\Users\Desktop\im_a_folder\Study\Other repository\PaniniCardGame\x64\Release\PaniniCardGame.exe

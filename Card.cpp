@@ -3,6 +3,7 @@
 #include "Board.hpp"
 #include "AssetsManager.hpp"
 #include "GameManager.hpp"
+#include "CardPlaceInfo.hpp"
 
 using namespace std;
 using namespace sf;
@@ -12,7 +13,7 @@ Card::Card()
 	isInitialized = false;
 }
 
-Card::Card(string name, string description, int attack, int defence, int cost, CardType cardType, string textureName)
+Card::Card(string name, string description, int attack, int defence, int cost, CardType cardType, string textureName, bool isPLayerOneCard)
 {
 	this->name(name); this->description(description); this->attack(attack); this->defence(defence);
 	this->cardType(cardType); this->cost(cost);
@@ -27,6 +28,7 @@ Card::Card(string name, string description, int attack, int defence, int cost, C
 	this->id = GetUniqueId();
 	this->isInitialized = true;
 	this->isSelected = false;
+	this->isPlayerOneCard = isPlayerOneCard;
 }
 
 Card::Card(const Card& card)
@@ -38,6 +40,7 @@ Card::Card(const Card& card)
 	this->id = card.id;
 	this->isInitialized = card.isInitialized;
 	this->isSelected = card.isSelected;
+	this->isPlayerOneCard = card.isPlayerOneCard;
 }
 
 int Card::GetUniqueId()
@@ -123,9 +126,14 @@ bool Card::CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const
 	return true;
 }
 
-void Card::OnPlay()
+bool Card::CanAttack(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& defencerInfo)
 {
+	return true;
+}
 
+bool Card::CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& strikerInfo)
+{
+	return true;
 }
 
 void Card::Draw(RenderWindow& window)

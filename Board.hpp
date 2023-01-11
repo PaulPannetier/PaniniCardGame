@@ -4,31 +4,12 @@
 #include "Card.hpp"
 #include "Button.hpp"
 #include "Player.hpp"
+#include "CardPlaceInfo.hpp"
 
 #define NB_MAX_GOAL_KEEPER 1
 #define NB_MAX_DEFENDER 5
 #define NB_MAX_STRIKER 4
-
-struct CardPlaceInfo
-{
-	bool playerOnePlace;
-	CardType line;
-	int indexPlace;
-	Card card;
-
-	CardPlaceInfo()
-	{
-
-	}
-
-	CardPlaceInfo(bool playerOnePlace, CardType line, int indexPlace, Card card)
-	{
-		this->playerOnePlace = playerOnePlace;
-		this->line = line;
-		this->indexPlace = indexPlace;
-		this->card = card;
-	}
-};
+#define NB_MAX_CARD_IN_BOARD (NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + NB_MAX_STRIKER) * 2
 
 class Board
 {
@@ -91,7 +72,7 @@ public:
 	Card goalKeepersTwo[NB_MAX_GOAL_KEEPER];
 	Card defencersTwo[NB_MAX_DEFENDER];
 	Card strikersTwo[NB_MAX_STRIKER];
-	Card* boardCards[(NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + NB_MAX_STRIKER) * 2];
+	Card* boardCards[NB_MAX_CARD_IN_BOARD];
 
 	static Board& Instance();
 
@@ -101,6 +82,10 @@ public:
 	void PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	bool GetCardPlaceInfo(sf::Vector2f position, CardPlaceInfo& info);
 	void OnClickEndTurnButtonAction(const Button& button);
+
+	void GetPlayerCard(bool playerOneCards, std::vector<CardPlaceInfo>& res);
+
+	void MakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
 
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);

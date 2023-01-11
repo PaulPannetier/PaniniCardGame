@@ -14,34 +14,76 @@ void Player::Start()
 	hand.Start();
 	hand.player = this;
 	mana = 1;
+	isABoardCardSelected = false;
 }
 
 void Player::Update(RenderWindow& window)
 {
-	hand.Update(window);//on actualise la main
-	//on place la carte selectionner sur le plateau
-	if (!hand.IsSelected() && hand.isACardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+	//On selection une carte sur le plateau de jeu
+	if (isMyTurn)
 	{
-		CardPlaceInfo info;
-		if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
+		if (InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 		{
-			if (false)
+			CardPlaceInfo info;
+			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
 			{
-				cout << info.card.ToString() << endl;
-				cout << info.indexPlace << endl;
-				cout << info.line << endl;
-				cout << to_string(info.playerOnePlace) << endl << endl;
-			}
-
-			if (info.playerOnePlace == isPlayerOne)
-			{
-				//on place la carte sur le plateau
-				Card card;
-				hand.GetSelectedCard(card);
-				if (Board::Instance().CanPlaceCard(card, isPlayerOne, info.line, info.indexPlace))
+				if (!isABoardCardSelected)
 				{
-					Board::Instance().PlaceCard(card, isPlayerOne, info.line, info.indexPlace);
-					hand.RemoveCard(card);
+					if (info.card.isInitialized && info.card.isPlayerOneCard == isPlayerOne)
+					{
+						isABoardCardSelected = true;
+						cardBoardSelected.card.isSelected = true;
+						cardBoardSelected = CardPlaceInfo(info);
+						cout << cardBoardSelected.card.name() << endl;
+					}
+				}
+				else
+				{
+					if (info.card.isPlayerOneCard == isPlayerOne)
+					{
+						cardBoardSelected = CardPlaceInfo(info);
+					}
+					else
+					{
+						if (cardBoardSelected.card.CanAttack(cardBoardSelected, info))
+						{
+							//trade entre les deux!
+							Board::Instance().MakeDuel(cardBoardSelected, info);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//on actualise la main
+	hand.Update(window);
+	//on place la carte selectionner sur le plateau
+	if (isMyTurn)
+	{
+		if (!hand.IsSelected() && hand.isACardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+		{
+			CardPlaceInfo info;
+			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
+			{
+				if (false)
+				{
+					cout << info.card.ToString() << endl;
+					cout << info.indexPlace << endl;
+					cout << info.line << endl;
+					cout << to_string(info.playerOnePlace) << endl << endl;
+				}
+
+				if (info.playerOnePlace == isPlayerOne)
+				{
+					//on place la carte sur le plateau
+					Card card;
+					hand.GetSelectedCard(card);
+					if (Board::Instance().CanPlaceCard(card, isPlayerOne, info.line, info.indexPlace))
+					{
+						Board::Instance().PlaceCard(card, isPlayerOne, info.line, info.indexPlace);
+						hand.RemoveCard(card);
+					}
 				}
 			}
 		}
@@ -57,7 +99,9 @@ void Player::FillDeck(vector<CardsManager::CardNum>& cards)
 {
 	for (int i = 0; i < cards.size(); i++)
 	{
-		this->deck.AddCard(CardsManager::Instance().GetCard(cards[i]));
+		Card card = CardsManager::Instance().GetCard(cards[i]);
+		card.isPlayerOneCard = this->isPlayerOne;
+		this->deck.AddCard(card);
 	}
 	deck.Shuffle();
 }

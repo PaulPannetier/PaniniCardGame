@@ -24,6 +24,7 @@
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="Card.hpp" />
     <ClInclude Include="CardManager.hpp" />
+    <ClInclude Include="CardPlaceInfo.hpp" />
     <ClInclude Include="Collider2D.hpp" />
     <ClInclude Include="Deck.hpp" />
     <ClInclude Include="GameManager.hpp" />

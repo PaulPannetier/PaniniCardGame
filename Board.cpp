@@ -44,17 +44,16 @@ void Board::Start()
 
 	//start the players
 	background.setScale(scale);
-	player1.Start();
 	player1.isPlayerOne = true;
-	player2.Start();
+	player1.Start();
 	player2.isPlayerOne = false;
+	player2.Start();
 	FillDeck();
 	player1.FirstDraw(NB_BEGIN_CARDS);
 	player2.FirstDraw(NB_BEGIN_CARDS);
 	player1.isMyTurn = true;
 	player1.BeginTurn();
 }
-
 
 void Board::FillDeck()
 {
@@ -152,6 +151,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 			info.card = Card(this->goalKeepersOne[i]);
 			info.line = CardType::goalkeeper;
 			info.playerOnePlace = true;
+			info.hitbox = hitbox;
 			return true;
 		}
 	}
@@ -166,6 +166,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 			info.card = Card(this->defencersOne[i]);
 			info.line = CardType::defender;
 			info.playerOnePlace = true;
+			info.hitbox = hitbox;
 			return true;
 		}
 	}
@@ -180,6 +181,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 			info.card = Card(this->strikersOne[i]);
 			info.line = CardType::striker;
 			info.playerOnePlace = true;
+			info.hitbox = hitbox;
 			return true;
 		}
 	}
@@ -194,6 +196,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 			info.card = Card(this->goalKeepersTwo[i]);
 			info.line = CardType::goalkeeper;
 			info.playerOnePlace = false;
+			info.hitbox = hitbox;
 			return true;
 		}
 	}
@@ -208,6 +211,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 			info.card = Card(this->defencersTwo[i]);
 			info.line = CardType::defender;
 			info.playerOnePlace = false;
+			info.hitbox = hitbox;
 			return true;
 		}
 	}
@@ -222,6 +226,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 			info.card = Card(this->strikersTwo[i]);
 			info.line = CardType::striker;
 			info.playerOnePlace = false;
+			info.hitbox = hitbox;
 			return true;
 		}
 	}
@@ -322,6 +327,76 @@ void Board::CalculateCardsTransform()
 		strikersTwo[i].SetPosition(strikerTwoPos[i]);
 		strikersTwo[i].SetSize(cardSize);
 	}
+}
+
+void Board::GetPlayerCard(bool playerOneCards, vector<CardPlaceInfo>& res)
+{
+	res.clear();
+
+	//goals joueur 1
+	for (int i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		if (goalKeepersOne[i].isInitialized && goalKeepersOne[i].isPlayerOneCard == playerOneCards)
+		{
+			CardPlaceInfo cpi = CardPlaceInfo(playerOneCards, goalKeepersOne[i].cardType(), i, Card(goalKeepersOne[i]), Rectangle(goalKeeperOnePos[i], cardSize));
+			res.push_back(cpi);
+		}
+	}
+
+	//defenceurs joueur 1
+	for (int i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		if (defencersOne[i].isInitialized && defencersOne[i].isPlayerOneCard == playerOneCards)
+		{
+			CardPlaceInfo cpi = CardPlaceInfo(playerOneCards, defencersOne[i].cardType(), i, Card(defencersOne[i]), Rectangle(defenderOnePos[i], cardSize));
+			res.push_back(cpi);
+		}
+	}
+
+	//attaquant joueur 1
+	for (int i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		if (strikersOne[i].isInitialized && strikersOne[i].isPlayerOneCard == playerOneCards)
+		{
+			CardPlaceInfo cpi = CardPlaceInfo(playerOneCards, strikersOne[i].cardType(), i, Card(strikersOne[i]), Rectangle(strikerOnePos[i], cardSize));
+			res.push_back(cpi);
+		}
+	}
+
+	//gardien joueur 2
+	for (int i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		if (goalKeepersTwo[i].isInitialized && goalKeepersTwo[i].isPlayerOneCard == playerOneCards)
+		{
+			CardPlaceInfo cpi = CardPlaceInfo(playerOneCards, goalKeepersTwo[i].cardType(), i, Card(strikersOne[i]), Rectangle(goalKeeperTwoPos[i], cardSize));
+			res.push_back(cpi);
+		}
+	}
+
+	//defenceurs joueur 2
+	for (int i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		if (defencersTwo[i].isInitialized && strikersOne[i].isPlayerOneCard == playerOneCards)
+		{
+			CardPlaceInfo cpi = CardPlaceInfo(playerOneCards, defencersTwo[i].cardType(), i, Card(defencersTwo[i]), Rectangle(defenderTwoPos[i], cardSize));
+			res.push_back(cpi);
+		}
+	}
+
+	//attaquant joueur 2
+	for (int i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		if (strikersTwo[i].isInitialized && strikersTwo[i].isPlayerOneCard == playerOneCards)
+		{
+			CardPlaceInfo cpi = CardPlaceInfo(playerOneCards, strikersTwo[i].cardType(), i, Card(strikersOne[i]), Rectangle(strikerTwoPos[i], cardSize));
+			res.push_back(cpi);
+		}
+	}
+}
+
+void Board::MakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender)
+{
+
 }
 
 void Board::Update(RenderWindow& window)
