@@ -1,6 +1,3 @@
-/x64/*
-/lib/*
-/example/*
-/doc/*
+/x64
 /.vs
 *.o
