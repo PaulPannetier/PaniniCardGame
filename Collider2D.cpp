@@ -5,23 +5,33 @@
 using namespace std;
 using namespace sf;
 
+Collider2D::Collider2D()
+{
+
+}
+
+Collider2D::Collider2D(Vector2f center)
+{
+	this->center = Vector2f(center);
+}
+
 string Collider2D::ToString() const
 {
 	return "Collider2D";
 }
 
-Rectangle::Rectangle()
+Rectangle::Rectangle() : Collider2D()
 {
 
 }
 
-Rectangle::Rectangle(const Vector2f& center, const Vector2f& size)
+Rectangle::Rectangle(const Vector2f& center, const Vector2f& size) : Collider2D(center)
 {
-	this->center = Vector2f(center);
+	//this->center = Vector2f(center);
 	this->size = Vector2f(size);
 }
 
-Rectangle::Rectangle(const Rectangle& rec)
+Rectangle::Rectangle(const Rectangle& rec) : Collider2D(rec.center)
 {
 	this->center = Vector2f(rec.center);
 	this->size = Vector2f(rec.size);
@@ -66,20 +76,20 @@ string Rectangle::ToString() const
 	return os.str();
 }
 
-Circle::Circle()
+Circle::Circle() : Collider2D()
 {
 
 }
 
-Circle::Circle(const Circle& circle)
+Circle::Circle(const Circle& circle) : Collider2D(circle.center)
 {
-	this->center = Vector2f(circle.center);
+	//this->center = Vector2f(circle.center);
 	this->radius = circle.radius;
 }
 
-Circle::Circle(const Vector2f& center, float radius)
+Circle::Circle(const Vector2f& center, float radius) : Collider2D(center)
 {
-	this->center = Vector2f(center);
+	//this->center = Vector2f(center);
 	this->radius = radius;
 }
 

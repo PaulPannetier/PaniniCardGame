@@ -4,6 +4,7 @@
 #include <string>
 #include "Useful.hpp"
 #include "Collider2D.hpp"
+//#include "CardPlaceInfo.hpp"
 
 struct CardPlaceInfo;
 
@@ -11,6 +12,8 @@ typedef enum { goalkeeper, defender, striker, spell } CardType;
 
 class Card : Object
 {
+public : 
+
 private:
 	std::string _name;//le nom du joueur
 	std::string _description;//description des effets
@@ -27,6 +30,7 @@ public:
 	bool isInitialized;//true si tout les attribut ont été affecté, false sinon
 	bool isSelected;//est selectionner sur le plateau de jeu ou dans la main
 	bool isPlayerOneCard;//si cette carte appartient au joueur 1
+	//CardPlaceInfo cardPlaceInfo;
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName, bool isPlayerOneCard = false);
@@ -42,7 +46,7 @@ public:
 	sf::Vector2f GetSize();
 	Rectangle GetHitbox();
 
-	//Setter
+	//Setter:
 	void name(std::string value) { _name = value; }
 	void description(std::string value) { _description = value; }
 	void attack(int value) { _attack = value; } void defence(int value) { _defence = value; }
@@ -57,6 +61,7 @@ public:
 	bool CanAttack(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& defencerInfo);
 	bool CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& strikerInfo);
 
+	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 	std::string ToString() const override;
 };

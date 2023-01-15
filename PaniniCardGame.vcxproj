@@ -41,6 +41,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardManager.cpp" />
+    <ClCompile Include="CardPlaceInfo.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="GameManager.cpp" />

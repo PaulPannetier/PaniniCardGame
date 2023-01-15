@@ -29,23 +29,25 @@ void Player::Update(RenderWindow& window)
 			{
 				if (!isABoardCardSelected)
 				{
-					if (info.card.isInitialized && info.card.isPlayerOneCard == isPlayerOne)
+					if (info.card->isInitialized && info.card->isPlayerOneCard == isPlayerOne)
 					{
 						isABoardCardSelected = true;
-						cardBoardSelected.card.isSelected = true;
 						cardBoardSelected = CardPlaceInfo(info);
-						cout << cardBoardSelected.card.name() << endl;
+						cardBoardSelected.card->isSelected = true;
+						cout << cardBoardSelected.card->name() << endl;
 					}
 				}
 				else
 				{
-					if (info.card.isPlayerOneCard == isPlayerOne)
+					if (info.card->isPlayerOneCard == isPlayerOne)
 					{
 						cardBoardSelected = CardPlaceInfo(info);
+						cardBoardSelected.card->isSelected = true;
+						cout << cardBoardSelected.card->name() << endl;
 					}
 					else
 					{
-						if (cardBoardSelected.card.CanAttack(cardBoardSelected, info))
+						if (cardBoardSelected.card->CanAttack(cardBoardSelected, info))
 						{
 							//trade entre les deux!
 							Board::Instance().MakeDuel(cardBoardSelected, info);
@@ -58,6 +60,7 @@ void Player::Update(RenderWindow& window)
 
 	//on actualise la main
 	hand.Update(window);
+
 	//on place la carte selectionner sur le plateau
 	if (isMyTurn)
 	{
@@ -68,7 +71,7 @@ void Player::Update(RenderWindow& window)
 			{
 				if (false)
 				{
-					cout << info.card.ToString() << endl;
+					cout << info.card->ToString() << endl;
 					cout << info.indexPlace << endl;
 					cout << info.line << endl;
 					cout << to_string(info.playerOnePlace) << endl << endl;

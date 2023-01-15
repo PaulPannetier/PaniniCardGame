@@ -9,6 +9,9 @@ class Collider2D : Object
 public:
 	sf::Vector2f center;
 
+	Collider2D();
+	Collider2D(sf::Vector2f center);
+
 	virtual bool Contain(const sf::Vector2f& point) const = 0;
 	std::string ToString() const;
 };

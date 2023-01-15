@@ -136,6 +136,11 @@ bool Card::CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& str
 	return true;
 }
 
+void Card::Update(RenderWindow& window)
+{
+
+}
+
 void Card::Draw(RenderWindow& window)
 {
 	if (!isInitialized)
