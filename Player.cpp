@@ -31,6 +31,7 @@ void Player::Update(RenderWindow& window)
 				{
 					if (info.card->isInitialized && info.card->isPlayerOneCard == isPlayerOne)
 					{
+						hand.DeselectAllCard();
 						isABoardCardSelected = true;
 						cardBoardSelected = CardPlaceInfo(info);
 						cardBoardSelected.card->isSelected = true;
@@ -41,6 +42,8 @@ void Player::Update(RenderWindow& window)
 				{
 					if (info.card->isPlayerOneCard == isPlayerOne)
 					{
+						hand.DeselectAllCard();
+						cardBoardSelected.card->isSelected = false;
 						cardBoardSelected = CardPlaceInfo(info);
 						cardBoardSelected.card->isSelected = true;
 						cout << cardBoardSelected.card->name() << endl;
@@ -49,7 +52,6 @@ void Player::Update(RenderWindow& window)
 					{
 						if (cardBoardSelected.card->CanAttack(cardBoardSelected, info))
 						{
-							//trade entre les deux!
 							Board::Instance().MakeDuel(cardBoardSelected, info);
 						}
 					}
@@ -61,7 +63,7 @@ void Player::Update(RenderWindow& window)
 	//on actualise la main
 	hand.Update(window);
 
-	//on place la carte selectionner sur le plateau
+	//on place la carte selectionner de la main sur le plateau
 	if (isMyTurn)
 	{
 		if (!hand.IsSelected() && hand.isACardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
@@ -86,6 +88,7 @@ void Player::Update(RenderWindow& window)
 					{
 						Board::Instance().PlaceCard(card, isPlayerOne, info.line, info.indexPlace);
 						hand.RemoveCard(card);
+						hand.DeselectAllCard();
 					}
 				}
 			}

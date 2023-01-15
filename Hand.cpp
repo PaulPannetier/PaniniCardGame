@@ -201,3 +201,14 @@ bool Hand::RemoveCard(const Card& card)
 {
 	return RemoveCard(card.id);
 }
+
+void Hand::DeselectAllCard()
+{
+	for (int i = 0; i < MAX_HAND_SIZE; i++)
+	{
+		if (cards[i].isInitialized && !cards[i].isOnBoard)
+		{
+			cards[i].isSelected = false;
+		}
+	}
+}

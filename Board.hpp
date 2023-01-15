@@ -21,9 +21,9 @@ private:
 
 	Board();
 
-	void CalculateCardsTransform();
+	//void CalculateCardsTransform();
 	void FillDeck();
-	void PlaceCard(Card& boardCard, const Card& card, int index, int globalIndex);
+	void PlaceCard(Card& boardCard, const Card& card, CardPlaceInfo& placeInfo, int globalIndex);
 
 public:
 
@@ -79,7 +79,7 @@ public:
 	void Start();
 
 	bool CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
-	void PlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
+	void PlaceCard(Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	bool GetCardPlaceInfo(sf::Vector2f position, CardPlaceInfo& info);
 	void OnClickEndTurnButtonAction(const Button& button);
 

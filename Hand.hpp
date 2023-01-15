@@ -44,6 +44,7 @@ public :
 	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 	bool IsFull() const;
+	void DeselectAllCard();
 	bool AddCard(const Card& card);
 	bool RemoveCard(const Card& card);
 	bool RemoveCard(int cardId);

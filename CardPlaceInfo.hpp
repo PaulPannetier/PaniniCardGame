@@ -3,6 +3,8 @@
 
 class Card;
 
+typedef enum { goalkeeper, defender, striker, spell } CardType;
+
 struct CardPlaceInfo
 {
 	bool playerOnePlace;
@@ -13,7 +15,7 @@ struct CardPlaceInfo
 
 	CardPlaceInfo();
 
-	CardPlaceInfo(bool playerOnePlace, CardType line, int indexPlace, Card card, Rectangle hitbox);
+	CardPlaceInfo(bool playerOnePlace, CardType line, int indexPlace, Card* card, Rectangle hitbox);
 
 	CardPlaceInfo(const CardPlaceInfo& cardPlaceInfo);
 };

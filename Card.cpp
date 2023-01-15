@@ -1,9 +1,7 @@
-
 #include "Card.hpp"
 #include "Board.hpp"
 #include "AssetsManager.hpp"
 #include "GameManager.hpp"
-#include "CardPlaceInfo.hpp"
 
 using namespace std;
 using namespace sf;
@@ -48,6 +46,12 @@ int Card::GetUniqueId()
 	static int id = -1;
 	id++;
 	return id;
+}
+
+void Card::CalculateCardBoardTransform()
+{
+	SetPosition(this->cardPlaceInfo.hitbox.center);
+	SetSize(this->cardPlaceInfo.hitbox.size);
 }
 
 Vector2f Card::GetPosition()
@@ -138,7 +142,10 @@ bool Card::CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& str
 
 void Card::Update(RenderWindow& window)
 {
-
+	if (isOnBoard)
+	{
+		CalculateCardBoardTransform();
+	}
 }
 
 void Card::Draw(RenderWindow& window)

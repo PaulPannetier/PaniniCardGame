@@ -6,12 +6,13 @@ CardPlaceInfo::CardPlaceInfo()
 	card = nullptr;
 }
 
-CardPlaceInfo::CardPlaceInfo(bool playerOnePlace, CardType line, int indexPlace, Card card, Rectangle hitbox)
+CardPlaceInfo::CardPlaceInfo(bool playerOnePlace, CardType line, int indexPlace, Card* card, Rectangle hitbox)
 {
 	this->playerOnePlace = playerOnePlace;
 	this->line = line;
 	this->indexPlace = indexPlace;
-	this->card = &card;
+	this->card = card;
+	this->hitbox = hitbox;
 }
 
 CardPlaceInfo::CardPlaceInfo(const CardPlaceInfo& cardPlaceInfo)
