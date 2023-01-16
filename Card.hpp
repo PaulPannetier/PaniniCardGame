@@ -25,6 +25,7 @@ public:
 	bool isSelected;//est selectionner sur le plateau de jeu ou dans la main
 	bool isPlayerOneCard;//si cette carte appartient au joueur 1
 	CardPlaceInfo cardPlaceInfo;
+	bool haveTheBall;
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName, bool isPlayerOneCard = false);
@@ -51,6 +52,7 @@ public:
 	void SetSize(const sf::Vector2f& size);
 	void InverseScale(bool x, bool y);
 
+	void GetCardsCanAttack(std::vector<CardPlaceInfo>& cardsCanAttackInfo);
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
 	bool CanAttack(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& defencerInfo);
 	bool CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& strikerInfo);

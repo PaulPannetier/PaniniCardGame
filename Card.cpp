@@ -27,6 +27,7 @@ Card::Card(string name, string description, int attack, int defence, int cost, C
 	this->isInitialized = true;
 	this->isSelected = false;
 	this->isPlayerOneCard = isPlayerOneCard;
+	this->haveTheBall = false;
 }
 
 Card::Card(const Card& card)
@@ -39,6 +40,7 @@ Card::Card(const Card& card)
 	this->isInitialized = card.isInitialized;
 	this->isSelected = card.isSelected;
 	this->isPlayerOneCard = card.isPlayerOneCard;
+	this->haveTheBall = card.haveTheBall;
 }
 
 int Card::GetUniqueId()
@@ -140,11 +142,26 @@ bool Card::CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& str
 	return true;
 }
 
+void Card::GetCardsCanAttack(vector<CardPlaceInfo>& cardsCanAttackInfo)
+{
+
+}
+
 void Card::Update(RenderWindow& window)
 {
+	if (!isInitialized)
+		return;
 	if (isOnBoard)
 	{
 		CalculateCardBoardTransform();
+		if (isSelected)
+		{
+			if (haveTheBall)
+			{
+				vector<CardPlaceInfo> cardCanAttack;
+				GetCardsCanAttack(cardCanAttack);
+			}
+		}
 	}
 }
 

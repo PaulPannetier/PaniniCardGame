@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsManager.hpp" />
+    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Board.hpp" />
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="Card.hpp" />
@@ -37,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetsManager.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
