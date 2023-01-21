@@ -21,10 +21,10 @@ le joueur ne peut rien faire.
 
 Duel :  
 
-- une carte défend, une ou plusieurs attaques :
-	Point attaque(PA) = Somme attaque des carte attaquantes
-	Point de defence(PD) = defence carte qui défend
-	=> PA > PD => attaquant gagne et le defenseur exclue du terrain, le premier attaquant passe sur ca case avec le ballon, les autres ne bouge pas.
-	=> PA <= PD => défenceur gagne, tout les attaquant sont virer du terrain.
+- une carte défend, une carte attaque :
+	Point attaque(PA) = attaque de la carte attaquante
+	Point de defence(PD) = defence de la carte qui défend
+	=> PA > PD => attaquant gagne et le defenseur exclue du terrain, le premier attaquant passe sur ca case avec le ballon
+	=> PA <= PD => défenceur gagne, l'attaquant est viré du terrain
 
 

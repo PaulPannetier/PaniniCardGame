@@ -120,6 +120,194 @@ void Board::FillDeck()
 	player2.FillDeck(deckPlayer2);
 }
 
+bool Board::GetCardPlaceInfo(bool playerOne, CardType line, int indexPlace, CardPlaceInfo& info)
+{
+	switch (line)
+	{
+	case CardType::goalkeeper:
+		if (indexPlace < 0 || indexPlace >= NB_MAX_GOAL_KEEPER)
+			return false;
+
+		info.card = playerOne ? &goalKeepersOne[indexPlace] : &goalKeepersTwo[indexPlace];
+		if (!info.card->isInitialized || !info.card->isOnBoard)
+			return false;
+		info.line = line;
+		info.hitbox = info.card->GetHitbox();
+		info.indexPlace = indexPlace;
+		info.playerOnePlace = playerOne;
+		return true;
+	case CardType::defender:
+		if (indexPlace < 0 || indexPlace >= NB_MAX_DEFENDER)
+			return false;
+
+		info.card = playerOne ? &defencersOne[indexPlace] : &defencersTwo[indexPlace];
+		if (!info.card->isInitialized || !info.card->isOnBoard)
+			return false;
+		info.line = line;
+		info.hitbox = info.card->GetHitbox();
+		info.indexPlace = indexPlace;
+		info.playerOnePlace = playerOne;
+		return true;
+	case CardType::striker:
+		if (indexPlace < 0 || indexPlace >= NB_MAX_STRIKER)
+			return false;
+
+		info.card = playerOne ? &strikersOne[indexPlace] : &strikersTwo[indexPlace];
+		if (!info.card->isInitialized || !info.card->isOnBoard)
+			return false;
+		info.line = line;
+		info.hitbox = info.card->GetHitbox();
+		info.indexPlace = indexPlace;
+		info.playerOnePlace = playerOne;
+		return true;
+	case CardType::spell:
+		return true;
+	default:
+		return false;
+	}
+}
+
+void Board::GetAdjacentCardsPlacesInfo(const CardPlaceInfo& current, std::vector<CardPlaceInfo>& adjacents)
+{
+	adjacents.clear();
+	switch (current.line)
+	{
+	case CardType::goalkeeper:
+		if (current.indexPlace < 0 || current.indexPlace >= NB_MAX_GOAL_KEEPER)
+			return;
+
+		if (current.playerOnePlace)
+		{
+			for (int i = 0; i < NB_MAX_DEFENDER; i++)
+			{
+				CardPlaceInfo cpi = CardPlaceInfo(current.playerOnePlace, CardType::defender, i, &defencersOne[i], Rectangle(defenderOnePos[i], cardSize));
+				adjacents.push_back(cpi);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < NB_MAX_DEFENDER; i++)
+			{
+				CardPlaceInfo cpi = CardPlaceInfo(current.playerOnePlace, CardType::defender, i, &defencersTwo[i], Rectangle(defenderTwoPos[i], cardSize));
+				adjacents.push_back(cpi);
+			}
+		}
+		return;
+
+	case CardType::defender:
+	
+		if (current.indexPlace < 0 || current.indexPlace >= NB_MAX_DEFENDER)
+			return;
+
+		if (current.playerOnePlace)
+		{
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::goalkeeper, 0, &goalKeepersOne[0], Rectangle(goalKeeperOnePos[0], cardSize)));
+			if (current.indexPlace == 0)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, 1, &defencersOne[1], Rectangle(defenderOnePos[1], cardSize)));
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, 0, &strikersOne[0], Rectangle(strikerOnePos[0], cardSize)));
+				return;
+			}
+			if (current.indexPlace == NB_MAX_DEFENDER - 1)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace - 1, &defencersOne[current.indexPlace - 1], Rectangle(defenderOnePos[current.indexPlace - 1], cardSize)));
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, NB_MAX_STRIKER - 1, &strikersOne[NB_MAX_STRIKER - 1], Rectangle(strikerOnePos[NB_MAX_STRIKER - 1], cardSize)));
+				return;
+			}
+
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace - 1, &defencersOne[current.indexPlace - 1], Rectangle(defenderOnePos[current.indexPlace - 1], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace + 1, &defencersOne[current.indexPlace + 1], Rectangle(defenderOnePos[current.indexPlace + 1], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace - 1, &strikersOne[current.indexPlace - 1], Rectangle(strikerOnePos[current.indexPlace - 1], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace, &strikersOne[current.indexPlace], Rectangle(strikerOnePos[current.indexPlace], cardSize)));
+		}
+		else
+		{
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::goalkeeper, 0, &goalKeepersTwo[0], Rectangle(goalKeeperTwoPos[0], cardSize)));
+			if (current.indexPlace == 0)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, 1, &defencersTwo[1], Rectangle(defenderTwoPos[1], cardSize)));
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, 0, &strikersTwo[0], Rectangle(strikerTwoPos[0], cardSize)));
+				return;
+			}
+			if (current.indexPlace == NB_MAX_DEFENDER - 1)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace - 1, &defencersTwo[current.indexPlace - 1], Rectangle(defenderTwoPos[current.indexPlace - 1], cardSize)));
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, NB_MAX_STRIKER - 1, &strikersTwo[NB_MAX_STRIKER - 1], Rectangle(strikerTwoPos[NB_MAX_STRIKER - 1], cardSize)));
+				return;
+			}
+
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace - 1, &defencersTwo[current.indexPlace - 1], Rectangle(defenderTwoPos[current.indexPlace - 1], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace + 1, &defencersTwo[current.indexPlace + 1], Rectangle(defenderTwoPos[current.indexPlace + 1], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace - 1, &strikersTwo[current.indexPlace - 1], Rectangle(strikerTwoPos[current.indexPlace - 1], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace, &strikersTwo[current.indexPlace], Rectangle(strikerTwoPos[current.indexPlace], cardSize)));
+		}
+		return;
+	case CardType::striker:
+		if (current.indexPlace < 0 || current.indexPlace >= NB_MAX_STRIKER)
+			return;
+
+		if (current.playerOnePlace)
+		{
+			//défensseurs
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace, &defencersOne[current.indexPlace], Rectangle(defenderOnePos[current.indexPlace], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace + 1, &defencersOne[current.indexPlace + 1], Rectangle(defenderOnePos[current.indexPlace + 1], cardSize)));
+
+			//attaquant allié
+			if (current.indexPlace != 0)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace - 1, &strikersOne[current.indexPlace - 1], Rectangle(strikerOnePos[current.indexPlace - 1], cardSize)));
+			}
+			if (current.indexPlace != NB_MAX_STRIKER - 1)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace + 1, &strikersOne[current.indexPlace + 1], Rectangle(strikerOnePos[current.indexPlace + 1], cardSize)));
+			}
+
+			//attaquant d'en face
+			adjacents.push_back(CardPlaceInfo(!current.playerOnePlace, CardType::striker, current.indexPlace, &strikersTwo[current.indexPlace], Rectangle(strikerTwoPos[current.indexPlace], cardSize)));
+			if (current.indexPlace != 0)
+			{
+				adjacents.push_back(CardPlaceInfo(!current.playerOnePlace, CardType::striker, current.indexPlace - 1, &strikersTwo[current.indexPlace - 1], Rectangle(strikerTwoPos[current.indexPlace - 1], cardSize)));
+			}
+			if (current.indexPlace != NB_MAX_STRIKER - 1)
+			{
+				adjacents.push_back(CardPlaceInfo(!current.playerOnePlace, CardType::striker, current.indexPlace + 1, &strikersTwo[current.indexPlace + 1], Rectangle(strikerTwoPos[current.indexPlace + 1], cardSize)));
+			}
+		}
+		else
+		{
+			//défensseurs
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace, &defencersTwo[current.indexPlace], Rectangle(defenderTwoPos[current.indexPlace], cardSize)));
+			adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::defender, current.indexPlace + 1, &defencersTwo[current.indexPlace + 1], Rectangle(defenderTwoPos[current.indexPlace + 1], cardSize)));
+
+			//attaquant allié
+			if (current.indexPlace != 0)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace - 1, &strikersTwo[current.indexPlace - 1], Rectangle(strikerTwoPos[current.indexPlace - 1], cardSize)));
+			}
+			if (current.indexPlace != NB_MAX_STRIKER - 1)
+			{
+				adjacents.push_back(CardPlaceInfo(current.playerOnePlace, CardType::striker, current.indexPlace + 1, &strikersTwo[current.indexPlace + 1], Rectangle(strikerTwoPos[current.indexPlace + 1], cardSize)));
+			}
+
+			//attaquant d'en face
+			adjacents.push_back(CardPlaceInfo(!current.playerOnePlace, CardType::striker, current.indexPlace, &strikersOne[current.indexPlace], Rectangle(strikerOnePos[current.indexPlace], cardSize)));
+			if (current.indexPlace != 0)
+			{
+				adjacents.push_back(CardPlaceInfo(!current.playerOnePlace, CardType::striker, current.indexPlace - 1, &strikersOne[current.indexPlace - 1], Rectangle(strikerOnePos[current.indexPlace - 1], cardSize)));
+			}
+			if (current.indexPlace != NB_MAX_STRIKER - 1)
+			{
+				adjacents.push_back(CardPlaceInfo(!current.playerOnePlace, CardType::striker, current.indexPlace + 1, &strikersOne[current.indexPlace + 1], Rectangle(strikerOnePos[current.indexPlace + 1], cardSize)));
+			}
+		}
+		return;
+	case CardType::spell:
+		return;
+	default:
+		return;
+	}
+}
+
 bool Board::CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace)
 {
 	if (!card.CanPlaceInBoard(playerOneBoard, line, indexPlace) || indexPlace < 0)

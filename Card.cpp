@@ -144,7 +144,7 @@ bool Card::CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& str
 
 void Card::GetCardsCanAttack(vector<CardPlaceInfo>& cardsCanAttackInfo)
 {
-
+	
 }
 
 void Card::Update(RenderWindow& window)
