@@ -17,6 +17,15 @@ void Player::Start()
 	isABoardCardSelected = false;
 }
 
+void Player::DeSelectAllCards()
+{
+	if (isABoardCardSelected)
+	{
+		isABoardCardSelected = false;
+		cardBoardSelected.card->isSelected = false;
+	}
+}
+
 void Player::Update(RenderWindow& window)
 {
 	//On selection une carte sur le plateau de jeu
@@ -44,15 +53,22 @@ void Player::Update(RenderWindow& window)
 					{
 						hand.DeselectAllCard();
 						cardBoardSelected.card->isSelected = false;
+						cout << cardBoardSelected.card->name() << " is deselected" << endl;
 						cardBoardSelected = CardPlaceInfo(info);
 						cardBoardSelected.card->isSelected = true;
-						cout << cardBoardSelected.card->name() << endl;
+						cout << cardBoardSelected.card->name() << " is selected" << endl;
 					}
 					else
 					{
 						if (cardBoardSelected.card->CanAttack(cardBoardSelected, info))
 						{
 							Board::Instance().MakeDuel(cardBoardSelected, info);
+						}
+						else
+						{
+							isABoardCardSelected = false;
+							cardBoardSelected.card->isSelected = false;
+							cout << cardBoardSelected.card->name() << " is deselected" << endl;
 						}
 					}
 				}
@@ -124,12 +140,28 @@ void Player::FirstDraw(int nbCards)
 	}
 }
 
-void Player::BeginTurn()
+void Player::DrawCard()
 {
-
+	Card drawCard;
+	if (this->deck.DrawCard(drawCard))
+	{
+		this->hand.AddCard(drawCard);
+	}
 }
 
-void Player::EndTurn()
+void Player::OnBeginTurn(bool isPlayerOneTurn)
 {
+	if (isPlayerOne == isPlayerOneTurn)
+	{
+		hand.DeselectAllCard();
+		DrawCard();
+	}
+}
 
+void Player::OnEndTurn(bool isPlayerOneEndTurn)
+{
+	if (isPlayerOne == isPlayerOneEndTurn)
+	{
+		hand.DeselectAllCard();
+	}
 }

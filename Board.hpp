@@ -79,6 +79,8 @@ public:
 
 	bool CanPlaceCard(const Card& card, bool playerOneBoard, CardType line, int indexPlace);
 	void PlaceCard(Card& card, bool playerOneBoard, CardType line, int indexPlace);
+	void SwitchCards(const CardPlaceInfo& card1, const CardPlaceInfo& card2);
+
 	bool GetCardPlaceInfo(sf::Vector2f position, CardPlaceInfo& info);
 	bool GetCardPlaceInfo(bool playerOne, CardType line, int indexPlace, CardPlaceInfo& info);
 	void GetAdjacentCardsPlacesInfo(const CardPlaceInfo& current, std::vector<CardPlaceInfo>& adjacents);
@@ -87,6 +89,9 @@ public:
 	void GetPlayerCard(bool playerOneCards, std::vector<CardPlaceInfo>& res);
 
 	void MakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
+
+	void OnBeginTurn(bool isPlayerOneTurn);
+	void OnEndTurn(bool isPlayerOneEndTurn);
 
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);

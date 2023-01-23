@@ -21,6 +21,13 @@ private:
 
 	std::map<std::string, std::shared_ptr<sf::Texture>> textures;
 
+	const std::map<std::string, std::string> fontsPath =
+	{
+		{ "poppins", "Assets/poppins.ttf" },
+	};
+
+	std::map<std::string, std::shared_ptr<sf::Font>> fonts;
+
 	AssetsManager();
 
 	void LoadAssets();
@@ -30,7 +37,8 @@ public:
 	static AssetsManager& Instance();
 
 	void Start();
-	sf::Texture &GetTexture(std::string name) const;
+	sf::Texture& GetTexture(std::string name) const;
+	sf::Font& GetFont(std::string name) const;
 };
 
 #endif

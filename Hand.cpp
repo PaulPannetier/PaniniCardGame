@@ -95,6 +95,9 @@ void Hand::Update(RenderWindow& window)
 						isSelected = false;
 						isACardSelected = true;
 						indexCardSelected = i;
+
+						//on déselectionne la carte du plateau de jeu
+						player->DeSelectAllCards();
 						break;
 					}
 				}

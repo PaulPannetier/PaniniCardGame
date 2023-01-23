@@ -25,14 +25,17 @@ public :
 
 	Player() = default;
 
+	void DeSelectAllCards();
+
 	void Start();
 	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 
 	void FillDeck(std::vector<CardsManager::CardNum>& cards);
 	void FirstDraw(int nbCards);
-	void BeginTurn();
-	void EndTurn();
+	void DrawCard();
+	void OnBeginTurn(bool isPlayerOneTurn);
+	void OnEndTurn(bool isPlayerOneEndTurn);
 };
 
 #endif

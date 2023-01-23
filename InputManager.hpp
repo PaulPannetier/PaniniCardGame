@@ -28,7 +28,6 @@ public:
 
 	void Start(sf::RenderWindow& window);
 	void Update(sf::RenderWindow& window);
-
 };
 
 #endif

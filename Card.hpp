@@ -15,8 +15,10 @@ private:
 	int _cost;//le cout en point de la carte
 	CardType _cardType;//le type de carte (goal, attaquant, defenceur ou sort)
 	sf::Sprite sprite;//le sprite (servant a laffichage de l'image)
+	std::vector<CardPlaceInfo> placeToMove, cardsCanAttack;
 
 	int GetUniqueId();
+	static sf::Font& GetCardFont();
 
 public:
 	int id;//l'identifiant unique de la carte
@@ -24,8 +26,10 @@ public:
 	bool isInitialized;//true si tout les attribut ont été affecté, false sinon
 	bool isSelected;//est selectionner sur le plateau de jeu ou dans la main
 	bool isPlayerOneCard;//si cette carte appartient au joueur 1
-	CardPlaceInfo cardPlaceInfo;
-	bool haveTheBall;
+	CardPlaceInfo cardPlaceInfo;//les info sur lemplacement ou est posé la carte
+	bool haveTheBall, isSleeping;//si la carte possède le ballon, si la carte est endormi (cad si elle peut effectuer une action se tour)
+	int attackBonus, defenceBonus, costBonus;
+	sf::Text attackText, defenceText, costText;
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName, bool isPlayerOneCard = false);
@@ -53,9 +57,15 @@ public:
 	void InverseScale(bool x, bool y);
 
 	void GetCardsCanAttack(std::vector<CardPlaceInfo>& cardsCanAttackInfo);
+	void GetPlaceToMove(std::vector<CardPlaceInfo>& placeCanMove);
 	bool CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const;
 	bool CanAttack(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& defencerInfo);
 	bool CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& strikerInfo);
+
+	void OnPlaceOnBoard();
+	void OnMove();
+	void OnBeginTurn(bool playerOneTurn);
+	void OnEndTurn(bool playerOneEndTurn);
 
 	void CalculateCardBoardTransform();
 	void Update(sf::RenderWindow& window);

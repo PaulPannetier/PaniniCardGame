@@ -28,6 +28,8 @@
     <ClInclude Include="CardPlaceInfo.hpp" />
     <ClInclude Include="Collider2D.hpp" />
     <ClInclude Include="Deck.hpp" />
+    <ClInclude Include="Action.hpp" />
+    <ClInclude Include="EventManager.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="Hand.hpp" />
     <ClInclude Include="InputManager.hpp" />
@@ -46,6 +48,7 @@
     <ClCompile Include="CardPlaceInfo.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="InputManager.cpp" />

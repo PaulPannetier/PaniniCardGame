@@ -7,6 +7,7 @@
 #include "Test.hpp"
 #include "InputManager.hpp"
 #include "Time.hpp"
+#include "EventManager.hpp"
 
 using namespace std;
 using namespace sf;
@@ -43,6 +44,7 @@ void GameManager::Start(RenderWindow& window)
     this->_windowSize = Vector2f(window.getSize().x, window.getSize().y);
     InputManager::Instance().Start(window);
     AssetsManager::Instance().Start();//on charge les assets
+    EventManager::Instance().Start();
     CardsManager::Instance().Start();//Création de toutes les cartes du jeu
     Board::Instance().Start();//Création du plateau dde jeu
 }

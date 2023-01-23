@@ -1,4 +1,4 @@
-
+#include "EventManager.hpp"
 #include "Board.hpp"
 #include "Collider2D.hpp"
 #include "AssetsManager.hpp"
@@ -12,9 +12,9 @@ void Board::OnClickEndTurnButtonAction(const Button& button)
 	Player& player = player1.isMyTurn ? player1 : player2;
 	Player& otherPlayer = player1.isMyTurn ? player2 : player1;
 	player.isMyTurn = false;
-	player.EndTurn();
+	EventManager::Instance().OnEndTurn(player.isPlayerOne);
 	otherPlayer.isMyTurn = true;
-	otherPlayer.BeginTurn();
+	EventManager::Instance().OnBeginTurn(otherPlayer.isPlayerOne);
 }
 
 void OnClickEndTurnButton(const Button& button)
@@ -41,8 +41,6 @@ void Board::Start()
 	Vector2f windowSize = GameManager::Instance().GetWindowSize();//marche pas
 	Vector2f textureSize = Vector2f(bgText.getSize());
 	Vector2f scale = Vector2f(1600 / textureSize.x, 900 / textureSize.y);
-
-	//init board Cards
 
 	//goals joueur 1
 	int i;
@@ -86,7 +84,8 @@ void Board::Start()
 	player1.FirstDraw(NB_BEGIN_CARDS);
 	player2.FirstDraw(NB_BEGIN_CARDS);
 	player1.isMyTurn = true;
-	player1.BeginTurn();
+
+	EventManager::Instance().OnBeginTurn(true);
 }
 
 void Board::FillDeck()
@@ -462,6 +461,8 @@ void Board::PlaceCard(Card& boardCard, const Card& newCard, CardPlaceInfo& place
 	boardCard.isOnBoard = true;
 	boardCard.isSelected = false;
 	boardCard.cardPlaceInfo = CardPlaceInfo(placeInfo);
+	boardCard.cardPlaceInfo.card = &boardCard;
+	boardCard.OnPlaceOnBoard();
 	boardCards[globalIndex] = &boardCard;
 }
 
@@ -511,6 +512,106 @@ void Board::PlaceCard(Card& card, bool playerOneBoard, CardType line, int indexP
 	default:
 		break;
 	}
+}
+
+void Board::SwitchCards(const CardPlaceInfo& card1, const CardPlaceInfo& card2)
+{
+	CardPlaceInfo tmp = CardPlaceInfo(card1);
+	Card tmpCard = Card(*tmp.card);
+
+	//replace card1 by card2
+	switch (card1.line)
+	{
+	case CardType::goalkeeper:
+		if (card1.playerOnePlace)
+		{
+			goalKeepersOne[tmp.indexPlace] = Card(*card2.card);
+			goalKeepersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, CardType::goalkeeper, tmp.indexPlace, &goalKeepersOne[tmp.indexPlace], tmp.hitbox);
+		}
+		else
+		{
+			goalKeepersTwo[tmp.indexPlace] = Card(*card2.card);
+			goalKeepersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, CardType::goalkeeper, tmp.indexPlace, &goalKeepersTwo[tmp.indexPlace], tmp.hitbox);
+		}
+		break;
+	case CardType::defender:
+		if (card1.playerOnePlace)
+		{
+			defencersOne[tmp.indexPlace] = Card(*card2.card);
+			defencersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, CardType::defender, tmp.indexPlace, &defencersOne[tmp.indexPlace], tmp.hitbox);
+		}
+		else
+		{
+			defencersTwo[tmp.indexPlace] = Card(*card2.card);
+			defencersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, CardType::defender, tmp.indexPlace, &defencersTwo[tmp.indexPlace], tmp.hitbox);
+		}
+		break;
+	case CardType::striker:
+		if (card1.playerOnePlace)
+		{
+			strikersOne[tmp.indexPlace] = Card(*card2.card);
+			strikersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, tmp.line, tmp.indexPlace, &strikersOne[tmp.indexPlace], tmp.hitbox);
+		}
+		else
+		{
+			strikersTwo[tmp.indexPlace] = Card(*card2.card);
+			strikersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, tmp.line, tmp.indexPlace, &strikersTwo[tmp.indexPlace], tmp.hitbox);
+		}
+		break;
+	case CardType::spell:
+		return;
+	default:
+		return;
+	}
+
+	//replace card2 by the copy of card1
+	CardPlaceInfo tmp2 = CardPlaceInfo(card2);
+	Card tmpCard2 = Card(*tmp2.card);
+	switch (card2.line)
+	{
+	case CardType::goalkeeper:
+		if (card2.playerOnePlace)
+		{
+			goalKeepersOne[tmp2.indexPlace] = Card(tmpCard);
+			goalKeepersOne[tmp2.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp2.playerOnePlace, CardType::goalkeeper, tmp2.indexPlace, &goalKeepersOne[tmp2.indexPlace], tmp2.hitbox);
+		}
+		else
+		{
+			goalKeepersTwo[tmp2.indexPlace] = Card(tmpCard);
+			goalKeepersTwo[tmp2.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp2.playerOnePlace, CardType::goalkeeper, tmp2.indexPlace, &goalKeepersTwo[tmp2.indexPlace], tmp2.hitbox);
+		}
+		break;
+	case CardType::defender:
+		if (card2.playerOnePlace)
+		{
+			defencersOne[tmp2.indexPlace] = Card(tmpCard);
+			defencersOne[tmp2.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp2.playerOnePlace, CardType::defender, tmp2.indexPlace, &defencersOne[tmp2.indexPlace], tmp2.hitbox);
+		}
+		else
+		{
+			defencersTwo[tmp2.indexPlace] = Card(tmpCard);
+			defencersTwo[tmp2.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp2.playerOnePlace, CardType::defender, tmp2.indexPlace, &defencersTwo[tmp2.indexPlace], tmp2.hitbox);
+		}
+		break;
+	case CardType::striker:
+		if (card2.playerOnePlace)
+		{
+			strikersOne[tmp2.indexPlace] = Card(tmpCard);
+			strikersOne[tmp2.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp2.playerOnePlace, CardType::striker, tmp2.indexPlace, &strikersOne[tmp2.indexPlace], tmp2.hitbox);
+		}
+		else
+		{
+			strikersTwo[tmp2.indexPlace] = Card(tmpCard);
+			strikersTwo[tmp2.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp2.playerOnePlace, CardType::striker, tmp2.indexPlace, &strikersTwo[tmp2.indexPlace], tmp2.hitbox);
+		}
+		break;
+	case CardType::spell:
+		return;
+	default:
+		return;
+	}
+
+	EventManager::Instance().OnCardsSwitched(card1, card2);
 }
 
 void Board::GetPlayerCard(bool playerOneCards, vector<CardPlaceInfo>& res)
@@ -583,6 +684,26 @@ void Board::MakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender
 
 }
 
+void Board::OnBeginTurn(bool isPlayerOneTurn)
+{
+	for (int i = 0; i < NB_MAX_CARD_IN_BOARD; i++)
+	{
+		boardCards[i]->OnBeginTurn(isPlayerOneTurn);
+	}
+	player1.OnBeginTurn(isPlayerOneTurn);
+	player2.OnBeginTurn(isPlayerOneTurn);
+}
+
+void Board::OnEndTurn(bool isPlayerOneEndTurn)
+{
+	for (int i = 0; i < NB_MAX_CARD_IN_BOARD; i++)
+	{
+		boardCards[i]->OnEndTurn(isPlayerOneEndTurn);
+	}
+	player1.OnEndTurn(isPlayerOneEndTurn);
+	player2.OnEndTurn(isPlayerOneEndTurn);
+}
+
 void Board::Update(RenderWindow& window)
 {
 	player1.Update(window);
@@ -611,7 +732,7 @@ void Board::Draw(RenderWindow& window)
 	//le goal
 	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
 	{
-		if (this->goalKeepersOne[i].isOnBoard)
+		if (this->goalKeepersOne[i].isInitialized && this->goalKeepersOne[i].isOnBoard)
 		{
 			this->goalKeepersOne[i].Draw(window);
 		}
@@ -623,7 +744,7 @@ void Board::Draw(RenderWindow& window)
 	//defenseurs
 	for (i = 0; i < NB_MAX_DEFENDER; i++)
 	{
-		if (this->defencersOne[i].isOnBoard)
+		if (this->defencersOne[i].isInitialized && this->defencersOne[i].isOnBoard)
 		{
 			this->defencersOne[i].Draw(window);
 		}
@@ -635,7 +756,7 @@ void Board::Draw(RenderWindow& window)
 	//attaquants
 	for (i = 0; i < NB_MAX_STRIKER; i++)
 	{
-		if (this->strikersOne[i].isOnBoard)
+		if (this->strikersOne[i].isInitialized && this->strikersOne[i].isOnBoard)
 		{
 			this->strikersOne[i].Draw(window);
 		}
@@ -649,7 +770,7 @@ void Board::Draw(RenderWindow& window)
 	//le goal
 	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
 	{
-		if (this->goalKeepersTwo[i].isOnBoard)
+		if (this->goalKeepersTwo[i].isInitialized && this->goalKeepersTwo[i].isOnBoard)
 		{
 			this->goalKeepersTwo[i].Draw(window);
 		}
@@ -661,7 +782,7 @@ void Board::Draw(RenderWindow& window)
 	//defenseurs
 	for (i = 0; i < NB_MAX_DEFENDER; i++)
 	{
-		if (this->defencersTwo[i].isOnBoard)
+		if (this->defencersTwo[i].isInitialized && this->defencersTwo[i].isOnBoard)
 		{
 			this->defencersTwo[i].Draw(window);
 		}
@@ -673,7 +794,7 @@ void Board::Draw(RenderWindow& window)
 	//attaquants
 	for (i = 0; i < NB_MAX_STRIKER; i++)
 	{
-		if (this->strikersTwo[i].isOnBoard)
+		if (this->strikersTwo[i].isInitialized && this->strikersTwo[i].isOnBoard)
 		{
 			this->strikersTwo[i].Draw(window);
 		}

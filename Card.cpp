@@ -2,6 +2,8 @@
 #include "Board.hpp"
 #include "AssetsManager.hpp"
 #include "GameManager.hpp"
+#include "EventManager.hpp"
+#include "InputManager.hpp"
 
 using namespace std;
 using namespace sf;
@@ -9,6 +11,7 @@ using namespace sf;
 Card::Card()
 {
 	isInitialized = false;
+	isSleeping = true;
 }
 
 Card::Card(string name, string description, int attack, int defence, int cost, CardType cardType, string textureName, bool isPLayerOneCard)
@@ -28,6 +31,8 @@ Card::Card(string name, string description, int attack, int defence, int cost, C
 	this->isSelected = false;
 	this->isPlayerOneCard = isPlayerOneCard;
 	this->haveTheBall = false;
+	this->isSleeping = true;
+	this->attackBonus = this->defenceBonus = this->costBonus = 0;
 }
 
 Card::Card(const Card& card)
@@ -41,6 +46,14 @@ Card::Card(const Card& card)
 	this->isSelected = card.isSelected;
 	this->isPlayerOneCard = card.isPlayerOneCard;
 	this->haveTheBall = card.haveTheBall;
+	this->cardPlaceInfo = CardPlaceInfo(card.cardPlaceInfo);
+	this->isSleeping = card.isSleeping;
+	this->attackBonus = card.attackBonus;
+	this->defenceBonus = card.defenceBonus;
+	this->attackText = card.attackText;
+	this->defenceText = card.defenceText;
+	this->costText = card.costText;
+	this->costBonus = card.costBonus;
 }
 
 int Card::GetUniqueId()
@@ -48,6 +61,11 @@ int Card::GetUniqueId()
 	static int id = -1;
 	id++;
 	return id;
+}
+
+Font& Card::GetCardFont()
+{
+	return AssetsManager::Instance().GetFont("poppins");
 }
 
 void Card::CalculateCardBoardTransform()
@@ -144,7 +162,50 @@ bool Card::CanDefend(const CardPlaceInfo& thisCardInfo, const CardPlaceInfo& str
 
 void Card::GetCardsCanAttack(vector<CardPlaceInfo>& cardsCanAttackInfo)
 {
-	
+	Board::Instance().GetAdjacentCardsPlacesInfo(cardPlaceInfo, cardsCanAttackInfo);
+	for (int i = cardsCanAttackInfo.size() - 1; i >= 0; i--)
+	{
+		if (!cardsCanAttackInfo[i].card->isInitialized || cardsCanAttackInfo[i].card->isPlayerOneCard == cardPlaceInfo.card->isPlayerOneCard)
+		{
+			cardsCanAttackInfo.erase(cardsCanAttackInfo.begin() + i);
+		}
+	}
+}
+
+void Card::GetPlaceToMove(vector<CardPlaceInfo>& placeCanMove)
+{
+	Board::Instance().GetAdjacentCardsPlacesInfo(cardPlaceInfo, placeCanMove);
+	for (int i = placeCanMove.size() - 1; i >= 0; i--)
+	{
+		if (placeCanMove[i].card->isInitialized)
+		{
+			placeCanMove.erase(placeCanMove.begin() + i);
+		}
+	}
+}
+
+void Card::OnPlaceOnBoard()
+{
+	isSleeping = true;
+	isSelected = false;
+}
+
+void Card::OnBeginTurn(bool playerOneTurn)
+{
+	if (isInitialized)
+	{
+		isSleeping = false;
+	}
+}
+
+void Card::OnEndTurn(bool playerOneEndTurn)
+{
+	isSelected = false;
+}
+
+void Card::OnMove()
+{
+	isSleeping = true;
 }
 
 void Card::Update(RenderWindow& window)
@@ -156,10 +217,26 @@ void Card::Update(RenderWindow& window)
 		CalculateCardBoardTransform();
 		if (isSelected)
 		{
-			if (haveTheBall)
+			if (!isSleeping)
 			{
-				vector<CardPlaceInfo> cardCanAttack;
-				GetCardsCanAttack(cardCanAttack);
+				GetPlaceToMove(placeToMove);
+
+				if (InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+				{
+					for (int i = 0; i < placeToMove.size(); i++)
+					{
+						if (placeToMove[i].hitbox.Contain(InputManager::Instance().MousePosition()))
+						{
+							Board::Instance().SwitchCards(cardPlaceInfo, placeToMove[i]);
+							OnMove();
+						}
+					}
+				}
+
+				if (haveTheBall)
+				{
+					GetCardsCanAttack(cardsCanAttack);
+				}
 			}
 		}
 	}
@@ -169,9 +246,52 @@ void Card::Draw(RenderWindow& window)
 {
 	if (!isInitialized)
 		return;
+
 	window.draw(sprite);
 	Color color = isSelected ? Color::Yellow : Color::Blue;
 	Rectangle::DrawWire(window, GetHitbox(), color);
+
+	if (isSelected)
+	{
+		for (int i = 0; i < placeToMove.size(); i++)
+		{
+			Rectangle::Draw(window, placeToMove[i].hitbox * 0.8, Color::Green);
+		}
+	}
+
+	//Draw the text
+	//attackText
+	attackText.setString(to_string(_attack + attackBonus));
+	color = attackBonus > 0 ? Color::Green : (attackBonus < 0 ? Color::Red : Color::White);
+	attackText.setFillColor(color);
+	attackText.setOutlineColor(color);
+	attackText.setOrigin(Vector2f(attackText.getLocalBounds().width * 0.5f, attackText.getLocalBounds().height * 0.5f));
+	attackText.setPosition(GetPosition() + (GetHitbox().size * 0.5f) - Vector2f(attackText.getLocalBounds().left, attackText.getLocalBounds().top));
+	//Rectangle::DrawWire(window, Rectangle(attackText.getPosition() + Vector2f(attackText.getLocalBounds().left, attackText.getLocalBounds().top), Vector2f(attackText.getLocalBounds().width, attackText.getLocalBounds().height)), Color::Yellow);
+	attackText.setFont(GetCardFont());
+	attackText.setCharacterSize(50);
+	window.draw(attackText);
+
+	defenceText.setString(to_string(_defence + defenceBonus));
+	color = defenceBonus > 0 ? Color::Green : (defenceBonus < 0 ? Color::Red : Color::White);
+	defenceText.setFillColor(color);
+	defenceText.setOutlineColor(color);
+	defenceText.setOrigin(Vector2f(defenceText.getLocalBounds().width * 0.5f, defenceText.getLocalBounds().height * 0.5f));
+	defenceText.setPosition(GetPosition() + Vector2f(-GetHitbox().size.x * 0.5, GetHitbox().size.y * 0.5) - Vector2f(defenceText.getLocalBounds().left, defenceText.getLocalBounds().top));
+	//Rectangle::DrawWire(window, Rectangle(defenceText.getPosition() + Vector2f(defenceText.getLocalBounds().left, defenceText.getLocalBounds().top), Vector2f(defenceText.getLocalBounds().width, defenceText.getLocalBounds().height)), Color::Yellow);
+	defenceText.setFont(GetCardFont());
+	defenceText.setCharacterSize(50);
+	window.draw(defenceText);
+
+	costText.setString(to_string(_cost + costBonus));
+	color = costBonus > 0 ? Color::Green : (costBonus < 0 ? Color::Red : Color::Blue);
+	costText.setFillColor(color);
+	costText.setOutlineColor(color);
+	costText.setOrigin(Vector2f(costText.getLocalBounds().width * 0.5f, costText.getLocalBounds().height * 0.5f));
+	costText.setPosition(GetPosition() - (GetHitbox().size * 0.5f) - Vector2f(costText.getLocalBounds().left, costText.getLocalBounds().top));
+	costText.setFont(GetCardFont());
+	costText.setCharacterSize(65);
+	window.draw(costText);
 }
 
 string Card::ToString() const
