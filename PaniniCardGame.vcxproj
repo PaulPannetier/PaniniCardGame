@@ -109,14 +109,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\lib;D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\lib;$(LibraryPath)</LibraryPath>
-    <PublicIncludeDirectories>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <IncludePath>D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\lib;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\lib;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\lib;D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\lib;$(LibraryPath)</LibraryPath>
-    <PublicIncludeDirectories>D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <IncludePath>D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\lib;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\lib;$(LibraryPath)</LibraryPath>
+    <PublicIncludeDirectories>D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\include;D:\User\Desktop\im_a_folder\Study\Other_repositories\PaniniCardGame\include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
