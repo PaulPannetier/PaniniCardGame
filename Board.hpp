@@ -85,6 +85,7 @@ public:
 	bool GetCardPlaceInfo(bool playerOne, CardType line, int indexPlace, CardPlaceInfo& info);
 	void GetAdjacentCardsPlacesInfo(const CardPlaceInfo& current, std::vector<CardPlaceInfo>& adjacents);
 	void OnClickEndTurnButtonAction(const Button& button);
+	void ClearPlace(const CardPlaceInfo& place);
 
 	void GetPlayerCard(bool playerOneCards, std::vector<CardPlaceInfo>& res);
 
@@ -92,6 +93,7 @@ public:
 
 	void OnBeginTurn(bool isPlayerOneTurn);
 	void OnEndTurn(bool isPlayerOneEndTurn);
+	void OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
 
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);

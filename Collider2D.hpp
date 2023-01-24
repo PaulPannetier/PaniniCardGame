@@ -12,7 +12,7 @@ public:
 	Collider2D();
 	Collider2D(sf::Vector2f center);
 
-	virtual bool Contain(const sf::Vector2f& point) const = 0;
+	virtual bool Contains(const sf::Vector2f& point) const = 0;
 	std::string ToString() const;
 };
 
@@ -30,7 +30,7 @@ public:
 	Rectangle(const sf::Vector2f& center, const sf::Vector2f& size);
 	Rectangle(const Rectangle& rec);
 
-	bool Contain(const sf::Vector2f& point) const override;
+	bool Contains(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
 
 	friend Rectangle operator*(Rectangle rec, float f)
@@ -56,7 +56,7 @@ public:
 	Circle(const sf::Vector2f& center, float radius);
 	Circle(const Circle& circle);
 
-	bool Contain(const sf::Vector2f& point) const override;
+	bool Contains(const sf::Vector2f& point) const override;
 	std::string ToString() const override;
 
 	friend Circle operator*(Circle c, float f)

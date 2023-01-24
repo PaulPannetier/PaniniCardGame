@@ -66,6 +66,7 @@ public:
 	void OnMove();
 	void OnBeginTurn(bool playerOneTurn);
 	void OnEndTurn(bool playerOneEndTurn);
+	void OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
 
 	void CalculateCardBoardTransform();
 	void Update(sf::RenderWindow& window);

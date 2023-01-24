@@ -19,7 +19,7 @@ Button::Button(const Rectangle& hitbox, void (*OnClick)(const Button& button))
 
 void Button::Update(RenderWindow& window)
 {
-	isHover = this->hitbox.Contain(InputManager::Instance().MousePosition());
+	isHover = this->hitbox.Contains(InputManager::Instance().MousePosition());
 	if (isHover && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 	{
 		OnClick(*this);

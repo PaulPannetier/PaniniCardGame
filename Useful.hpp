@@ -160,6 +160,11 @@ public:
     {
         array[i * width + j] = value;
     }
+
+    ~Array2D()
+    {
+        delete array;
+    }
 };
 
 #endif

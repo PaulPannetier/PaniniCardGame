@@ -20,6 +20,8 @@ public:
 	void OnBeginTurn(bool playerOneTurn);
 
 	void OnEndTurn(bool playerOneEndTurn);
+
+	void OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
 };
 
 #endif

@@ -58,7 +58,7 @@ void Hand::Update(RenderWindow& window)
 	{
 		if (isSelected)
 		{
-			if (!recSelected.Contain(InputManager::Instance().MousePosition()) && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+			if (!recSelected.Contains(InputManager::Instance().MousePosition()) && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 			{
 				isSelected = false;
 				//on déselectionne la carte sélectionner
@@ -67,7 +67,7 @@ void Hand::Update(RenderWindow& window)
 		}
 		else
 		{
-			if (recNotSelected.Contain(InputManager::Instance().MousePosition()) && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+			if (recNotSelected.Contains(InputManager::Instance().MousePosition()) && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 			{
 				isSelected = true;
 ;			}
@@ -85,7 +85,7 @@ void Hand::Update(RenderWindow& window)
 				for (int i = 0; i < nbCard; i++)
 				{
 					Rectangle hitbox = cards[i].GetHitbox();
-					if (hitbox.Contain(InputManager::Instance().MousePosition()))
+					if (hitbox.Contains(InputManager::Instance().MousePosition()))
 					{
 						//on déseclectionne la carte précédemment sélectionner
 						DeselectSelectedCard();

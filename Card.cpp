@@ -97,7 +97,7 @@ void Card::SetRotation(float angle)
 Vector2f Card::GetSize()
 {
 	if (!isInitialized)
-		return Vector2f(0, 0);
+		return cardPlaceInfo.hitbox.size;
 	Vector2f scale = sprite.getScale();
 	Vector2f fullSize = Vector2f(sprite.getTextureRect().width, sprite.getTextureRect().height);
 	return Vector2f(scale.x * fullSize.x, scale.y * fullSize.y);
@@ -206,6 +206,12 @@ void Card::OnEndTurn(bool playerOneEndTurn)
 void Card::OnMove()
 {
 	isSleeping = true;
+	isSelected = false;
+}
+
+void Card::OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender)
+{
+
 }
 
 void Card::Update(RenderWindow& window)
@@ -225,7 +231,7 @@ void Card::Update(RenderWindow& window)
 				{
 					for (int i = 0; i < placeToMove.size(); i++)
 					{
-						if (placeToMove[i].hitbox.Contain(InputManager::Instance().MousePosition()))
+						if (placeToMove[i].hitbox.Contains(InputManager::Instance().MousePosition()))
 						{
 							Board::Instance().SwitchCards(cardPlaceInfo, placeToMove[i]);
 							OnMove();
@@ -236,6 +242,17 @@ void Card::Update(RenderWindow& window)
 				if (haveTheBall)
 				{
 					GetCardsCanAttack(cardsCanAttack);
+					if (InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+					{
+						for (int i = 0; i < cardsCanAttack.size(); i++)
+						{
+							CardPlaceInfo* tmpCard = &cardsCanAttack[i];
+							if (tmpCard->hitbox.Contains(InputManager::Instance().MousePosition()))
+							{
+								Board::Instance().MakeDuel(this->cardPlaceInfo, *tmpCard);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -256,6 +273,14 @@ void Card::Draw(RenderWindow& window)
 		for (int i = 0; i < placeToMove.size(); i++)
 		{
 			Rectangle::Draw(window, placeToMove[i].hitbox * 0.8, Color::Green);
+		}
+	}
+
+	if (isSelected)
+	{
+		for (int i = 0; i < cardsCanAttack.size(); i++)
+		{
+			Rectangle::Draw(window, cardsCanAttack[i].hitbox * 0.8, Color::Red);
 		}
 	}
 

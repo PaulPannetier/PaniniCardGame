@@ -31,47 +31,54 @@ void Player::Update(RenderWindow& window)
 	//On selection une carte sur le plateau de jeu
 	if (isMyTurn)
 	{
-		if (InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+		if (InputManager::Instance().GetKeyDown(Mouse::Button::Left) && !hand.IsSelected())
 		{
 			CardPlaceInfo info;
 			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
 			{
-				if (!isABoardCardSelected)
+				if (info.card->isInitialized && info.card->isOnBoard == isPlayerOne)
 				{
-					if (info.card->isInitialized && info.card->isPlayerOneCard == isPlayerOne)
+					if (!isABoardCardSelected)
 					{
-						hand.DeselectAllCard();
-						isABoardCardSelected = true;
-						cardBoardSelected = CardPlaceInfo(info);
-						cardBoardSelected.card->isSelected = true;
-						cout << cardBoardSelected.card->name() << endl;
-					}
-				}
-				else
-				{
-					if (info.card->isPlayerOneCard == isPlayerOne)
-					{
-						hand.DeselectAllCard();
-						cardBoardSelected.card->isSelected = false;
-						cout << cardBoardSelected.card->name() << " is deselected" << endl;
-						cardBoardSelected = CardPlaceInfo(info);
-						cardBoardSelected.card->isSelected = true;
-						cout << cardBoardSelected.card->name() << " is selected" << endl;
+						if (info.card->isInitialized && info.card->isPlayerOneCard == isPlayerOne)
+						{
+							hand.DeselectAllCard();
+							isABoardCardSelected = true;
+							cardBoardSelected = CardPlaceInfo(info);
+							cardBoardSelected.card->isSelected = true;
+							cout << cardBoardSelected.card->name() << " is selected" << endl;
+						}
 					}
 					else
 					{
-						if (cardBoardSelected.card->CanAttack(cardBoardSelected, info))
+						if (info.card->isPlayerOneCard == isPlayerOne)
 						{
-							Board::Instance().MakeDuel(cardBoardSelected, info);
+							hand.DeselectAllCard();
+							cardBoardSelected.card->isSelected = false;
+							cout << cardBoardSelected.card->name() << " is deselected" << endl;
+							cardBoardSelected = CardPlaceInfo(info);
+							cardBoardSelected.card->isSelected = true;
+							cout << cardBoardSelected.card->name() << " is selected" << endl;
 						}
 						else
 						{
-							isABoardCardSelected = false;
-							cardBoardSelected.card->isSelected = false;
-							cout << cardBoardSelected.card->name() << " is deselected" << endl;
+							if (cardBoardSelected.card->CanAttack(cardBoardSelected, info))
+							{
+								Board::Instance().MakeDuel(cardBoardSelected, info);
+							}
+							else
+							{
+								isABoardCardSelected = false;
+								cardBoardSelected.card->isSelected = false;
+								cout << cardBoardSelected.card->name() << " is deselected" << endl;
+							}
 						}
 					}
 				}
+			}
+			else
+			{
+				DeSelectAllCards();
 			}
 		}
 	}
@@ -82,7 +89,7 @@ void Player::Update(RenderWindow& window)
 	//on place la carte selectionner de la main sur le plateau
 	if (isMyTurn)
 	{
-		if (!hand.IsSelected() && hand.isACardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
+		if (!hand.IsSelected() && hand.isACardSelected && !isABoardCardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 		{
 			CardPlaceInfo info;
 			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))

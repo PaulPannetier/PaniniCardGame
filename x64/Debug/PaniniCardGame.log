@@ -1,1 +1,56 @@
-﻿  PaniniCardGame.vcxproj -> D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\x64\Debug\PaniniCardGame.exe
+﻿  Card.cpp
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Useful.hpp(89,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Deck.hpp(16,20): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(25,72): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(25,45): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(102,85): warning C4244: 'argument' : conversion de 'const T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(102,54): warning C4244: 'argument' : conversion de 'const T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(110,110): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(110,70): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(166,2): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(178,2): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(275,55): warning C4305: 'argument' : troncation de 'double' à 'float'
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(283,58): warning C4305: 'argument' : troncation de 'double' à 'float'
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(305,97): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\Card.cpp(305,71): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+  PaniniCardGame.vcxproj -> D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\x64\Debug\PaniniCardGame.exe

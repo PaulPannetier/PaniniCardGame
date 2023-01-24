@@ -63,7 +63,7 @@ void Rectangle::DrawWire(RenderWindow& window, const Rectangle& rec, const Color
 	Rectangle::DrawWire(window, rec.center, rec.size, color, thinckness);
 }
 
-bool Rectangle::Contain(const Vector2f& point) const
+bool Rectangle::Contains(const Vector2f& point) const
 {
 	return point.x >= center.x - size.x * 0.5 && point.x <= center.x + size.x * 0.5 &&
 		point.y >= center.y - size.y * 0.5 && point.y <= center.y + size.y * 0.5;
@@ -106,7 +106,7 @@ void Circle::Draw(RenderWindow& window, const Circle& circle, const Color& color
 	Circle::Draw(window, circle.center, circle.radius, color);
 }
 
-bool Circle::Contain(const Vector2f& point) const
+bool Circle::Contains(const Vector2f& point) const
 {
 	return Useful::SqrDistance(center, point) <= radius * radius;
 }

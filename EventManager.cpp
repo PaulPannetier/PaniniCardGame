@@ -31,5 +31,10 @@ void EventManager::OnBeginTurn(bool playerOneTurn)
 void EventManager::OnEndTurn(bool playerOneEndTurn)
 {
 	Board::Instance().OnEndTurn(playerOneEndTurn);
+}
+
+void EventManager::OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender)
+{
 
 }
+

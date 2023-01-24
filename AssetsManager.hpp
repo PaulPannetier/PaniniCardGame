@@ -17,6 +17,7 @@ private:
 		{ "Pavard", "Assets/Cards/Pavard.jpg" },
 		{ "Giroud", "Assets/Cards/Giroud.png" },
 		{ "Lioris", "Assets/Cards/Lioris.jpg" },
+		{ "Ball", "Assets/ball.png" },
 	};
 
 	std::map<std::string, std::shared_ptr<sf::Texture>> textures;
