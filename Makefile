@@ -3,12 +3,12 @@ CC := g++
 # Compilation
 CPPFLAGS := -I include -std=c++11
 # Edition des liens
-LDFLAGS := -L lib_linux_d
-LDLIBS := -lsfml-graphics -lsfml-window -lsfml-system -Wl,-rpath='$$ORIGIN/lib'
+LDFLAGS := -L lib_linux
+LDLIBS := -lsfml-graphics -lsfml-window -lsfml-system -Wl,-rpath='$$ORIGIN/lib_linux'
 
 # LDLIBS := -lsfml-graphics -lsfml-window -lsfml-system -Wl,-rpath='$$ORIGIN/lib'
 
-MAIN=morpion.exe
+MAIN=projetJeuDeCarte
 
 all: $(MAIN)
 
