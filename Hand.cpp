@@ -126,9 +126,16 @@ void Hand::CalculateCardsTransform(int nbCards, const Rectangle& rec, const Vect
 	for (int i = 0; i < nbCards; i++)
 	{
 		x = offset + gap.x * (i + 1) + i * cardSize.x;
-		cards[i].SetPosition(Vector2f(x, y));
-		cards[i].SetSize(cardSize);
-		cards[i].InverseScale(false, !player->isMyTurn);
+		cards[i].rectangleToDraw = Rectangle(Vector2f(x, y), cardSize);
+	}
+}
+
+void Hand::Clear()
+{
+	int end = GetNbCards();
+	for (int i = 0; i < end; i++)
+	{
+		this->RemoveCard(cards[0]);
 	}
 }
 
@@ -138,7 +145,7 @@ void Hand::Draw(RenderWindow& window)
 	{
 		if (isSelected)
 		{
-			Rectangle::DrawWire(window, recSelected, Color::Blue);
+			//Rectangle::DrawWire(window, recSelected, Color::Blue);
 		}
 		else
 		{
@@ -147,7 +154,7 @@ void Hand::Draw(RenderWindow& window)
 	}
 	else
 	{
-		Rectangle::DrawWire(window, recNotHerTurn, Color::Blue);
+		//Rectangle::DrawWire(window, recNotHerTurn, Color::Blue);
 	}
 
 	int nbCards = GetNbCards();

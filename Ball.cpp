@@ -35,7 +35,17 @@ void Ball::CalculateTransform()
 
 void Ball::SetAttachCard(Card& card)
 {
+	if (this->card != nullptr)
+	{
+		this->card->haveTheBall = false;
+	}
 	this->card = &card;
+	card.haveTheBall = true;
+}
+
+void Ball::DeSetAttachCard()
+{
+	this->card = nullptr;
 }
 
 void Ball::Update(RenderWindow& window)

@@ -20,6 +20,7 @@ public:
 
 	void CalculateTransform();
 	void SetAttachCard(Card& card);
+	void DeSetAttachCard();
 
 	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);

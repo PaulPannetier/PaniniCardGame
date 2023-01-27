@@ -17,12 +17,13 @@ private:
 
 	sf::Sprite background;
 	Button endTurnButton;
-	Player player1, player2;
 
 	Board();
 
 	void FillDeck();
 	void PlaceCard(Card& boardCard, const Card& card, CardPlaceInfo& placeInfo, int globalIndex);
+	void ReStart();
+	void Clear();
 
 public:
 
@@ -65,6 +66,7 @@ public:
 		sf::Vector2f(950, 675)
 	};
 
+	Player player1, player2;
 	Card goalKeepersOne[NB_MAX_GOAL_KEEPER];
 	Card defencersOne[NB_MAX_DEFENDER];
 	Card strikersOne[NB_MAX_STRIKER];
@@ -94,6 +96,7 @@ public:
 	void OnBeginTurn(bool isPlayerOneTurn);
 	void OnEndTurn(bool isPlayerOneEndTurn);
 	void OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
+	void OnMakeGoal(Card& card, Player& player);
 
 	void Update(sf::RenderWindow& windows);
 	void Draw(sf::RenderWindow& windows);

@@ -27,13 +27,11 @@ Rectangle::Rectangle() : Collider2D()
 
 Rectangle::Rectangle(const Vector2f& center, const Vector2f& size) : Collider2D(center)
 {
-	//this->center = Vector2f(center);
 	this->size = Vector2f(size);
 }
 
 Rectangle::Rectangle(const Rectangle& rec) : Collider2D(rec.center)
 {
-	this->center = Vector2f(rec.center);
 	this->size = Vector2f(rec.size);
 }
 

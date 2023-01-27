@@ -10,9 +10,15 @@
 class Player
 {
 private :
+
+	const sf::Vector2f scoreTextPosPlayerOne = sf::Vector2f(50, 50);
+	const sf::Vector2f scoreTextPosPlayerTwo = sf::Vector2f(1550, 50);
+
 	Deck deck;//le deck du joueur
 	Hand hand;//la main du joueur
 	int mana;//les point permettant de jouer des carte
+	int nbGoals;//le nombre de but marqué par ce joueur
+	sf::Text scoreText;
 
 	//pour update
 	bool isABoardCardSelected;
@@ -26,8 +32,10 @@ public :
 	Player() = default;
 
 	void DeSelectAllCards();
+	void Clear();
 
 	void Start();
+	void ReStart();
 	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 
@@ -36,6 +44,7 @@ public :
 	void DrawCard();
 	void OnBeginTurn(bool isPlayerOneTurn);
 	void OnEndTurn(bool isPlayerOneEndTurn);
+	void OnMakeGoal(Card& card);
 };
 
 #endif

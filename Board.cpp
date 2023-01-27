@@ -34,6 +34,8 @@ Board& Board::Instance()
 	return instance;
 }
 
+#include "RonaldoCard.hpp"
+
 void Board::Start()
 {
 	endTurnButton = Button(Rectangle(Vector2f(1500, 800), Vector2f(50, 50)), OnClickEndTurnButton);
@@ -43,31 +45,7 @@ void Board::Start()
 	Vector2f textureSize = Vector2f(bgText.getSize());
 	Vector2f scale = Vector2f(1600 / textureSize.x, 900 / textureSize.y);
 
-	//goals
-	int i;
-	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
-	{
-		ClearPlace(CardPlaceInfo(true, CardType::goalkeeper, i, nullptr, Rectangle()));
-		boardCards[i] = &goalKeepersOne[i];
-		ClearPlace(CardPlaceInfo(false, CardType::goalkeeper, i, nullptr, Rectangle()));
-		boardCards[NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + NB_MAX_STRIKER + i] = &goalKeepersTwo[i];
-	}
-	//defenceurs joueur 1
-	for (i = 0; i < NB_MAX_DEFENDER; i++)
-	{
-		ClearPlace(CardPlaceInfo(true, CardType::defender, i, nullptr, Rectangle()));
-		boardCards[NB_MAX_GOAL_KEEPER + i] = &defencersOne[i];
-		ClearPlace(CardPlaceInfo(false, CardType::defender, i, nullptr, Rectangle()));
-		boardCards[(NB_MAX_GOAL_KEEPER * 2) + NB_MAX_DEFENDER + NB_MAX_STRIKER + i] = &defencersTwo[i];
-	}
-	//attaquant joueur 1
-	for (i = 0; i < NB_MAX_STRIKER; i++)
-	{
-		ClearPlace(CardPlaceInfo(true, CardType::striker, i, nullptr, Rectangle()));
-		boardCards[NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + i] = &strikersOne[i];
-		ClearPlace(CardPlaceInfo(false, CardType::striker, i, nullptr, Rectangle()));
-		boardCards[((NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER) * 2) + NB_MAX_STRIKER + i] = &strikersTwo[i];
-	}
+	Clear();
 
 	//start the ball
 	Ball::Instance().Start();
@@ -89,6 +67,26 @@ void Board::Start()
 	EventManager::Instance().OnBeginTurn(true);
 }
 
+void Board::ReStart()
+{
+	Clear();
+	player1.Clear();
+	player2.Clear();
+
+	Card* cardWidthTheBall = Random::Rand() >= 0.5f ? &strikersOne[Random::Rand(1, 2)] : &strikersTwo[Random::Rand(1, 2)];
+	Ball::Instance().SetAttachCard(*cardWidthTheBall);
+
+	player1.isPlayerOne = true;
+	player1.ReStart();
+	player2.isPlayerOne = false;
+	player2.ReStart();
+	FillDeck();
+	player1.FirstDraw(NB_BEGIN_CARDS);
+	player2.FirstDraw(NB_BEGIN_CARDS);
+	player1.isMyTurn = true;
+	EventManager::Instance().OnBeginTurn(true);
+}
+
 void Board::FillDeck()
 {
 	vector<CardsManager::CardNum> deckPlayer1 =
@@ -101,7 +99,10 @@ void Board::FillDeck()
 		CardsManager::CardNum::Giroud,
 		CardsManager::CardNum::Pavard,
 		CardsManager::CardNum::Pavard,
-		CardsManager::CardNum::Pavard
+		CardsManager::CardNum::Pavard,
+		CardsManager::CardNum::Ronaldo,
+		CardsManager::CardNum::Ronaldo,
+		CardsManager::CardNum::Ronaldo
 	};
 	player1.FillDeck(deckPlayer1);
 
@@ -115,7 +116,11 @@ void Board::FillDeck()
 		CardsManager::CardNum::Giroud,
 		CardsManager::CardNum::Pavard,
 		CardsManager::CardNum::Pavard,
-		CardsManager::CardNum::Pavard
+		CardsManager::CardNum::Pavard,
+		CardsManager::CardNum::Ronaldo,
+		CardsManager::CardNum::Ronaldo,
+		CardsManager::CardNum::Ronaldo
+
 	};
 	player2.FillDeck(deckPlayer2);
 }
@@ -458,6 +463,7 @@ bool Board::GetCardPlaceInfo(Vector2f position, CardPlaceInfo& info)
 
 void Board::PlaceCard(Card& boardCard, const Card& newCard, CardPlaceInfo& placeInfo, int globalIndex = 0)
 {
+	bool boardCardHaveTheBall = boardCard.haveTheBall;
 	boardCard = newCard;
 	boardCard.isOnBoard = true;
 	boardCard.isSelected = false;
@@ -465,6 +471,10 @@ void Board::PlaceCard(Card& boardCard, const Card& newCard, CardPlaceInfo& place
 	boardCard.cardPlaceInfo.card = &boardCard;
 	boardCard.OnPlaceOnBoard();
 	boardCards[globalIndex] = &boardCard;
+	if (boardCardHaveTheBall)
+	{
+		Ball::Instance().SetAttachCard(boardCard);
+	}
 }
 
 void Board::PlaceCard(Card& card, bool playerOneBoard, CardType line, int indexPlace)
@@ -520,6 +530,9 @@ void Board::SwitchCards(const CardPlaceInfo& card1, const CardPlaceInfo& card2)
 	CardPlaceInfo tmp = CardPlaceInfo(card1);
 	Card tmpCard = Card(*tmp.card);
 
+	CardPlaceInfo tmp2 = CardPlaceInfo(card2);
+	Card tmpCard2 = Card(*tmp2.card);
+
 	//replace card1 by card2
 	switch (card1.line)
 	{
@@ -551,12 +564,12 @@ void Board::SwitchCards(const CardPlaceInfo& card1, const CardPlaceInfo& card2)
 		if (card1.playerOnePlace)
 		{
 			strikersOne[tmp.indexPlace] = Card(*card2.card);
-			strikersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, tmp.line, tmp.indexPlace, &strikersOne[tmp.indexPlace], tmp.hitbox);
+			strikersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, CardType::striker, tmp.indexPlace, &strikersOne[tmp.indexPlace], tmp.hitbox);
 		}
 		else
 		{
 			strikersTwo[tmp.indexPlace] = Card(*card2.card);
-			strikersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, tmp.line, tmp.indexPlace, &strikersTwo[tmp.indexPlace], tmp.hitbox);
+			strikersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(tmp.playerOnePlace, CardType::striker, tmp.indexPlace, &strikersTwo[tmp.indexPlace], tmp.hitbox);
 		}
 		break;
 	case CardType::spell:
@@ -566,8 +579,6 @@ void Board::SwitchCards(const CardPlaceInfo& card1, const CardPlaceInfo& card2)
 	}
 
 	//replace card2 by the copy of card1
-	CardPlaceInfo tmp2 = CardPlaceInfo(card2);
-	Card tmpCard2 = Card(*tmp2.card);
 	switch (card2.line)
 	{
 	case CardType::goalkeeper:
@@ -682,58 +693,58 @@ void Board::GetPlayerCard(bool playerOneCards, vector<CardPlaceInfo>& res)
 
 void Board::ClearPlace(const CardPlaceInfo& place)
 {
-	switch (place.line)
+	CardPlaceInfo tmp = CardPlaceInfo(place);
+	switch (tmp.line)
 	{
 	case CardType::goalkeeper:
-		if (place.playerOnePlace)
+		if (tmp.playerOnePlace)
 		{
-			goalKeepersOne[place.indexPlace] = Card();
-			goalKeepersOne[place.indexPlace].isOnBoard = goalKeepersOne[place.indexPlace].isPlayerOneCard = true;
-			goalKeepersOne[place.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::goalkeeper, place.indexPlace, &goalKeepersOne[place.indexPlace], Rectangle(goalKeeperOnePos[place.indexPlace], cardSize));
-			goalKeepersOne[place.indexPlace].CalculateCardBoardTransform();
+			goalKeepersOne[tmp.indexPlace] = Card();
+			goalKeepersOne[tmp.indexPlace].isOnBoard = goalKeepersOne[tmp.indexPlace].isPlayerOneCard = true;
+			goalKeepersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::goalkeeper, tmp.indexPlace, &goalKeepersOne[tmp.indexPlace], Rectangle(goalKeeperOnePos[tmp.indexPlace], cardSize));
+			goalKeepersOne[tmp.indexPlace].CalculateCardBoardTransform();
 		}
 		else
 		{
-			goalKeepersTwo[place.indexPlace] = Card();
-			goalKeepersTwo[place.indexPlace].isOnBoard = true;
-			goalKeepersTwo[place.indexPlace].isPlayerOneCard = false;
-			goalKeepersTwo[place.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::goalkeeper, place.indexPlace, &goalKeepersTwo[place.indexPlace], Rectangle(goalKeeperTwoPos[place.indexPlace], cardSize));
-			goalKeepersTwo[place.indexPlace].CalculateCardBoardTransform();
-
+			goalKeepersTwo[tmp.indexPlace] = Card();
+			goalKeepersTwo[tmp.indexPlace].isOnBoard = true;
+			goalKeepersTwo[tmp.indexPlace].isPlayerOneCard = false;
+			goalKeepersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(false, CardType::goalkeeper, tmp.indexPlace, &goalKeepersTwo[tmp.indexPlace], Rectangle(goalKeeperTwoPos[tmp.indexPlace], cardSize));
+			goalKeepersTwo[tmp.indexPlace].CalculateCardBoardTransform();
 		}
 		break;
 	case CardType::defender:
-		if (place.playerOnePlace)
+		if (tmp.playerOnePlace)
 		{
-			defencersOne[place.indexPlace] = Card();
-			defencersOne[place.indexPlace].isOnBoard = defencersOne[place.indexPlace].isPlayerOneCard = true;
-			defencersOne[place.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::defender, place.indexPlace, &defencersOne[place.indexPlace], Rectangle(defenderTwoPos[place.indexPlace], cardSize));
-			defencersOne[place.indexPlace].CalculateCardBoardTransform();
+			defencersOne[tmp.indexPlace] = Card();
+			defencersOne[tmp.indexPlace].isOnBoard = defencersOne[tmp.indexPlace].isPlayerOneCard = true;
+			defencersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::defender, tmp.indexPlace, &defencersOne[tmp.indexPlace], Rectangle(defenderTwoPos[tmp.indexPlace], cardSize));
+			defencersOne[tmp.indexPlace].CalculateCardBoardTransform();
 		}
 		else
 		{
-			defencersTwo[place.indexPlace] = Card();
-			defencersTwo[place.indexPlace].isOnBoard = true;
-			defencersTwo[place.indexPlace].isPlayerOneCard = false;
-			defencersTwo[place.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::defender, place.indexPlace, &defencersTwo[place.indexPlace], Rectangle(defenderTwoPos[place.indexPlace], cardSize));
-			defencersTwo[place.indexPlace].CalculateCardBoardTransform();
+			defencersTwo[tmp.indexPlace] = Card();
+			defencersTwo[tmp.indexPlace].isOnBoard = true;
+			defencersTwo[tmp.indexPlace].isPlayerOneCard = false;
+			defencersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(false, CardType::defender, tmp.indexPlace, &defencersTwo[tmp.indexPlace], Rectangle(defenderTwoPos[tmp.indexPlace], cardSize));
+			defencersTwo[tmp.indexPlace].CalculateCardBoardTransform();
 		}
 		break;
 	case CardType::striker:
-		if (place.playerOnePlace)
+		if (tmp.playerOnePlace)
 		{
-			strikersOne[place.indexPlace] = Card();
-			strikersOne[place.indexPlace].isOnBoard = strikersOne[place.indexPlace].isPlayerOneCard = true;
-			strikersOne[place.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::striker, place.indexPlace, &strikersOne[place.indexPlace], Rectangle(strikerOnePos[place.indexPlace], cardSize));
-			strikersOne[place.indexPlace].CalculateCardBoardTransform();
+			strikersOne[tmp.indexPlace] = Card();
+			strikersOne[tmp.indexPlace].isOnBoard = strikersOne[tmp.indexPlace].isPlayerOneCard = true;
+			strikersOne[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::striker, tmp.indexPlace, &strikersOne[tmp.indexPlace], Rectangle(strikerOnePos[tmp.indexPlace], cardSize));
+			strikersOne[tmp.indexPlace].CalculateCardBoardTransform();
 		}
 		else
 		{
-			strikersTwo[place.indexPlace] = Card();
-			strikersTwo[place.indexPlace].isOnBoard = true;
-			strikersTwo[place.indexPlace].isPlayerOneCard = false;
-			strikersTwo[place.indexPlace].cardPlaceInfo = CardPlaceInfo(true, CardType::striker, place.indexPlace, &strikersTwo[place.indexPlace], Rectangle(strikerTwoPos[place.indexPlace], cardSize));
-			strikersTwo[place.indexPlace].CalculateCardBoardTransform();
+			strikersTwo[tmp.indexPlace] = Card();
+			strikersTwo[tmp.indexPlace].isOnBoard = true;
+			strikersTwo[tmp.indexPlace].isPlayerOneCard = false;
+			strikersTwo[tmp.indexPlace].cardPlaceInfo = CardPlaceInfo(false, CardType::striker, tmp.indexPlace, &strikersTwo[tmp.indexPlace], Rectangle(strikerTwoPos[tmp.indexPlace], cardSize));
+			strikersTwo[tmp.indexPlace].CalculateCardBoardTransform();
 		}
 		break;
 	case CardType::spell:
@@ -745,19 +756,62 @@ void Board::ClearPlace(const CardPlaceInfo& place)
 
 void Board::MakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender)
 {
+	cout << "Duel betwenn : " << striker.card->name() << " and " << defender.card->name() << endl;
 	EventManager::Instance().OnMakeDuel(striker, defender);
 	int attack = striker.card->attack() + striker.card->attackBonus;
-	int defence = striker.card->attack() + striker.card->attackBonus;
+	int defence = defender.card->defence() + defender.card->defenceBonus;
+	bool oneOfThemHaveTheball = striker.card->haveTheBall || defender.card->haveTheBall;
+	if (oneOfThemHaveTheball)
+	{
+		Ball::Instance().DeSetAttachCard();
+		striker.card->haveTheBall = defender.card->haveTheBall = false;
+	}
 
 	if (attack > defence)
 	{
 		CardPlaceInfo tmp = CardPlaceInfo(striker);
 		SwitchCards(striker, defender);
 		ClearPlace(tmp);
+		if (oneOfThemHaveTheball)
+		{
+			Ball::Instance().SetAttachCard(*defender.card);
+		}
 	}
 	else
 	{
 		ClearPlace(striker);
+		if (oneOfThemHaveTheball)
+		{
+			Ball::Instance().SetAttachCard(*defender.card);
+		}
+	}
+}
+
+void Board::Clear()
+{
+	int i;
+	for (i = 0; i < NB_MAX_GOAL_KEEPER; i++)
+	{
+		ClearPlace(CardPlaceInfo(true, CardType::goalkeeper, i, nullptr, Rectangle()));
+		boardCards[i] = &goalKeepersOne[i];
+		ClearPlace(CardPlaceInfo(false, CardType::goalkeeper, i, nullptr, Rectangle()));
+		boardCards[NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + NB_MAX_STRIKER + i] = &goalKeepersTwo[i];
+	}
+	//defenceurs joueur 1
+	for (i = 0; i < NB_MAX_DEFENDER; i++)
+	{
+		ClearPlace(CardPlaceInfo(true, CardType::defender, i, nullptr, Rectangle()));
+		boardCards[NB_MAX_GOAL_KEEPER + i] = &defencersOne[i];
+		ClearPlace(CardPlaceInfo(false, CardType::defender, i, nullptr, Rectangle()));
+		boardCards[(NB_MAX_GOAL_KEEPER * 2) + NB_MAX_DEFENDER + NB_MAX_STRIKER + i] = &defencersTwo[i];
+	}
+	//attaquant joueur 1
+	for (i = 0; i < NB_MAX_STRIKER; i++)
+	{
+		ClearPlace(CardPlaceInfo(true, CardType::striker, i, nullptr, Rectangle()));
+		boardCards[NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER + i] = &strikersOne[i];
+		ClearPlace(CardPlaceInfo(false, CardType::striker, i, nullptr, Rectangle()));
+		boardCards[((NB_MAX_GOAL_KEEPER + NB_MAX_DEFENDER) * 2) + NB_MAX_STRIKER + i] = &strikersTwo[i];
 	}
 }
 
@@ -789,18 +843,23 @@ void Board::OnEndTurn(bool isPlayerOneEndTurn)
 	player2.OnEndTurn(isPlayerOneEndTurn);
 }
 
+void Board::OnMakeGoal(Card& card, Player& player)
+{
+	ReStart();
+}
+
 void Board::Update(RenderWindow& window)
 {
 	player1.Update(window);
 	player2.Update(window);
-
-	Ball::Instance().Update(window);
 
 	//Update des cartes
 	for (int i = 0; i < NB_MAX_CARD_IN_BOARD; i++)
 	{
 		boardCards[i]->Update(window);
 	}
+
+	Ball::Instance().Update(window);
 
 	endTurnButton.Update(window);
 }

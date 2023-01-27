@@ -13,13 +13,13 @@ class Player;
 class Hand
 {
 private:
-	const Rectangle recNotSelected = Rectangle(sf::Vector2f(800, 925), sf::Vector2f(700, 350));
-	const Rectangle recNotHerTurn = Rectangle(sf::Vector2f(800, -50), sf::Vector2f(700, 350));
-	const Rectangle recSelected = Rectangle(sf::Vector2f(800, 450), sf::Vector2f(900, 600));
+	const Rectangle recNotSelected = Rectangle(sf::Vector2f(800, 925), sf::Vector2f(900, 350));
+	const Rectangle recNotHerTurn = Rectangle(sf::Vector2f(800, -50), sf::Vector2f(900, 350));
+	const Rectangle recSelected = Rectangle(sf::Vector2f(800, 450), sf::Vector2f(1500, 600));
 
-	const sf::Vector2f cardSizeWhenSelected = sf::Vector2f(150, 400);
-	const sf::Vector2f cardSizeWhenNotSelected = sf::Vector2f(80, 300);
-	const sf::Vector2f cardSizeWhenNotHerTurn = sf::Vector2f(80, 300);
+	const sf::Vector2f cardSizeWhenSelected = sf::Vector2f(220, 450);
+	const sf::Vector2f cardSizeWhenNotSelected = sf::Vector2f(110, 300);
+	const sf::Vector2f cardSizeWhenNotHerTurn = sf::Vector2f(110, 300);
 
 	Card cards[MAX_HAND_SIZE];
 	bool isSelected;// si la main est sélectionner
@@ -49,6 +49,7 @@ public :
 	bool RemoveCard(const Card& card);
 	bool RemoveCard(int cardId);
 	int GetNbCards() const;
+	void Clear();
 };
 
 #endif

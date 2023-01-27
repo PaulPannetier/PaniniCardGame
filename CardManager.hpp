@@ -20,7 +20,8 @@ public:
 	{
 		Pavard,
 		Giroud,
-		Lorris
+		Lorris,
+		Ronaldo
 	}CardNum;
 
 	static CardsManager& Instance();

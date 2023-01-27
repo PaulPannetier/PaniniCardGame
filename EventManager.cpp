@@ -35,6 +35,12 @@ void EventManager::OnEndTurn(bool playerOneEndTurn)
 
 void EventManager::OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender)
 {
+	Board::Instance().OnMakeDuel(striker, defender);
+}
 
+void EventManager::OnMakeGoal(Card& card, Player& player)
+{
+	player.OnMakeGoal(card);
+	Board::Instance().OnMakeGoal(card, player);
 }
 

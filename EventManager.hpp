@@ -3,6 +3,7 @@
 
 #include "CardPlaceInfo.hpp"
 #include "Action.hpp"
+#include "Player.hpp"
 
 class EventManager
 {
@@ -22,6 +23,8 @@ public:
 	void OnEndTurn(bool playerOneEndTurn);
 
 	void OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defender);
+
+	void OnMakeGoal(Card& card, Player& player);
 };
 
 #endif

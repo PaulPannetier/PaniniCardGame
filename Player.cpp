@@ -1,13 +1,24 @@
-
+#include "AssetsManager.hpp"
 #include "Player.hpp"
 #include "Board.hpp"
 #include "InputManager.hpp"
 #include <vector>
+#include "EventManager.hpp"
 
 using namespace std; 
 using namespace sf;
 
 void Player::Start()
+{
+	ReStart();
+	nbGoals = 0;
+	scoreText.setFont(AssetsManager::Instance().GetFont("poppins"));
+	scoreText.setCharacterSize(50);
+	scoreText.setFillColor(Color::White);
+	this->deck.player = this;
+}
+
+void Player::ReStart()
 {
 	isMyTurn = false;
 	deck.Start();
@@ -36,7 +47,7 @@ void Player::Update(RenderWindow& window)
 			CardPlaceInfo info;
 			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
 			{
-				if (info.card->isInitialized && info.card->isOnBoard == isPlayerOne)
+				if (info.card->isInitialized && info.card->isOnBoard && info.card->isPlayerOneCard == isPlayerOne)
 				{
 					if (!isABoardCardSelected)
 					{
@@ -86,6 +97,9 @@ void Player::Update(RenderWindow& window)
 	//on actualise la main
 	hand.Update(window);
 
+	//On actualise le deck
+	deck.Update(window);
+
 	//on place la carte selectionner de la main sur le plateau
 	if (isMyTurn)
 	{
@@ -94,14 +108,6 @@ void Player::Update(RenderWindow& window)
 			CardPlaceInfo info;
 			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
 			{
-				if (false)
-				{
-					cout << info.card->ToString() << endl;
-					cout << info.indexPlace << endl;
-					cout << info.line << endl;
-					cout << to_string(info.playerOnePlace) << endl << endl;
-				}
-
 				if (info.playerOnePlace == isPlayerOne)
 				{
 					//on place la carte sur le plateau
@@ -117,11 +123,29 @@ void Player::Update(RenderWindow& window)
 			}
 		}
 	}
+
+	//On regarde si on a marque un but
+	if (isMyTurn)
+	{
+		CardPlaceInfo info;
+		Board::Instance().GetCardPlaceInfo(!isPlayerOne, CardType::goalkeeper, 0, info);
+		if (info.card->isInitialized && info.card->isOnBoard && info.card->haveTheBall && info.card->isPlayerOneCard == isPlayerOne)
+		{
+			EventManager::Instance().OnMakeGoal(*info.card, *this);
+		}
+	}
+
+	//le text de score
+	scoreText.setString(to_string(this->nbGoals));
+	
+	scoreText.setPosition(isPlayerOne ? (scoreTextPosPlayerOne) : (scoreTextPosPlayerTwo - Vector2f(scoreText.getLocalBounds().width, 0)));
 }
 
 void Player::Draw(RenderWindow& window)
 {
 	hand.Draw(window);
+	deck.Draw(window);
+	window.draw(scoreText);
 }
 
 void Player::FillDeck(vector<CardsManager::CardNum>& cards)
@@ -156,6 +180,13 @@ void Player::DrawCard()
 	}
 }
 
+void Player::Clear()
+{
+	this->deck.Clear();
+	this->hand.Clear();
+	this->mana = 0;
+}
+
 void Player::OnBeginTurn(bool isPlayerOneTurn)
 {
 	if (isPlayerOne == isPlayerOneTurn)
@@ -171,4 +202,9 @@ void Player::OnEndTurn(bool isPlayerOneEndTurn)
 	{
 		hand.DeselectAllCard();
 	}
+}
+
+void Player::OnMakeGoal(Card& card)
+{
+	this->nbGoals++;
 }
