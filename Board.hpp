@@ -67,6 +67,7 @@ public:
 	};
 
 	Player player1, player2;
+	int turnNunber;
 	Card goalKeepersOne[NB_MAX_GOAL_KEEPER];
 	Card defencersOne[NB_MAX_DEFENDER];
 	Card strikersOne[NB_MAX_STRIKER];

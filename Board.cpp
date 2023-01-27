@@ -34,18 +34,16 @@ Board& Board::Instance()
 	return instance;
 }
 
-#include "RonaldoCard.hpp"
-
 void Board::Start()
 {
 	endTurnButton = Button(Rectangle(Vector2f(1500, 800), Vector2f(50, 50)), OnClickEndTurnButton);
 	Texture& bgText = AssetsManager::Instance().GetTexture("BoardBackground");
 	background.setTexture(bgText);
-	Vector2f windowSize = GameManager::Instance().GetWindowSize();//marche pas
 	Vector2f textureSize = Vector2f(bgText.getSize());
 	Vector2f scale = Vector2f(1600 / textureSize.x, 900 / textureSize.y);
 
 	Clear();
+	turnNunber = 0;
 
 	//start the ball
 	Ball::Instance().Start();
@@ -70,9 +68,11 @@ void Board::Start()
 void Board::ReStart()
 {
 	Clear();
+
 	player1.Clear();
 	player2.Clear();
 
+	turnNunber = 0;
 	Card* cardWidthTheBall = Random::Rand() >= 0.5f ? &strikersOne[Random::Rand(1, 2)] : &strikersTwo[Random::Rand(1, 2)];
 	Ball::Instance().SetAttachCard(*cardWidthTheBall);
 
@@ -825,6 +825,11 @@ void Board::OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defend
 
 void Board::OnBeginTurn(bool isPlayerOneTurn)
 {
+	if (isPlayerOneTurn)
+	{
+		turnNunber++;
+	}
+
 	for (int i = 0; i < NB_MAX_CARD_IN_BOARD; i++)
 	{
 		boardCards[i]->OnBeginTurn(isPlayerOneTurn);

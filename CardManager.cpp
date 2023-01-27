@@ -1,5 +1,5 @@
  #include "CardManager.hpp"
-#include "RonaldoCard.hpp"
+#include "IncreaseStatAtTurnEffect.hpp"
 
 CardsManager::CardsManager()
 {
@@ -21,10 +21,10 @@ void CardsManager::CreateCards()
 {
 	this->gameCards = 
 	{
-		Card("Pavard", "Second poteau Pavard!", 5, 4, 3, CardType::striker, "Pavard"),
+		Card("Pavard", "Second poteau\n Pavard!", 5, 4, 3, CardType::striker, "Pavard"),
 		Card("Giroud", "Encore raté", 3, 3, 2, CardType::defender, "Giroud"),
-		Card("Lorris", "Ramener la coupe à la maison", 5, 3, 2, CardType::goalkeeper, "Lioris"),
-		RonaldoCard("Ronaldo", "Gagne +1 d'attaque au début de chaque tour", 1, 5, 5, CardType::striker, "Ronaldo")
+		Card("Lorris", "Ramener la coupe\n à la maison", 5, 3, 2, CardType::goalkeeper, "Lioris"),
+		Card("Ronaldo", "Gagne +1 d'attaque\n au début de chaque\n tour", 1, 5, 5, CardType::striker, "Ronaldo", false, new IncreaseStatAtTurn(1,0))
 	};
 }
 

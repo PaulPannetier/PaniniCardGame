@@ -13,12 +13,13 @@ private :
 
 	const sf::Vector2f scoreTextPosPlayerOne = sf::Vector2f(50, 50);
 	const sf::Vector2f scoreTextPosPlayerTwo = sf::Vector2f(1550, 50);
+	const sf::Vector2f manaTextPos = sf::Vector2f(120, 860);
 
 	Deck deck;//le deck du joueur
 	Hand hand;//la main du joueur
 	int mana;//les point permettant de jouer des carte
 	int nbGoals;//le nombre de but marqué par ce joueur
-	sf::Text scoreText;
+	sf::Text scoreText, manaText;
 
 	//pour update
 	bool isABoardCardSelected;

@@ -5,6 +5,7 @@
 #include "Useful.hpp"
 #include "Collider2D.hpp"
 #include "CardPlaceInfo.hpp"
+#include "Effect.hpp"
 
 class Card : Object
 {
@@ -15,17 +16,21 @@ private:
 	Rectangle defenceRec = Rectangle(sf::Vector2f(0.37, 0.4), sf::Vector2f(0.25, 0.182));
 	Rectangle attackRec = Rectangle(sf::Vector2f(-0.371, 0.4), sf::Vector2f(0.25, 0.182));
 	Rectangle fanArtRec = Rectangle(sf::Vector2f(0, -0.230), sf::Vector2f(0.7001, 0.440));
+	Rectangle descriptionRec = Rectangle(sf::Vector2f(0, 0.271f), sf::Vector2f(0.614f, 0.195f));
+	Rectangle nameRec = Rectangle(sf::Vector2f(0, 0.00475f), sf::Vector2f(0.7, 0.0569f));
 
 	std::string _name;//le nom du joueur
 	std::string _description;//description des effets
 	int _attack, _defence;//stats d'attaque et de defence
 	int _cost;//le cout en point de la carte
 	CardType _cardType;//le type de carte (goal, attaquant, defenceur ou sort)
+	std::vector<Effect*> effects;
 	sf::Sprite fanArt;//le sprite (servant a laffichage de l'image)
 	sf::Sprite bg;//le fond de l'image
 	sf::Sprite manaSprite;//le cout en mana
 	sf::Sprite attackSprite;//l'icone de l'attaque
 	sf::Sprite defenceSprite;//l'icone de defence
+	sf::Text nameText, descrptionText;
 
 	std::vector<CardPlaceInfo> placeToMove, cardsCanAttack;
 
@@ -46,6 +51,7 @@ public:
 
 	Card();
 	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName, bool isPlayerOneCard = false);
+	Card(std::string name, std::string description, int attack, int defence, int cost, CardType cardType, std::string textureName, bool isPlayerOneCard, Effect* effet);
 	Card(const Card& card);
 
 	//Getter:
@@ -65,6 +71,7 @@ public:
 	void cardType(CardType value) { _cardType = value; }
 	void SetPosition(const sf::Vector2f& position);
 	void SetSize(const sf::Vector2f& size);
+	void AddEffect(Effect* effect);
 
 	virtual void GetCardsCanAttack(std::vector<CardPlaceInfo>& cardsCanAttackInfo);
 	virtual void GetPlaceToMove(std::vector<CardPlaceInfo>& placeCanMove);
@@ -82,6 +89,8 @@ public:
 	void Update(sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 	std::string ToString() const override;
+
+	~Card();
 };
 
 #endif

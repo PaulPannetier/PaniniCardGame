@@ -42,6 +42,14 @@ Card::Card(string name, string description, int attack, int defence, int cost, C
 	this->manaSprite.setTexture(tmpText5);
 	this->manaSprite.setOrigin(tmpText5.getSize().x * 0.5f, tmpText5.getSize().y * 0.5f);
 
+	this->nameText.setFont(AssetsManager::Instance().GetFont("poppins"));
+	this->nameText.setFillColor(Color::White);
+	this->nameText.setCharacterSize(35);
+
+	this->descrptionText.setFont(AssetsManager::Instance().GetFont("poppins"));
+	this->descrptionText.setFillColor(Color::White);
+	this->descrptionText.setCharacterSize(15);
+
 	this->id = GetUniqueId();
 	this->isInitialized = true;
 	this->isSelected = false;
@@ -50,6 +58,13 @@ Card::Card(string name, string description, int attack, int defence, int cost, C
 	this->isSleeping = true;
 	this->attackBonus = this->defenceBonus = this->costBonus = 0;
 }
+
+Card::Card(string name, string description, int attack, int defence, int cost, CardType cardType, string textureName, bool isPLayerOneCard, Effect* effect)
+	: Card(name, description, attack, defence, cost, cardType, textureName, isPlayerOneCard)
+{
+	AddEffect(effect);
+}
+
 
 Card::Card(const Card& card)
 {
@@ -75,6 +90,13 @@ Card::Card(const Card& card)
 	this->costText = Text(card.costText);
 	this->costBonus = card.costBonus;
 	this->rectangleToDraw = Rectangle(card.rectangleToDraw);
+	this->nameText = Text(card.nameText);
+	this->descrptionText = Text(card.descrptionText);
+
+	for (int i = 0; i < card.effects.size(); i++)
+	{
+		this->AddEffect(card.effects[i]->Clone());
+	}
 }
 
 int Card::GetUniqueId()
@@ -127,6 +149,12 @@ Rectangle Card::GetHitbox()
 	return Rectangle(GetPosition(), GetSize());
 }
 
+void Card::AddEffect(Effect* effect)
+{
+	effect->card = this;
+	this->effects.push_back(effect);
+}
+
 bool Card::CanPlaceInBoard(bool playerOneBoard, CardType line, int index) const
 {
 	if (this->_cardType != line)
@@ -175,13 +203,23 @@ void Card::OnPlaceOnBoard()
 {
 	isSleeping = true;
 	isSelected = false;
+
+	for (int i = 0; i < effects.size(); i++)
+	{
+		effects[i]->card = this;
+	}
 }
 
-void Card::OnBeginTurn(bool playerOneTurn)
+void Card::OnBeginTurn(bool isPlayerOneTurn)
 {
 	if (isInitialized)
 	{
 		isSleeping = false;
+
+		for (int i = 0; i < effects.size(); i++)
+		{
+			effects[i]->OnBeginTurn(isPlayerOneTurn);
+		}
 	}
 }
 
@@ -255,9 +293,6 @@ void Card::Draw(RenderWindow& window)
 	if (!isInitialized)
 		return;
 
-
-
-
 	Vector2f pos = rectangleToDraw.center;
 	Vector2f size = rectangleToDraw.size;
 	if (isOnBoard)
@@ -322,7 +357,7 @@ void Card::Draw(RenderWindow& window)
 		}
 	}
 
-	if (isPlayerOneCard == Board::Instance().player1.isMyTurn)
+	if (isPlayerOneCard == Board::Instance().player1.isMyTurn || isOnBoard)
 	{
 		//Draw the text
 		attackText.setString(to_string(_attack + attackBonus));
@@ -346,7 +381,7 @@ void Card::Draw(RenderWindow& window)
 		window.draw(defenceText);
 
 		costText.setString(to_string(_cost + costBonus));
-		color = costBonus > 0 ? Color::Green : (costBonus < 0 ? Color::Red : Color::Blue);
+		color = costBonus > 0 ? Color::Green : (costBonus < 0 ? Color::Red : Color::White);
 		costText.setFillColor(color);
 		costText.setOutlineColor(color);
 		costText.setOrigin(Vector2f(costText.getLocalBounds().width * 0.5f, costText.getLocalBounds().height * 0.5f));
@@ -355,6 +390,20 @@ void Card::Draw(RenderWindow& window)
 		costText.setCharacterSize(65);
 		window.draw(costText);
 	}
+
+	if (isPlayerOneCard == Board::Instance().player1.isMyTurn)
+	{
+		this->nameText.setString(name());
+		this->nameText.setOrigin(nameText.getLocalBounds().width * 0.5, nameText.getLocalBounds().height * 0.5);
+		this->nameText.setPosition(pos + Vector2f(nameRec.center.x * size.x, nameRec.center.y * size.y));
+
+		this->descrptionText.setString(description());
+		this->descrptionText.setOrigin(descrptionText.getLocalBounds().width * 0.5, descrptionText.getLocalBounds().height * 0.5);
+		this->descrptionText.setPosition(pos + Vector2f(descriptionRec.center.x * size.x, descriptionRec.center.y * size.y));
+
+		window.draw(nameText);
+		window.draw(descrptionText);
+	}
 }
 
 string Card::ToString() const
@@ -362,4 +411,9 @@ string Card::ToString() const
 	ostringstream os;
 	os << "[Card], name : " << this->_name;
 	return os.str();
+}
+
+Card::~Card()
+{
+	
 }

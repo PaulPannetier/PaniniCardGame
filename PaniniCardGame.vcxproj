@@ -29,12 +29,13 @@
     <ClInclude Include="Collider2D.hpp" />
     <ClInclude Include="Deck.hpp" />
     <ClInclude Include="Action.hpp" />
+    <ClInclude Include="Effect.hpp" />
     <ClInclude Include="EventManager.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="Hand.hpp" />
+    <ClInclude Include="IncreaseStatAtTurnEffect.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.hpp" />
-    <ClInclude Include="RonaldoCard.hpp" />
     <ClInclude Include="Test.hpp" />
     <ClInclude Include="Time.hpp" />
     <ClInclude Include="Useful.hpp" />
@@ -49,13 +50,14 @@
     <ClCompile Include="CardPlaceInfo.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="IncreaseStatAtTurnEffect.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RonaldoCard.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

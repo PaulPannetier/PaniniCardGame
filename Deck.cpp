@@ -26,6 +26,10 @@ void Deck::Shuffle()
         int randIndex1 = Random::RandExclude(0, count());
         int randIndex2 = Random::RandExclude(0, count());
         Card tmp = cards[randIndex1];
+        if (tmp.name() == "Ronaldo")
+        {
+            int a = 10;
+        }
         cards[randIndex1] = cards[randIndex2];
         cards[randIndex2] = tmp;
     }

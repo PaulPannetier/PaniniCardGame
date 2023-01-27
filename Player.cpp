@@ -15,6 +15,9 @@ void Player::Start()
 	scoreText.setFont(AssetsManager::Instance().GetFont("poppins"));
 	scoreText.setCharacterSize(50);
 	scoreText.setFillColor(Color::White);
+
+	manaText.setFillColor(Color::White);
+	manaText.setFont(AssetsManager::Instance().GetFont("poppins"));
 	this->deck.player = this;
 }
 
@@ -105,19 +108,23 @@ void Player::Update(RenderWindow& window)
 	{
 		if (!hand.IsSelected() && hand.isACardSelected && !isABoardCardSelected && InputManager::Instance().GetKeyDown(Mouse::Button::Left))
 		{
-			CardPlaceInfo info;
-			if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
+			Card card;
+			hand.GetSelectedCard(card);
+			if (card.cost() + card.costBonus <= this->mana)
 			{
-				if (info.playerOnePlace == isPlayerOne)
+				CardPlaceInfo info;
+				if (Board::Instance().GetCardPlaceInfo(InputManager::Instance().MousePosition(), info))
 				{
-					//on place la carte sur le plateau
-					Card card;
-					hand.GetSelectedCard(card);
-					if (Board::Instance().CanPlaceCard(card, isPlayerOne, info.line, info.indexPlace))
+					if (info.playerOnePlace == isPlayerOne)
 					{
-						Board::Instance().PlaceCard(card, isPlayerOne, info.line, info.indexPlace);
-						hand.RemoveCard(card);
-						hand.DeselectAllCard();
+						//on place la carte sur le plateau
+						if (Board::Instance().CanPlaceCard(card, isPlayerOne, info.line, info.indexPlace))
+						{
+							this->mana -= card.cost() + card.costBonus;
+							Board::Instance().PlaceCard(card, isPlayerOne, info.line, info.indexPlace);
+							hand.RemoveCard(card);
+							hand.DeselectAllCard();
+						}
 					}
 				}
 			}
@@ -135,9 +142,14 @@ void Player::Update(RenderWindow& window)
 		}
 	}
 
+	//le texte du nombre de mana
+	this->manaText.setCharacterSize(30);
+	this->manaText.setString("mana : " + to_string(this->mana));
+	this->manaText.setOrigin(manaText.getLocalBounds().width * 0.5, manaText.getLocalBounds().height * 0.5);
+	this->manaText.setPosition(this->manaTextPos);
+
 	//le text de score
 	scoreText.setString(to_string(this->nbGoals));
-	
 	scoreText.setPosition(isPlayerOne ? (scoreTextPosPlayerOne) : (scoreTextPosPlayerTwo - Vector2f(scoreText.getLocalBounds().width, 0)));
 }
 
@@ -146,6 +158,10 @@ void Player::Draw(RenderWindow& window)
 	hand.Draw(window);
 	deck.Draw(window);
 	window.draw(scoreText);
+	if (isMyTurn)
+	{
+		window.draw(manaText);
+	}
 }
 
 void Player::FillDeck(vector<CardsManager::CardNum>& cards)
@@ -191,6 +207,8 @@ void Player::OnBeginTurn(bool isPlayerOneTurn)
 {
 	if (isPlayerOne == isPlayerOneTurn)
 	{
+		//maximum 10 points de mana
+		this->mana = Useful::Min(Board::Instance().turnNunber, 10);
 		hand.DeselectAllCard();
 		DrawCard();
 	}
