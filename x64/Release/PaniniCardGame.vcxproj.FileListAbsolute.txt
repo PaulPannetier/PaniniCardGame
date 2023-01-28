@@ -1,1 +1,2 @@
 D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\x64\Debug\PaniniCardGame.exe
+D:\Users\Desktop\im_a_folder\Study\Other_repository\PaniniCardGame\x64\Release\PaniniCardGame.exe

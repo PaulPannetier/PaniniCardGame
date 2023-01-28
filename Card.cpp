@@ -391,7 +391,7 @@ void Card::Draw(RenderWindow& window)
 		window.draw(costText);
 	}
 
-	if (isPlayerOneCard == Board::Instance().player1.isMyTurn)
+	if (isPlayerOneCard == Board::Instance().player1.isMyTurn && !isOnBoard)
 	{
 		this->nameText.setString(name());
 		this->nameText.setOrigin(nameText.getLocalBounds().width * 0.5, nameText.getLocalBounds().height * 0.5);
