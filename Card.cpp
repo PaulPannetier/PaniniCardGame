@@ -239,6 +239,10 @@ void Card::OnMakeDuel(const CardPlaceInfo& striker, const CardPlaceInfo& defende
 
 }
 
+const std::string cardTypeToString[4] = { "Goal", "Défenseur", "Attaquant", "Sort" };
+
+std::string CardTypeToString(CardType cardType) { return cardTypeToString[(int)cardType]; }
+
 void Card::Update(RenderWindow& window)
 {
 	if (!isInitialized)
@@ -397,7 +401,7 @@ void Card::Draw(RenderWindow& window)
 		this->nameText.setOrigin(nameText.getLocalBounds().width * 0.5, nameText.getLocalBounds().height * 0.5);
 		this->nameText.setPosition(pos + Vector2f(nameRec.center.x * size.x, nameRec.center.y * size.y));
 
-		this->descrptionText.setString(description());
+		this->descrptionText.setString(CardTypeToString(this->cardType()) + "\n" +  description());
 		this->descrptionText.setOrigin(descrptionText.getLocalBounds().width * 0.5, descrptionText.getLocalBounds().height * 0.5);
 		this->descrptionText.setPosition(pos + Vector2f(descriptionRec.center.x * size.x, descriptionRec.center.y * size.y));
 

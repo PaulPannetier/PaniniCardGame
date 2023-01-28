@@ -7,8 +7,10 @@ class Card;
 
 typedef enum { goalkeeper, defender, striker, spell } CardType;
 
-struct CardPlaceInfo
+struct CardPlaceInfo : Object
 {
+public:
+
 	bool playerOnePlace;
 	CardType line;
 	int indexPlace;
@@ -20,6 +22,8 @@ struct CardPlaceInfo
 	CardPlaceInfo(bool playerOnePlace, CardType line, int indexPlace, Card* card, Rectangle hitbox);
 
 	CardPlaceInfo(const CardPlaceInfo& cardPlaceInfo);
+
+	std::string ToString() const override;
 };
 
 #endif
