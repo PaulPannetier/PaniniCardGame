@@ -15,8 +15,8 @@ all: $(MAIN)
 %: %.cpp %.hpp
 	$(CC) -o $@ $< $(CCFLAGS)
 
-$(MAIN): main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o
-	$(CC) -o $(MAIN) main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o $(LDFLAGS) $(LDLIBS)
+$(MAIN): main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o Effect.o
+	$(CC) -o $(MAIN) main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o Effect.o $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm *.o $(MAIN)
