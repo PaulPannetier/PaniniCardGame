@@ -226,3 +226,8 @@ void Player::OnMakeGoal(Card& card)
 {
 	this->nbGoals++;
 }
+
+string Player::ToString() const
+{
+	return "[Player]";
+}

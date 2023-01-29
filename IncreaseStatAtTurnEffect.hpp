@@ -8,6 +8,7 @@ class IncreaseStatAtTurn : public Effect
 public:
 	IncreaseStatAtTurn();
 	IncreaseStatAtTurn(IncreaseStatAtTurn& effect);
+	IncreaseStatAtTurn(Effect& effect);
 
 	int attackAmount, defenceAmount;
 	IncreaseStatAtTurn(int attackAmount, int defenceAmount);

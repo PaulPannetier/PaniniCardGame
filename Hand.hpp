@@ -10,7 +10,7 @@ class Player;
 #define MAX_HAND_SIZE 5
 #define NB_BEGIN_CARDS 3
 
-class Hand
+class Hand : Object
 {
 private:
 	const Rectangle recNotSelected = Rectangle(sf::Vector2f(800, 925), sf::Vector2f(900, 350));
@@ -50,6 +50,7 @@ public :
 	bool RemoveCard(int cardId);
 	int GetNbCards() const;
 	void Clear();
+	std::string ToString() const override;
 };
 
 #endif

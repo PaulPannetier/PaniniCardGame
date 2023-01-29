@@ -12,7 +12,6 @@
 using namespace std;
 using namespace sf;
 
-bool testCollider2D = false;
 void FillDeck(Player& player1, Player& player2);
 
 GameManager::GameManager()
@@ -24,6 +23,11 @@ GameManager& GameManager::Instance()
 {
     static GameManager gameManager;
     return gameManager;
+}
+
+Vector2f GameManager::GetWindowSize()
+{
+    return this->_windowSize;
 }
 
 void GameManager::GameLoop(RenderWindow& window)
@@ -59,11 +63,6 @@ void GameManager::Update(RenderWindow& window)
 
 void GameManager::Draw(RenderWindow& window)
 {
-    if (testCollider2D)
-    {
-        TestCollider2D(window);
-    }
-
     Board::Instance().Draw(window);
 }
 

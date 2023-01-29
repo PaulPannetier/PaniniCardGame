@@ -9,7 +9,7 @@ int main()
 {
     GameManager gameManager = GameManager::Instance();
 
-    RenderWindow window(VideoMode(1600, 900), "SFML!");
+    RenderWindow window(VideoMode(1600, 900), "Panini GameCard");
 
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);

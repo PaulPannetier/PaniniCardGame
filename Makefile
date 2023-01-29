@@ -8,15 +8,15 @@ LDLIBS := -lsfml-graphics -lsfml-window -lsfml-system -Wl,-rpath='$$ORIGIN/lib_l
 
 # LDLIBS := -lsfml-graphics -lsfml-window -lsfml-system -Wl,-rpath='$$ORIGIN/lib'
 
-MAIN=projetJeuDeCarte
+MAIN=PaniniCardGame
 
 all: $(MAIN)
 
 %: %.cpp %.hpp
 	$(CC) -o $@ $< $(CCFLAGS)
 
-$(MAIN): main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o Effect.o
-	$(CC) -o $(MAIN) main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o Effect.o $(LDFLAGS) $(LDLIBS)
+$(MAIN): main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o Effect.o IncreaseStatAtTurnEffect.o
+	$(CC) -o $(MAIN) main.o AssetsManager.o Ball.o Board.o Button.o Card.o CardManager.o CardPlaceInfo.o Collider2D.o Deck.o EventManager.o GameManager.o Hand.o InputManager.o Player.o Time.o Effect.o IncreaseStatAtTurnEffect.o $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm *.o $(MAIN)

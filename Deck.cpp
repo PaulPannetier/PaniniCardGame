@@ -21,7 +21,7 @@ void Deck::Start()
 
 void Deck::Shuffle()
 {
-    for (int i = 0; i < count(); i++)
+    for (int i = 0; i < 2 * count(); i++)
     {
         int randIndex1 = Random::RandExclude(0, count());
         int randIndex2 = Random::RandExclude(0, count());

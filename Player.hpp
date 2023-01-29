@@ -7,7 +7,7 @@
 #include "CardManager.hpp"
 #include "CardPlaceInfo.hpp"
 
-class Player
+class Player : Object
 {
 private :
 
@@ -46,6 +46,7 @@ public :
 	void OnBeginTurn(bool isPlayerOneTurn);
 	void OnEndTurn(bool isPlayerOneEndTurn);
 	void OnMakeGoal(Card& card);
+	std::string ToString() const override;
 };
 
 #endif

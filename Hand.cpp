@@ -222,3 +222,8 @@ void Hand::DeselectAllCard()
 		}
 	}
 }
+
+string Hand::ToString() const
+{
+	return "[Hand] { size : " + to_string(GetNbCards()) + " }";
+}

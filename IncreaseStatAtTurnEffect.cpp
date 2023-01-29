@@ -15,6 +15,11 @@ IncreaseStatAtTurn::IncreaseStatAtTurn(IncreaseStatAtTurn& effect) : Effect(effe
 	this->defenceAmount = effect.defenceAmount;
 }
 
+IncreaseStatAtTurn::IncreaseStatAtTurn(Effect& effect) : Effect(effect)
+{
+	this->attackAmount = this->defenceAmount = 0;
+}
+
 Effect* IncreaseStatAtTurn::Clone()
 {
 	return new IncreaseStatAtTurn(*this);
